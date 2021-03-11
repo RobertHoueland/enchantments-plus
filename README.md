@@ -22,6 +22,6 @@ Installation: Drop .jar file into mods folder
 | Thunder Lord  | Sword              | 3                 | Chance of summoning a lightning bolt to strike on target     | Very Rare       | |
 | Execute       | Sword              | 3                 | If target is low on health, they will be dealt more damage   | Rare            | |
 | Ice Tip       | Sword              | 3                 | Target is slowed when hit                                    | Uncommon        | |
-| End Slayer    | Sword              | 5                 | Deals extra damage to Endermen, Endermites, and Ender Dragon | Rare            | |
+| End Slayer    | Sword              | 5                 | Deals extra damage to Endermen, Endermites, and Ender Dragon | Rare            | Cannot be equipped with other damage enchantment|
 | Cubical       | Sword              | 5                 | Deals extra damage to Creepers and Slimes                    | Uncommon        | Cannot be equipped with other damage enchantment |
-| Night Vision  | Helmet             | 1                 | (NOT YET WORKING) Gives night vision effect                  | Uncommon        | Cannot be equipped with other damage enchantment |
+| Night Vision  | Helmet             | 1                 | (NOT YET WORKING) Gives night vision effect                  | Uncommon        | |
