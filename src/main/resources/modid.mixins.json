@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.robdog777.enchantmentsplus.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "mixins": [
     "EnchantmentsPlusMixin",
     "PlayerEntityMixin"
