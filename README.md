@@ -1,4 +1,4 @@
-# enchantments-plus
+# Enchantments-Plus
 Mod for minecraft that adds additional enchantments to the game. WIP project.
 
 **[Download Link](https://github.com/therobdog7/enchantments-plus/releases/download/1.0.0/enchantments-plus-1.0.0.jar "Download")**
