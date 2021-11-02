@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "enchantmentsplus",
-  "version": "1.0-1.16.1",
+  "version": "1.0.1-1.17.1",
 
   "name": "Enchantments Plus",
   "description": "Adds additional enchantments to the game!",
@@ -9,8 +9,8 @@
     "robdog777"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/therobdog7/enchantments-plus",
+    "sources": "https://github.com/therobdog7/enchantments-plus"
   },
 
   "license": "CC0-1.0",
@@ -23,15 +23,15 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "enchantmentsplus.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
+    "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.16.1"
+    "minecraft": "1.17.1",
+    "java": ">=16"
   },
   "suggests": {
-    "flamingo": "*"
   }
 }
