@@ -56,6 +56,12 @@ public class EnchantmentsPlus implements ModInitializer
             new LevitationEnchantment()
     );
 
+    private static final Enchantment BLAZEWALKER = Registry.register(
+            Registry.ENCHANTMENT,
+            new Identifier("enchantmentsplus", "blazewalker"),
+            new BlazeWalkerEnchantment()
+    );
+
     @Override
     public void onInitialize() {
 
