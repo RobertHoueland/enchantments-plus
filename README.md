@@ -1,20 +1,20 @@
 # Enchantments-Plus
-# UPDATED TO 1.17.1
+## Updated to 1.18
 Mod for minecraft that adds additional enchantments to the game. WIP project.
 
-**[Download Link](https://github.com/therobdog7/enchantments-plus/releases/download/1.0.0/enchantments-plus-1.0.0.jar "Download")**
+**[Download Link](https://github.com/therobdog7/enchantments-plus/releases/download/ "Download")**
 
 ---
 
-**MC VERSION: 1.17.1**
+**MC VERSION: 1.18.x**
 
-**REQUIRES [Fabric Loader (latest)](https://fabricmc.net/use/ "Fabric Download") and [Fabric API (0.41.3)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
+**Requires: [Fabric Loader (any 1.18 version)](https://fabricmc.net/use/ "Fabric Download") AND [Fabric API (0.42.4+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
 Installation: Drop .jar file into mods folder
 
 ---
 
-## Enchantments List:
+### Enchantments List:
 
 | Name          | Tool/Weapon/Armor  | Number of Levels  | Effect                                                       | Rarity          | Notes |
 |:-------------:|:------------------:|:-----------------:|--------------------------------------------------------------|:---------------:|-------|
