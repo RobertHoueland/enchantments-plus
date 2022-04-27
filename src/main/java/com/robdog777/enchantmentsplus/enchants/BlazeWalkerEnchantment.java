@@ -48,30 +48,8 @@ public class BlazeWalkerEnchantment extends Enchantment {
 
     public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
         if (entity.isOnGround()) {
-            BlockState blockState = Blocks.OBSIDIAN.getDefaultState();
-            float f = (float)Math.min(16, 2 + level);
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
-            Iterator var7 = BlockPos.iterate(blockPos.add((double)(-f), -1.0D, (double)(-f)),
-                    blockPos.add((double)f, -1.0D, (double)f)).iterator();
 
-            while(var7.hasNext()) {
-                BlockPos blockPos2 = (BlockPos)var7.next();
-                if (blockPos2.isWithinDistance(entity.getPos(), (double)f)) {
-                    mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
-                    BlockState blockState2 = world.getBlockState(mutable);
-                    if (blockState2.isAir()) {
-                        BlockState blockState3 = world.getBlockState(blockPos2);
-                        if (blockState3.getMaterial() == Material.LAVA &&
-                                (Integer)blockState3.get(FluidBlock.LEVEL) == 0 &&
-                                blockState.canPlaceAt(world, blockPos2) &&
-                                world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
-                            world.setBlockState(blockPos2, blockState);
-                            world.getBlockTickScheduler().schedule(blockPos2, Blocks.OBSIDIAN,
-                                    MathHelper.nextInt(entity.getRandom(), 60, 120));
-                        }
-                    }
-                }
-            }
+
         }
     }
 }
