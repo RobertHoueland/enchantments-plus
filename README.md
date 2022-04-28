@@ -1,8 +1,11 @@
 # Enchantments-Plus
 ## Updated to 1.18
+
+<img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
+
 Mod for minecraft that adds additional enchantments to the game. WIP project.
 
-**[Download Link](https://github.com/therobdog7/enchantments-plus/releases/download/ "Download")**
+**[Download Link](https://github.com/therobdog7/enchantments-plus/releases/ "Download")**
 
 ---
 
@@ -29,3 +32,5 @@ Installation: Drop .jar file into mods folder
 | Blaze Walker |        Boots         |        2         | Walk on lava to turn it to obsidian (works like frost walker)                           |   Rare    | Treasure enchantment. Cannot be equipped with depth strider or frost walker |
  | Flash Forge  |       Pickaxe        |        1         | Ores automatically smelt when mined, works with fortune                                 |   Rare    | Cannot be equipped with silk touch                                          |
 |  Moon Walk   |        Boots         |        2         | Gives jump boost effect                                                                 |   Rare    |                                                                             |
+
+[![Curse Forge](https://i.imgur.com/1gmBDfe.png?1)](https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric "Curse Forge")
