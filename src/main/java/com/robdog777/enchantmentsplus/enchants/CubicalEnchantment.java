@@ -12,7 +12,6 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 
 public class CubicalEnchantment extends Enchantment {
-
     public CubicalEnchantment() {
         super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }

@@ -7,7 +7,6 @@ import net.minecraft.entity.*;
 import java.util.Random;
 
 public class ThunderlordEnchantment extends Enchantment {
-
     public ThunderlordEnchantment() {
         super(Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }

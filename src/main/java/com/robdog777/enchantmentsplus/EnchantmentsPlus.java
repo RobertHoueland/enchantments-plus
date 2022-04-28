@@ -6,8 +6,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class EnchantmentsPlus implements ModInitializer
-{
+public class EnchantmentsPlus implements ModInitializer {
     private static final Enchantment ICETIP = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "icetip"),
@@ -66,6 +65,12 @@ public class EnchantmentsPlus implements ModInitializer
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "autosmelt"),
             new AutoSmeltEnchantment()
+    );
+
+    public static final Enchantment MOONWALKER = Registry.register(
+            Registry.ENCHANTMENT,
+            new Identifier("enchantmentsplus", "moonwalker"),
+            new MoonWalkerEnchantment()
     );
 
     @Override

@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import java.util.Iterator;
 
 public class BlazeWalkerEnchantment extends Enchantment {
-
     public BlazeWalkerEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
     }

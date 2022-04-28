@@ -23,11 +23,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "tick",at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
-        ItemStack itemStack = this.getEquippedStack(EquipmentSlot.HEAD);
+        ItemStack itemStackHead = this.getEquippedStack(EquipmentSlot.HEAD);
+        int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.NIGHTVISION, itemStackHead);
         // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
-        if(EnchantmentHelper.getLevel(EnchantmentsPlus.NIGHTVISION, itemStack) > 0) {
+        if(nightvisionLevel > 0) {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
                     220, 0, false, false, true));
+        }
+
+        ItemStack itemStackFeet = this.getEquippedStack(EquipmentSlot.FEET);
+        int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
+        if(moonwalkerLevel > 0) {
+            this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
+                    220, moonwalkerLevel - 1, false, false, true));
         }
     }
 }

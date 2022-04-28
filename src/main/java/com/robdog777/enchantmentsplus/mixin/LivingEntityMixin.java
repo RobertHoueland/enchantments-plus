@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-
     private Object ItemStackHelper;
 
     protected LivingEntityMixin(EntityType entityType, World world) {
@@ -31,12 +30,5 @@ public abstract class LivingEntityMixin extends Entity {
         if (j > 0) {
             BlazeWalkerEnchantment.freezeLava(casted, this.world, pos, j);
         }
-
-//        Map.Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.chooseEquipmentWith(EnchantmentsPlus.BLAZEWALKER, casted);
-//        if (entry != null) {
-//            ItemStack item = (ItemStack) ((Map.Entry<?, ?>) entry).getValue();
-//            BlazeWalkerEnchantment enchantment = ((BlazeWalkerEnchantment) (EnchantmentsPlus.BLAZEWALKER));
-//            BlazeWalkerEnchantment.freezeLava(casted, this.world, pos, j);
-//        }
     }
 }

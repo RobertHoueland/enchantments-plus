@@ -4,22 +4,22 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class NightVisionEnchantment extends Enchantment {
-    public NightVisionEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[] {EquipmentSlot.HEAD});
+public class MoonWalkerEnchantment extends Enchantment {
+    public MoonWalkerEnchantment() {
+        super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 5;
+        return 10 * level;
     }
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 2;
     }
 
     public String registryName() {
-        return "nightvision";
+        return "moonwalker";
     }
 }

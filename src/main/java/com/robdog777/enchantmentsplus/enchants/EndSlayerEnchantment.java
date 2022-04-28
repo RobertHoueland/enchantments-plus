@@ -12,7 +12,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.*;
 
 public class EndSlayerEnchantment extends Enchantment {
-
     public EndSlayerEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }
