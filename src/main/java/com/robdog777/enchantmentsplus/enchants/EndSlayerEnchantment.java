@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -32,7 +33,7 @@ public class EndSlayerEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return !(other instanceof DamageEnchantment);
+        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.CUBICAL;
     }
 
     @Override

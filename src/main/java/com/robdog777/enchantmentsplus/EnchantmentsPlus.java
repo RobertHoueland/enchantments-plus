@@ -20,13 +20,13 @@ public class EnchantmentsPlus implements ModInitializer
             new NightVisionEnchantment()
     );
 
-    private static final Enchantment CUBICAL = Registry.register(
+    public static final Enchantment CUBICAL = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "cubical"),
             new CubicalEnchantment()
     );
 
-    private static final Enchantment ENDSLAYER = Registry.register(
+    public static final Enchantment ENDSLAYER = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "endslayer"),
             new EndSlayerEnchantment()
