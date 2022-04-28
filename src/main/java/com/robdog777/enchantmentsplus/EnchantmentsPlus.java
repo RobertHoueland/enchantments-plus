@@ -14,7 +14,7 @@ public class EnchantmentsPlus implements ModInitializer
             new IceTipEnchantment()
     );
 
-    private static final Enchantment NIGHTVISION = Registry.register(
+    public static final Enchantment NIGHTVISION = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "nightvision"),
             new NightVisionEnchantment()
@@ -56,7 +56,7 @@ public class EnchantmentsPlus implements ModInitializer
             new LevitationEnchantment()
     );
 
-    private static final Enchantment BLAZEWALKER = Registry.register(
+    public static final Enchantment BLAZEWALKER = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "blazewalker"),
             new BlazeWalkerEnchantment()
