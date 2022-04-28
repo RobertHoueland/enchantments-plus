@@ -37,7 +37,7 @@ public class EndSlayerEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(target instanceof EndermanEntity || target instanceof EndermiteEntity) {
+        if(target instanceof EndermanEntity || target instanceof EndermiteEntity || target instanceof ShulkerEntity) {
             target.damage(DamageSource.GENERIC, level * 2.5F);
         }
 

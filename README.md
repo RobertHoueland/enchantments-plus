@@ -16,14 +16,14 @@ Installation: Drop .jar file into mods folder
 
 ### Current Enchantments List:
 
-|     Name     | Tool/Weapon/Armor | Number of Levels | Effect                                                        |  Rarity   | Notes                                                                       |
-|:------------:|:-----------------:|:----------------:|---------------------------------------------------------------|:---------:|-----------------------------------------------------------------------------|
-|  Levitation  |       Sword       |        3         | Target floats for a few seconds when hit                      | Uncommon  |                                                                             |
-|  Life Steal  |       Sword       |        3         | Some of damage dealt is returned to user as health            |   Rare    |                                                                             |
-| Thunder Lord |       Sword       |        3         | Chance of summoning a lightning bolt to strike target         | Very Rare |                                                                             |
-|   Execute    |       Sword       |        3         | If user is low on health, target will be dealt more damage    |   Rare    |                                                                             |
-|   Ice Tip    |       Sword       |        3         | Target is slowed when hit                                     | Uncommon  |                                                                             |
-|  End Slayer  |       Sword       |        5         | Deals extra damage to Endermen, Endermites, and Ender Dragon  |   Rare    | Cannot be equipped with other damage enchantments                           |
-|   Cubical    |       Sword       |        5         | Deals extra damage to Creepers and Slimes                     | Uncommon  | Cannot be equipped with other damage enchantments                           |
-| Night Vision |      Helmet       |        1         | Gives night vision effect                                     | Uncommon  |                                                                             |
-| Blaze Walker |       Boots       |        2         | Walk on lava to turn it to obsidian (works like frost walker) |   Rare    | Treasure enchantment. Cannot be equipped with depth strider or frost walker |
+|     Name     | Tool/Weapon/Armor | Number of Levels | Effect                                                                                  |  Rarity   | Notes                                                                       |
+|:------------:|:-----------------:|:----------------:|-----------------------------------------------------------------------------------------|:---------:|-----------------------------------------------------------------------------|
+|  Levitation  |       Sword       |        3         | Target floats for a few seconds when hit                                                | Uncommon  |                                                                             |
+|  Life Steal  |       Sword       |        3         | Some of damage dealt is returned to user as health                                      |   Rare    |                                                                             |
+| Thunder Lord |       Sword       |        3         | Chance of summoning a lightning bolt to strike target                                   | Very Rare |                                                                             |
+|   Execute    |       Sword       |        3         | If user is low on health, target will be dealt more damage                              |   Rare    |                                                                             |
+|   Ice Tip    |       Sword       |        3         | Target is slowed when hit                                                               | Uncommon  |                                                                             |
+|  End Slayer  |       Sword       |        5         | Deals extra damage to Endermen, Endermites, Shulkers, and slightly more to Ender Dragon |   Rare    | Cannot be equipped with other damage enchantments                           |
+|   Cubical    |       Sword       |        5         | Deals extra damage to Creepers and Slimes                                               | Uncommon  | Cannot be equipped with other damage enchantments                           |
+| Night Vision |      Helmet       |        1         | Gives night vision effect                                                               | Uncommon  |                                                                             |
+| Blaze Walker |       Boots       |        2         | Walk on lava to turn it to obsidian (works like frost walker)                           |   Rare    | Treasure enchantment. Cannot be equipped with depth strider or frost walker |
