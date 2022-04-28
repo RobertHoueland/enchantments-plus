@@ -29,7 +29,7 @@ public class BlockMixin {
         List<ItemStack> items = new ArrayList<>();
 
         List<ItemStack> returnValue = cir.getReturnValue();
-        if (EnchantmentHelper.getLevel(EnchantmentsPlus.AUTOSMELT, stack) == 0) {
+        if (EnchantmentHelper.getLevel(EnchantmentsPlus.FLASHFORGE, stack) == 0) {
             cir.setReturnValue(returnValue);
             return;
         }

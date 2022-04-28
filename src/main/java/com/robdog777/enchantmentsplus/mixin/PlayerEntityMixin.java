@@ -24,7 +24,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick",at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         ItemStack itemStackHead = this.getEquippedStack(EquipmentSlot.HEAD);
-        int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.NIGHTVISION, itemStackHead);
+        int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
         // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
         if(nightvisionLevel > 0) {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,

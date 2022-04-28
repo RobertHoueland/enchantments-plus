@@ -7,16 +7,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class EnchantmentsPlus implements ModInitializer {
-    private static final Enchantment ICETIP = Registry.register(
+    private static final Enchantment FROSTBITE = Registry.register(
             Registry.ENCHANTMENT,
-            new Identifier("enchantmentsplus", "icetip"),
-            new IceTipEnchantment()
+            new Identifier("enchantmentsplus", "frostbite"),
+            new FrostbiteEnchantment()
     );
 
-    public static final Enchantment NIGHTVISION = Registry.register(
+    public static final Enchantment LUNARSIGHT = Registry.register(
             Registry.ENCHANTMENT,
-            new Identifier("enchantmentsplus", "nightvision"),
-            new NightVisionEnchantment()
+            new Identifier("enchantmentsplus", "lunarsight"),
+            new LunarSightEnchantment()
     );
 
     public static final Enchantment CUBICAL = Registry.register(
@@ -31,10 +31,10 @@ public class EnchantmentsPlus implements ModInitializer {
             new EndSlayerEnchantment()
     );
 
-    private static final Enchantment EXECUTE = Registry.register(
+    private static final Enchantment PAYBACK = Registry.register(
             Registry.ENCHANTMENT,
-            new Identifier("enchantmentsplus", "execute"),
-            new ExecuteEnchantment()
+            new Identifier("enchantmentsplus", "payback"),
+            new PaybackEnchantment()
     );
 
     private static final Enchantment LIFESTEAL = Registry.register(
@@ -61,10 +61,10 @@ public class EnchantmentsPlus implements ModInitializer {
             new BlazeWalkerEnchantment()
     );
 
-    public static final Enchantment AUTOSMELT = Registry.register(
+    public static final Enchantment FLASHFORGE = Registry.register(
             Registry.ENCHANTMENT,
-            new Identifier("enchantmentsplus", "autosmelt"),
-            new AutoSmeltEnchantment()
+            new Identifier("enchantmentsplus", "flashforge"),
+            new FlashForgeEnchantment()
     );
 
     public static final Enchantment MOONWALKER = Registry.register(

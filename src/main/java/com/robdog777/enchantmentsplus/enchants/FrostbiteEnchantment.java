@@ -8,8 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
-public class IceTipEnchantment extends Enchantment {
-    public IceTipEnchantment() {
+public class FrostbiteEnchantment extends Enchantment {
+    public FrostbiteEnchantment() {
         super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }
 
@@ -24,7 +24,7 @@ public class IceTipEnchantment extends Enchantment {
     }
 
     public String registryName() {
-        return "icetip";
+        return "frostbite";
     }
 
     @Override

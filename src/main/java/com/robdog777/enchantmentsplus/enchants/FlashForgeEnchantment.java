@@ -5,8 +5,8 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 
-public class AutoSmeltEnchantment extends Enchantment  {
-    public AutoSmeltEnchantment() {
+public class FlashForgeEnchantment extends Enchantment  {
+    public FlashForgeEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.DIGGER, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }
 
@@ -21,7 +21,7 @@ public class AutoSmeltEnchantment extends Enchantment  {
     }
 
     public String registryName() {
-        return "autosmelt";
+        return "flashforge";
     }
 
     public boolean canAccept(Enchantment other) {

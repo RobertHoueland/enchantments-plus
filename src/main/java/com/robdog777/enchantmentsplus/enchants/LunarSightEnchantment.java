@@ -4,8 +4,8 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class NightVisionEnchantment extends Enchantment {
-    public NightVisionEnchantment() {
+public class LunarSightEnchantment extends Enchantment {
+    public LunarSightEnchantment() {
         super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[] {EquipmentSlot.HEAD});
     }
 
@@ -20,6 +20,6 @@ public class NightVisionEnchantment extends Enchantment {
     }
 
     public String registryName() {
-        return "nightvision";
+        return "lunarsight";
     }
 }

@@ -7,8 +7,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 
-public class ExecuteEnchantment extends Enchantment {
-    public ExecuteEnchantment() {
+public class PaybackEnchantment extends Enchantment {
+    public PaybackEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }
 
@@ -23,7 +23,7 @@ public class ExecuteEnchantment extends Enchantment {
     }
 
     public String registryName() {
-        return "execute";
+        return "payback";
     }
 
     @Override
