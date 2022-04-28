@@ -62,6 +62,12 @@ public class EnchantmentsPlus implements ModInitializer
             new BlazeWalkerEnchantment()
     );
 
+    public static final Enchantment AUTOSMELT = Registry.register(
+            Registry.ENCHANTMENT,
+            new Identifier("enchantmentsplus", "autosmelt"),
+            new AutoSmeltEnchantment()
+    );
+
     @Override
     public void onInitialize() {
 

@@ -4,6 +4,7 @@
   "package": "com.robdog777.enchantmentsplus.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "BlockMixin",
     "EnchantmentsPlusMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin"

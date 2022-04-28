@@ -15,7 +15,7 @@ public class ExecuteEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 5 * level;
+        return 6 * level;
     }
 
     @Override

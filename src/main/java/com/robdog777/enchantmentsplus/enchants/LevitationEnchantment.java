@@ -16,7 +16,7 @@ public class LevitationEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 10 * level;
+        return 8 * level;
     }
 
     @Override

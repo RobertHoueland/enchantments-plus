@@ -16,7 +16,7 @@ public class IceTipEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 5 * level;
+        return 8 * level;
     }
 
     @Override

@@ -13,7 +13,7 @@
     "sources": "https://github.com/therobdog7/enchantments-plus"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/enchantmentsplus/icon.png",
 
   "environment": "*",

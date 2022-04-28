@@ -14,7 +14,7 @@ public class LifeStealEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 5 * level;
+        return 7 * level;
     }
 
     @Override

@@ -24,6 +24,11 @@ public class BlazeWalkerEnchantment extends Enchantment {
     }
 
     @Override
+    public int getMaxPower(int level) {
+        return this.getMinPower(level) + 15;
+    }
+
+    @Override
     public int getMaxLevel() {
         return 2;
     }

@@ -18,7 +18,7 @@ public class EndSlayerEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 6 * level;
+        return 8 * level;
     }
 
     @Override

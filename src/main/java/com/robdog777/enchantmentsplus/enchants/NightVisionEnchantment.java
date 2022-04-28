@@ -12,7 +12,7 @@ public class NightVisionEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 1;
+        return 5;
     }
 
     @Override
