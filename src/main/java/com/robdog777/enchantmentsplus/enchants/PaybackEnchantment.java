@@ -29,7 +29,7 @@ public class PaybackEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if(user.getHealth() < 10){
-            target.damage(DamageSource.GENERIC, level * 0.5F * (20 - user.getHealth()));
+            target.damage(DamageSource.GENERIC, (float)level * 0.5F * (20 - user.getHealth()));
         }
 
         super.onTargetDamaged(user, target, level);

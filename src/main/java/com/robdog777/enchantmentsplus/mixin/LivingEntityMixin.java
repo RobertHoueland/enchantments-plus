@@ -17,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    private Object ItemStackHelper;
-
     protected LivingEntityMixin(EntityType entityType, World world) {
         super(entityType, world);
     }

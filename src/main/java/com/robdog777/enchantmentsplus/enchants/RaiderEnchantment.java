@@ -5,14 +5,13 @@ import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.*;
 
-public class EndSlayerEnchantment extends Enchantment {
-    public EndSlayerEnchantment() {
+public class RaiderEnchantment extends Enchantment {
+    public RaiderEnchantment() {
         super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
     }
 
@@ -27,22 +26,20 @@ public class EndSlayerEnchantment extends Enchantment {
     }
 
     public String registryName() {
-        return "endslayer";
+        return "raider";
     }
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.CUBICAL && other!= EnchantmentsPlus.RAIDER;
+        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.CUBICAL && other!= EnchantmentsPlus.ENDSLAYER;
     }
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(target instanceof EndermanEntity || target instanceof EndermiteEntity || target instanceof ShulkerEntity) {
-            target.damage(DamageSource.GENERIC, (float)level * 2.5F);
-        }
-
-        if(target instanceof EnderDragonEntity) {
-            target.damage(DamageSource.GENERIC, (float)level * 5F);
+        if (target instanceof LivingEntity livingEntity) {
+            if (livingEntity.getGroup() == EntityGroup.ILLAGER) {
+                target.damage(DamageSource.GENERIC, (float)level * 2.5F);
+            }
         }
 
         super.onTargetDamaged(user, target, level);

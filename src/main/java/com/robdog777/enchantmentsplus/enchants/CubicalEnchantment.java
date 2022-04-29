@@ -32,13 +32,13 @@ public class CubicalEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.ENDSLAYER;
+        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.ENDSLAYER && other!= EnchantmentsPlus.RAIDER;
     }
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if(target instanceof CreeperEntity || target instanceof SlimeEntity) {
-            target.damage(DamageSource.GENERIC, level * 2.5F);
+            target.damage(DamageSource.GENERIC, (float)level * 2.5F);
         }
 
         super.onTargetDamaged(user, target, level);

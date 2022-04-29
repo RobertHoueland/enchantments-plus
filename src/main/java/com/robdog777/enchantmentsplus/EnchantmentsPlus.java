@@ -73,6 +73,12 @@ public class EnchantmentsPlus implements ModInitializer {
             new MoonWalkerEnchantment()
     );
 
+    public static final Enchantment RAIDER = Registry.register(
+            Registry.ENCHANTMENT,
+            new Identifier("enchantmentsplus", "raider"),
+            new RaiderEnchantment()
+    );
+
     @Override
     public void onInitialize() {
 
