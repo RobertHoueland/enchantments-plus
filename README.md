@@ -1,5 +1,5 @@
 # Enchantments-Plus
-## Updated to 1.18
+## Updated to 1.18.2
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
@@ -9,9 +9,9 @@ Mod for minecraft that adds additional enchantments to the game. WIP project.
 
 ---
 
-**MC VERSION: 1.18.x**
+**UPDATED TO MC VERSION: 1.18.2**
 
-**Requires: [Fabric Loader (any 1.18 version)](https://fabricmc.net/use/ "Fabric Download") AND [Fabric API (0.42.4+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
+**Requires: [Fabric Loader (0.13.3+)](https://fabricmc.net/use/ "Fabric Download") AND [Fabric API (0.51.1+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
 Installation: Drop .jar file into mods folder
 
