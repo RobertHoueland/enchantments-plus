@@ -31,7 +31,7 @@ public class LevitationEnchantment extends Enchantment {
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if (target instanceof LivingEntity) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION,
-                    10 * level, level));
+                    10 * level, level - 1));
         }
 
         super.onTargetDamaged(user, target, level);

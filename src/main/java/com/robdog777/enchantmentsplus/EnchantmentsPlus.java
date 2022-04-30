@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class EnchantmentsPlus implements ModInitializer {
-    private static final Enchantment FROSTBITE = Registry.register(
+    public static final Enchantment FROSTBITE = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "frostbite"),
             new FrostbiteEnchantment()
@@ -77,6 +77,12 @@ public class EnchantmentsPlus implements ModInitializer {
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "raider"),
             new RaiderEnchantment()
+    );
+
+    public static final Enchantment TOXICSTRIKE = Registry.register(
+            Registry.ENCHANTMENT,
+            new Identifier("enchantmentsplus", "toxicstrike"),
+            new ToxicStrikeEnchantment()
     );
 
     @Override

@@ -10,9 +10,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
-public class FrostbiteEnchantment extends Enchantment {
-    public FrostbiteEnchantment() {
-        super(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+public class ToxicStrikeEnchantment extends Enchantment {
+    public ToxicStrikeEnchantment() {
+        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
@@ -31,18 +31,18 @@ public class FrostbiteEnchantment extends Enchantment {
     }
 
     public String registryName() {
-        return "frostbite";
+        return "toxicstrike";
     }
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return other != Enchantments.FIRE_ASPECT && other != EnchantmentsPlus.TOXICSTRIKE;
+        return other != Enchantments.FIRE_ASPECT && other != EnchantmentsPlus.FROSTBITE;
     }
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if (target instanceof LivingEntity) {
-            ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,
+            ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,
                     40 * level, level - 1));
         }
 
