@@ -8,12 +8,12 @@ import net.minecraft.entity.LivingEntity;
 
 public class LifeStealEnchantment extends Enchantment {
     public LifeStealEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 7 * level;
+        return 5 + (7 * level);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class LifeStealEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(user.getHealth() < 20 && (Math.random() < level * 0.25)){
+        if (user.getHealth() < 20 && (Math.random() < level * 0.25)) {
             user.heal(1.0F * level);
         }
 

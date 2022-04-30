@@ -1,5 +1,6 @@
 # Enchantments-Plus
-## Updated to 1.18.2
+
+## Updated to 1.18.2 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
@@ -11,7 +12,8 @@ Mod for minecraft that adds additional enchantments to the game. WIP project.
 
 **UPDATED TO MC VERSION: 1.18.2**
 
-**Requires: [Fabric Loader (0.13.3+)](https://fabricmc.net/use/ "Fabric Download") AND [Fabric API (0.51.1+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
+**Requires: [Fabric Loader (0.13.3+)](https://fabricmc.net/use/ "Fabric Download")
+AND [Fabric API (0.51.1+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
 Installation: Drop .jar file into mods folder
 
@@ -30,8 +32,10 @@ Installation: Drop .jar file into mods folder
 |   Cubical    |       Sword       |        5         | Deals extra damage to Creepers, Slimes, and Magma Cubes                                 | Uncommon  | Cannot be equipped with other damage enchantments                           |
 | Lunar Sight  |      Helmet       |        1         | Gives night vision effect                                                               | Uncommon  |                                                                             |
 | Blaze Walker |       Boots       |        2         | Walk on lava to turn it to obsidian (works like frost walker)                           |   Rare    | Treasure enchantment. Cannot be equipped with depth strider or frost walker |
- | Flash Forge  |      Pickaxe      |        1         | Ores automatically smelt when mined, works with fortune                                 |   Rare    | Cannot be equipped with silk touch                                          |
-|  Moon Walk   |       Boots       |        2         | Gives jump boost effect                                                                 |   Rare    |                                                                             |
+| Flash Forge  |      Pickaxe      |        1         | Ores automatically smelt when mined, works with fortune                                 |   Rare    | Cannot be equipped with silk touch                                          |
+|  Moon Walk   |       Boots       |        2         | When tapping sprint, get jump boost and speed for a few seconds. 20 second cooldown     |   Rare    |                                                                             |
 |    Raider    |       Sword       |        5         | Deals extra damage to raid/illager/pillager mobs                                        | Uncommon  | Cannot be equipped with other damage enchantments                           |
 
-[![Curse Forge](https://i.imgur.com/1gmBDfe.png?1)](https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric "Curse Forge")
+[![Curse Forge Banner](https://i.imgur.com/1gmBDfe.png?1)](https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric "Curse Forge")
+
+![Fabric Only Banner](https://i.ibb.co/yphNcXz/fabric-only-banner.png)

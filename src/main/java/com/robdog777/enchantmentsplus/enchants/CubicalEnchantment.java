@@ -13,12 +13,17 @@ import net.minecraft.entity.mob.SlimeEntity;
 
 public class CubicalEnchantment extends Enchantment {
     public CubicalEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 8 * level;
+        return 5 + (level - 1) * 8;
+    }
+    
+    @Override
+    public int getMaxPower(int level) {
+        return this.getMinPower(level) + 20;
     }
 
     @Override
@@ -32,13 +37,13 @@ public class CubicalEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.ENDSLAYER && other!= EnchantmentsPlus.RAIDER;
+        return !(other instanceof DamageEnchantment) && other != EnchantmentsPlus.ENDSLAYER && other != EnchantmentsPlus.RAIDER;
     }
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(target instanceof CreeperEntity || target instanceof SlimeEntity) {
-            target.damage(DamageSource.GENERIC, (float)level * 2.5F);
+        if (target instanceof CreeperEntity || target instanceof SlimeEntity) {
+            target.damage(DamageSource.GENERIC, (float) level * 2.5F);
         }
 
         super.onTargetDamaged(user, target, level);

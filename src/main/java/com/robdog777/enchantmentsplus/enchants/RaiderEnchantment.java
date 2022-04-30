@@ -12,12 +12,17 @@ import net.minecraft.entity.damage.DamageSource;
 
 public class RaiderEnchantment extends Enchantment {
     public RaiderEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 8 * level;
+        return 5 + (level - 1) * 8;
+    }
+
+    @Override
+    public int getMaxPower(int level) {
+        return this.getMinPower(level) + 20;
     }
 
     @Override
@@ -31,14 +36,14 @@ public class RaiderEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return !(other instanceof DamageEnchantment) && other!= EnchantmentsPlus.CUBICAL && other!= EnchantmentsPlus.ENDSLAYER;
+        return !(other instanceof DamageEnchantment) && other != EnchantmentsPlus.CUBICAL && other != EnchantmentsPlus.ENDSLAYER;
     }
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if (target instanceof LivingEntity livingEntity) {
             if (livingEntity.getGroup() == EntityGroup.ILLAGER) {
-                target.damage(DamageSource.GENERIC, (float)level * 2.5F);
+                target.damage(DamageSource.GENERIC, (float) level * 2.5F);
             }
         }
 

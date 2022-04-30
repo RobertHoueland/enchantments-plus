@@ -10,12 +10,12 @@ import net.minecraft.entity.effect.StatusEffects;
 
 public class FrostbiteEnchantment extends Enchantment {
     public FrostbiteEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 8 * level;
+        return 5 + (8 * level);
     }
 
     @Override
@@ -29,9 +29,9 @@ public class FrostbiteEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(target instanceof LivingEntity) {
+        if (target instanceof LivingEntity) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,
-                    20 * 2 * level, level - 1));
+                    40 * level, level - 1));
         }
 
         super.onTargetDamaged(user, target, level);

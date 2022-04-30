@@ -9,12 +9,12 @@ import net.minecraft.entity.damage.DamageSource;
 
 public class PaybackEnchantment extends Enchantment {
     public PaybackEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 6 * level;
+        return 5 + (6 * level);
     }
 
     @Override
@@ -28,8 +28,8 @@ public class PaybackEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(user.getHealth() < 10){
-            target.damage(DamageSource.GENERIC, (float)level * 0.5F * (20 - user.getHealth()));
+        if (user.getHealth() < 10) {
+            target.damage(DamageSource.GENERIC, (float) level * 0.5F * (20 - user.getHealth()));
         }
 
         super.onTargetDamaged(user, target, level);

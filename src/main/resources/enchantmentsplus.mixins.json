@@ -6,7 +6,6 @@
   "mixins": [
     "BlockMixin",
     "EnchantmentsPlusMixin",
-    "GameOptionsMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin"
   ],

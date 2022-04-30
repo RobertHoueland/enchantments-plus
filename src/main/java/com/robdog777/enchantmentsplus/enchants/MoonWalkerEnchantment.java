@@ -6,12 +6,12 @@ import net.minecraft.entity.EquipmentSlot;
 
 public class MoonWalkerEnchantment extends Enchantment {
     public MoonWalkerEnchantment() {
-        super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[] {EquipmentSlot.FEET});
+        super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 10 * level;
+        return 5 + (10 * level);
     }
 
     @Override

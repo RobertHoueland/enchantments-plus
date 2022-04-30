@@ -10,12 +10,12 @@ import net.minecraft.entity.effect.StatusEffects;
 
 public class LevitationEnchantment extends Enchantment {
     public LevitationEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 8 * level;
+        return 5 + (8 * level);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class LevitationEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if(target instanceof LivingEntity) {
+        if (target instanceof LivingEntity) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION,
                     10 * level, level));
         }
