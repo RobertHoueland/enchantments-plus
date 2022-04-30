@@ -31,13 +31,13 @@ public class EnchantmentsPlus implements ModInitializer {
             new EndSlayerEnchantment()
     );
 
-    private static final Enchantment PAYBACK = Registry.register(
+    public static final Enchantment PAYBACK = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "payback"),
             new PaybackEnchantment()
     );
 
-    private static final Enchantment LIFESTEAL = Registry.register(
+    public static final Enchantment LIFESTEAL = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "lifesteal"),
             new LifeStealEnchantment()
@@ -49,7 +49,7 @@ public class EnchantmentsPlus implements ModInitializer {
             new ThunderlordEnchantment()
     );
 
-    private static final Enchantment LEVITATION = Registry.register(
+    public static final Enchantment LEVITATION = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "levitation"),
             new LevitationEnchantment()

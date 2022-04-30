@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -24,6 +25,11 @@ public class PaybackEnchantment extends Enchantment {
 
     public String registryName() {
         return "payback";
+    }
+
+    @Override
+    protected boolean canAccept(Enchantment other) {
+        return other != EnchantmentsPlus.LIFESTEAL;
     }
 
     @Override

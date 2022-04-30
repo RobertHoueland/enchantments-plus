@@ -36,7 +36,7 @@ public class ToxicStrikeEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return other != Enchantments.FIRE_ASPECT && other != EnchantmentsPlus.FROSTBITE;
+        return other != Enchantments.FIRE_ASPECT && other != EnchantmentsPlus.FROSTBITE && other != EnchantmentsPlus.LEVITATION;
     }
 
     @Override
