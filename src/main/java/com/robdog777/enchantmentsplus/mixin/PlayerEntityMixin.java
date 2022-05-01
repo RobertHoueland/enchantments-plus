@@ -11,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,6 +45,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 long time = world.getTimeOfDay();
                 // cooldown
                 if (time > lastBoost + cooldownTime) {
+                    if (!world.isClient) {
+                        world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent, SoundCategory.PLAYERS, 0.5f, 1f);
+                    }
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
                             moonwalkerLevel * 100, moonwalkerLevel - 1, false, false, true));
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,

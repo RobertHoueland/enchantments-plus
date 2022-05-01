@@ -3,10 +3,14 @@ package com.robdog777.enchantmentsplus;
 import com.robdog777.enchantmentsplus.enchants.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class EnchantmentsPlus implements ModInitializer {
+    public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
+    public static SoundEvent SwoopEvent = new SoundEvent(SWOOP);
+
     public static final Enchantment FROSTBITE = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "frostbite"),
@@ -87,6 +91,6 @@ public class EnchantmentsPlus implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
     }
 }
