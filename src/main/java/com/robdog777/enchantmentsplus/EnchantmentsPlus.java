@@ -11,6 +11,9 @@ public class EnchantmentsPlus implements ModInitializer {
     public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
     public static SoundEvent SwoopEvent = new SoundEvent(SWOOP);
 
+    public static final Identifier BLURP = new Identifier("enchantmentsplus:blurp");
+    public static SoundEvent BlurpEvent = new SoundEvent(BLURP);
+
     public static final Enchantment FROSTBITE = Registry.register(
             Registry.ENCHANTMENT,
             new Identifier("enchantmentsplus", "frostbite"),
@@ -92,5 +95,6 @@ public class EnchantmentsPlus implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
+        Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);
     }
 }

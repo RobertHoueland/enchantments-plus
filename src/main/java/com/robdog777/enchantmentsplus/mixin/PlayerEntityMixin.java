@@ -46,7 +46,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 // cooldown
                 if (time > lastBoost + cooldownTime) {
                     if (!world.isClient) {
-                        world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent, SoundCategory.PLAYERS, 0.5f, 1f);
+                        world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent, SoundCategory.PLAYERS, 0.7f, 1f);
                     }
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
                             moonwalkerLevel * 100, moonwalkerLevel - 1, false, false, true));

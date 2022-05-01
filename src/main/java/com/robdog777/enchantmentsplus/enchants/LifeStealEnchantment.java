@@ -6,6 +6,8 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.world.World;
 
 public class LifeStealEnchantment extends Enchantment {
     public LifeStealEnchantment() {
@@ -33,7 +35,11 @@ public class LifeStealEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        World world = user.world;
         if (user.getHealth() < 20 && (Math.random() < level * 0.25)) {
+            if (!world.isClient) {
+                world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 0.25f, 1f);
+            }
             user.heal(1.0F * level);
         }
 

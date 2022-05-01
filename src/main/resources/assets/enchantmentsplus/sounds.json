@@ -4,5 +4,11 @@
     "sounds": [
       "enchantmentsplus:swoop"
     ]
+  },
+  "blurp": {
+    "subtitle": "subtitles.enchantmentsplus.blurp",
+    "sounds": [
+      "enchantmentsplus:blurp"
+    ]
   }
 }
