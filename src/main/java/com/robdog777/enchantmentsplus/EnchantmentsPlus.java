@@ -92,6 +92,12 @@ public class EnchantmentsPlus implements ModInitializer {
             new ToxicStrikeEnchantment()
     );
 
+    public static final Enchantment HIKER = Registry.register(
+            Registry.ENCHANTMENT,
+            new Identifier("enchantmentsplus", "hiker"),
+            new HikerEnchantment()
+    );
+
     @Override
     public void onInitialize() {
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);

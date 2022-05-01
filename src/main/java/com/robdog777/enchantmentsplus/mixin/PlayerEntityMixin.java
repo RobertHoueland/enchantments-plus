@@ -30,6 +30,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         ItemStack itemStackHead = this.getEquippedStack(EquipmentSlot.HEAD);
+        ItemStack itemStackFeet = this.getEquippedStack(EquipmentSlot.FEET);
+        
         int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
         if (nightvisionLevel > 0) {
             // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
@@ -37,9 +39,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     220, 0, false, false, true));
         }
 
+        int hikerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.HIKER, itemStackFeet);
+        if (hikerLevel > 0) {
+            this.stepHeight = hikerLevel + 0.1F;
+        } else {
+            this.stepHeight = 0.6F;
+        }
+
         // boost while sprinting
         if (MinecraftClient.getInstance().options.sprintKey.isPressed()) {
-            ItemStack itemStackFeet = this.getEquippedStack(EquipmentSlot.FEET);
             int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
             if (moonwalkerLevel > 0) {
                 long time = world.getTimeOfDay();
