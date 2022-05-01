@@ -7,7 +7,9 @@ import org.spongepowered.asm.mixin.Mixin;
 public class InGameHudMixin {
     boolean renderFullness = false;
 
-    /*@Redirect(method = "renderCrosshair", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getAttackCooldownProgress(F)F"))
+    // TODO: add visual cooldown to moon walker
+    /*
+    @Redirect(method = "renderCrosshair", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getAttackCooldownProgress(F)F"))
     private float setBarProgress(ClientPlayerEntity player, float baseTime) {
         float progress = EnchantmentsPlus.getProgress(player.getAttackCooldownProgress(baseTime));
 
@@ -29,5 +31,6 @@ public class InGameHudMixin {
     private float setHotBarProgress(ClientPlayerEntity player, float baseTime) {
         float progress = EnchantmentsPlus.getProgress(player.getAttackCooldownProgress(baseTime));
         return progress == 2.0F ? 0.99F : progress;
-    }*/
+    }
+    */
 }
