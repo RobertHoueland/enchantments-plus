@@ -2,20 +2,18 @@
   "schemaVersion": 1,
   "id": "enchantmentsplus",
   "version": "${version}",
-
   "name": "Enchantments Plus",
   "description": "Adds additional enchantments to the game!",
   "authors": [
     "robdog777"
   ],
   "contact": {
-    "homepage": "https://github.com/therobdog7/enchantments-plus",
-    "sources": "https://github.com/therobdog7/enchantments-plus"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric",
+    "sources": "https://github.com/therobdog7/enchantments-plus",
+    "issues": "https://github.com/RobertHoueland/enchantments-plus/issues"
   },
-
   "license": "MIT",
   "icon": "assets/enchantmentsplus/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -25,7 +23,6 @@
   "mixins": [
     "enchantmentsplus.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
