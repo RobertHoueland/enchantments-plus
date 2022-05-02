@@ -3,11 +3,15 @@ package com.robdog777.enchantmentsplus;
 import com.robdog777.enchantmentsplus.enchants.*;
 import com.robdog777.enchantmentsplus.statuseffects.MoonRestEffect;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.lwjgl.glfw.GLFW;
 
 public class EnchantmentsPlus implements ModInitializer {
     // Audio files copyright free from https://freesound.org/
@@ -19,6 +23,8 @@ public class EnchantmentsPlus implements ModInitializer {
 
     // moon png file from https://www.pngitem.com
     public static final StatusEffect MOONREST = new MoonRestEffect();
+
+    public static KeyBinding moonWalk;
 
     public static final Enchantment FROSTBITE = Registry.register(
             Registry.ENCHANTMENT,
@@ -109,5 +115,12 @@ public class EnchantmentsPlus implements ModInitializer {
         Registry.register(Registry.STATUS_EFFECT, new Identifier("enchantmentsplus", "moonresteffect"), MOONREST);
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);
+
+        moonWalk = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.enchantmentsplus.moonwalk", // The translation key of the keybinding's name
+                InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
+                GLFW.GLFW_KEY_R, // The keycode of the key
+                "category.enchantmentsplus.enchantmentsplus" // The translation key of the keybinding's category.
+        ));
     }
 }

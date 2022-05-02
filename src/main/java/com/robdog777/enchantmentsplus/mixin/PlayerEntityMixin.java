@@ -3,6 +3,7 @@ package com.robdog777.enchantmentsplus.mixin;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
@@ -18,6 +19,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static com.robdog777.enchantmentsplus.EnchantmentsPlus.moonWalk;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -49,25 +52,30 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             this.stepHeight = 0.6F;
         }
 
-        // boost while sprinting
+        // boost
         if (MinecraftClient.getInstance().options.sprintKey.isPressed()) {
-            int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
-            if (moonwalkerLevel > 0) {
-                long time = world.getTimeOfDay();
-                // cooldown
-                if (time > lastBoost + cooldownTime && !this.hasStatusEffect(EnchantmentsPlus.MOONREST)) {
-                    if (!world.isClient) {
-                        world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent, SoundCategory.PLAYERS, 0.7f, 1f);
+            long time = world.getTimeOfDay();
+
+            ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                if (moonWalk.isPressed()) {
+                    int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
+                    if (moonwalkerLevel > 0) {
+                        // cooldown
+                        if (time > lastBoost + cooldownTime && !this.hasStatusEffect(EnchantmentsPlus.MOONREST)) {
+                            if (!world.isClient) {
+                                world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent, SoundCategory.PLAYERS, 0.7f, 1f);
+                            }
+                            this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
+                                    moonwalkerLevel * 100, moonwalkerLevel - 1, false, false, true));
+                            this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,
+                                    moonwalkerLevel * 100, 0, false, false, true));
+                            this.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
+                                    cooldownTime, 0, false, false, true));
+                            lastBoost = time;
+                        }
                     }
-                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
-                            moonwalkerLevel * 100, moonwalkerLevel - 1, false, false, true));
-                    this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,
-                            moonwalkerLevel * 100, 0, false, false, true));
-                    this.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
-                            cooldownTime, 0, false, false, true));
-                    lastBoost = time;
                 }
-            }
+            });
         }
     }
 }
