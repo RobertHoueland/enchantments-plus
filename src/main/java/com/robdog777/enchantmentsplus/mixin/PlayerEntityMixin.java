@@ -26,7 +26,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     long lastBoost;
-    long cooldownTime = 400; // 20 seconds
+    int cooldownTime = 400; // 20 seconds
 
     // Only run on client, because we access sprintKey
     @Environment(EnvType.CLIENT)
@@ -55,7 +55,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             if (moonwalkerLevel > 0) {
                 long time = world.getTimeOfDay();
                 // cooldown
-                if (time > lastBoost + cooldownTime) {
+                if (time > lastBoost + cooldownTime && !this.hasStatusEffect(EnchantmentsPlus.MOONREST)) {
                     if (!world.isClient) {
                         world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent, SoundCategory.PLAYERS, 0.7f, 1f);
                     }
@@ -63,6 +63,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                             moonwalkerLevel * 100, moonwalkerLevel - 1, false, false, true));
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,
                             moonwalkerLevel * 100, 0, false, false, true));
+                    this.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
+                            cooldownTime, 0, false, false, true));
                     lastBoost = time;
                 }
             }

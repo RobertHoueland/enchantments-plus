@@ -1,18 +1,24 @@
 package com.robdog777.enchantmentsplus;
 
 import com.robdog777.enchantmentsplus.enchants.*;
+import com.robdog777.enchantmentsplus.statuseffects.MoonRestEffect;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class EnchantmentsPlus implements ModInitializer {
+    // Audio files copyright free from https://freesound.org/
     public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
     public static SoundEvent SwoopEvent = new SoundEvent(SWOOP);
 
     public static final Identifier BLURP = new Identifier("enchantmentsplus:blurp");
     public static SoundEvent BlurpEvent = new SoundEvent(BLURP);
+
+    // moon png file from https://www.pngitem.com
+    public static final StatusEffect MOONREST = new MoonRestEffect();
 
     public static final Enchantment FROSTBITE = Registry.register(
             Registry.ENCHANTMENT,
@@ -100,6 +106,7 @@ public class EnchantmentsPlus implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        Registry.register(Registry.STATUS_EFFECT, new Identifier("enchantmentsplus", "moonresteffect"), MOONREST);
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);
     }
