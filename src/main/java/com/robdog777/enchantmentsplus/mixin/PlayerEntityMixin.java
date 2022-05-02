@@ -1,8 +1,9 @@
 package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.GameOptions;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,18 +21,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world, GameOptions settings) {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     long lastBoost;
     long cooldownTime = 400; // 20 seconds
 
+    // Only run on client, because we access sprintKey
+    @Environment(EnvType.CLIENT)
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         ItemStack itemStackHead = this.getEquippedStack(EquipmentSlot.HEAD);
         ItemStack itemStackFeet = this.getEquippedStack(EquipmentSlot.FEET);
-        
+
         int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
         if (nightvisionLevel > 0) {
             // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
