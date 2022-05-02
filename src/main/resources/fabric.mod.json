@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "com.robdog777.enchantmentsplus.EnchantmentsPlus"
+    ],
+    "client": [
+      "com.robdog777.enchantmentsplus.EnchantmentsPlusClient"
     ]
   },
   "mixins": [
