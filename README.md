@@ -11,7 +11,7 @@ Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchant
 
 ---
 
-**UPDATED TO MC VERSION: 1.18.2**
+**UPDATED TO MC VERSION: 1.19**
 
 **Requires: [Fabric Loader (0.14.7+)](https://fabricmc.net/use/ "Fabric Download")
 AND [Fabric API (0.55.3+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
