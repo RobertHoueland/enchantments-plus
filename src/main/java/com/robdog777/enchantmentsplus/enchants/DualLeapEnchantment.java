@@ -5,27 +5,31 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class MoonWalkerEnchantment extends Enchantment {
-    public MoonWalkerEnchantment() {
+import java.util.Random;
+
+public class DualLeapEnchantment extends Enchantment {
+    public DualLeapEnchantment() {
         super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
     }
 
     @Override
     public int getMinPower(int level) {
-        return 5 + (10 * level);
+        return (20 * level);
     }
 
     @Override
     public int getMaxLevel() {
-        return 2;
+        return 1;
     }
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return other != EnchantmentsPlus.DUALLEAP;
+        return other != EnchantmentsPlus.MOONWALKER;
     }
 
     public String registryName() {
-        return "moonwalker";
+        return "dualleap";
     }
+
+    private final static Random random = new Random();
 }

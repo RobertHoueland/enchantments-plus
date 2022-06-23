@@ -1,10 +1,11 @@
 # Enchantments-Plus
 
-## Updated to 1.18.2 for Fabric
+## Updated to 1.19 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
-Mod for minecraft that adds additional enchantments to the game. WIP project. Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
+Mod for minecraft that adds additional enchantments to the game. WIP project.
+Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
 
 **[Download Link](https://github.com/therobdog7/enchantments-plus/releases/ "Download")**
 
@@ -12,8 +13,8 @@ Mod for minecraft that adds additional enchantments to the game. WIP project. Su
 
 **UPDATED TO MC VERSION: 1.18.2**
 
-**Requires: [Fabric Loader (0.13.3+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.51.1+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
+**Requires: [Fabric Loader (0.14.7+)](https://fabricmc.net/use/ "Fabric Download")
+AND [Fabric API (0.55.3+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
 Installation: Drop .jar file into mods folder
 
@@ -37,6 +38,7 @@ Installation: Drop .jar file into mods folder
 |    Raider    |       Sword       |        5         | Deals extra damage to all raid/illager/pillager mobs                                        | Uncommon  | Cannot be equipped with other damage enchantments                           |
 | Toxic Strike |       Sword       |        2         | Target is poisoned when hit                                                                 |   Rare    | Cannot be equipped with fire aspect, frostbite, levitation                  |
 |    Hiker     |       Boots       |        1         | Allows you to step up blocks without jumping, like a horse                                  |   Rare    |                                                                             |
+|  Dual Leap   |       Boots       |        1         | Allows you to double jump                                                                   |   Rare    | Cannot be equipped with Moon Walk                                           |
 
 [![Curse Forge Banner](https://i.imgur.com/1gmBDfe.png?1)](https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric "Curse Forge")
 

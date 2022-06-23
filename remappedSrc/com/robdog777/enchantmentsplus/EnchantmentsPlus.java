@@ -8,13 +8,8 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class EnchantmentsPlus implements ModInitializer {
-    // This logger is used to write text to the console and the log file.
-    public static final Logger LOGGER = LoggerFactory.getLogger("enchantmentsplus");
-
     // Audio files copyright free from https://freesound.org/
     public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
     public static SoundEvent SwoopEvent = new SoundEvent(SWOOP);
@@ -117,12 +112,6 @@ public class EnchantmentsPlus implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
-
-        LOGGER.info("enchantmentsplus is now loaded");
-
         Registry.register(Registry.STATUS_EFFECT, new Identifier("enchantmentsplus", "moonresteffect"), MOONREST);
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
         Registry.register(Registry.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);

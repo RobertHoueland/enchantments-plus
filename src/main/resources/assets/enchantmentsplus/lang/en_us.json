@@ -28,6 +28,8 @@
   "enchantment.enchantmentsplus.hiker": "Hiker",
   "enchantment.enchantmentsplus.hiker.desc": "Allows the user to step up blocks without jumping.",
   "effect.enchantmentsplus.moonresteffect": "Moon Rest",
+  "enchantment.enchantmentsplus.dualleap": "Dual Leap",
+  "enchantment.enchantmentsplus.dualleap.desc": "Allows the user to double jump.",
   "key.enchantmentsplus.moonwalk": "Moon Walk (press while sprinting)",
   "category.enchantmentsplus.keys": "Enchantments Plus",
   "subtitles.enchantmentsplus.swoop": "Moon walk whoosh",
