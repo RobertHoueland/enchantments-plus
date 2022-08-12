@@ -1,6 +1,6 @@
 # Enchantments-Plus
 
-## Updated to 1.19 for Fabric
+## Updated to 1.19.2 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
@@ -11,10 +11,10 @@ Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchant
 
 ---
 
-**UPDATED TO MC VERSION: 1.19**
+**UPDATED TO MC VERSION: 1.19.2**
 
-**Requires: [Fabric Loader (0.14.7+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.55.3+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
+**Requires: [Fabric Loader (0.14.8+)](https://fabricmc.net/use/ "Fabric Download")
+AND [Fabric API (0.58.6+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
 Installation: Drop .jar file into mods folder
 
