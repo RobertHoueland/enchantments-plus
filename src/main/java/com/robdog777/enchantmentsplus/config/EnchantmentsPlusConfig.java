@@ -3,8 +3,13 @@ package com.robdog777.enchantmentsplus.config;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Config(name = "enchantmentsplus")
 public class EnchantmentsPlusConfig implements ConfigData {
+    public Map<String, Boolean> enabledEnchantments = new HashMap<>();
+
     public boolean enableBlazeWalker = true;
     public boolean enableCubical = true;
     public boolean enableDualLeap = true;
