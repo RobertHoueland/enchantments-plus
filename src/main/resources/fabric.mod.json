@@ -21,6 +21,9 @@
     ],
     "client": [
       "com.robdog777.enchantmentsplus.EnchantmentsPlusClient"
+    ],
+    "modmenu": [
+      "com.robdog777.enchantmentsplus.config.ModMenuIntegration"
     ]
   },
   "mixins": [

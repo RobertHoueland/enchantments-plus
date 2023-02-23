@@ -1,10 +1,10 @@
-package com.robdog777.enchantmentsplus;
+package com.robdog777.enchantmentsplus.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
 @Config(name = "enchantmentsplus")
-class EnchantmentsPlusConfig implements ConfigData {
+public class EnchantmentsPlusConfig implements ConfigData {
     public boolean enableBlazeWalker = true;
     public boolean enableCubical = true;
     public boolean enableDualLeap = true;

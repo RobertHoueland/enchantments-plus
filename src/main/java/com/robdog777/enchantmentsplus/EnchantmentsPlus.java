@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus;
 
+import com.robdog777.enchantmentsplus.config.EnchantmentsPlusConfig;
 import com.robdog777.enchantmentsplus.enchants.*;
 import com.robdog777.enchantmentsplus.statuseffects.MoonRestEffect;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -31,7 +32,7 @@ public class EnchantmentsPlus implements ModInitializer {
     public static Enchantment BLAZEWALKER = null, CUBICAL = null, DUALLEAP = null, ENDSLAYER = null, FLASHFORGE = null,
             FROSTBITE = null, HIKER = null, LEVITATION = null, LIFESTEAL = null, LUNARSIGHT = null, MOONWALKER = null,
             PAYBACK = null, RAIDER = null, THUNDERLORD = null, TOXICSTRIKE = null;
-    
+
     public static SoundEvent SwoopEvent = SoundEvent.of(SWOOP);
     public static SoundEvent BlurpEvent = SoundEvent.of(BLURP);
 
@@ -39,7 +40,6 @@ public class EnchantmentsPlus implements ModInitializer {
     public void onInitialize() {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
 
         LOGGER.info("enchantmentsplus is now loaded");
 
