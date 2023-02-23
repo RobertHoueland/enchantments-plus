@@ -34,7 +34,8 @@
     "fabric": "*",
     "minecraft": "~1.19.3",
     "java": ">=17",
-    "fabric-key-binding-api-v1": "*"
+    "fabric-key-binding-api-v1": "*",
+    "cloth-config": "9.0.94"
   },
   "suggests": {
   }
