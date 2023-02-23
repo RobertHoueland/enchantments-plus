@@ -15,35 +15,6 @@ public class BlazeWalkerEnchantment extends Enchantment {
         super(Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
     }
 
-    @Override
-    public int getMinPower(int level) {
-        return level * 10;
-    }
-
-    @Override
-    public int getMaxPower(int level) {
-        return this.getMinPower(level) + 15;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 2;
-    }
-    
-    @Override
-    public boolean isTreasure() {
-        return true;
-    }
-
-    public String registryName() {
-        return "blazewalker";
-    }
-
-    @Override
-    protected boolean canAccept(Enchantment other) {
-        return super.canAccept(other) && other != Enchantments.DEPTH_STRIDER && other != Enchantments.FROST_WALKER;
-    }
-
     // from frostwalker enchant
     public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
         if (entity.isOnGround()) {
@@ -59,11 +30,40 @@ public class BlazeWalkerEnchantment extends Enchantment {
                         BlockState blockState3 = world.getBlockState(blockPos2);
                         if (blockState3.getMaterial() == Material.LAVA && blockState3.get(FluidBlock.LEVEL) == 0 && blockState.canPlaceAt(world, blockPos2) && world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
                             world.setBlockState(blockPos2, blockState);
-                            world.createAndScheduleBlockTick(blockPos2, Blocks.OBSIDIAN, MathHelper.nextInt(entity.getRandom(), 60, 120));
+                            world.scheduleBlockTick(blockPos2, Blocks.OBSIDIAN, MathHelper.nextInt(entity.getRandom(), 60, 120));
                         }
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public int getMinPower(int level) {
+        return level * 10;
+    }
+
+    @Override
+    public int getMaxPower(int level) {
+        return this.getMinPower(level) + 15;
+    }
+
+    @Override
+    public int getMaxLevel() {
+        return 2;
+    }
+
+    @Override
+    public boolean isTreasure() {
+        return true;
+    }
+
+    public String registryName() {
+        return "blazewalker";
+    }
+
+    @Override
+    protected boolean canAccept(Enchantment other) {
+        return super.canAccept(other) && other != Enchantments.DEPTH_STRIDER && other != Enchantments.FROST_WALKER;
     }
 }
