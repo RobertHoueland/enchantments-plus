@@ -9,7 +9,7 @@ import net.minecraft.entity.damage.DamageSource;
 
 public class SniperEnchantment extends Enchantment {
     public SniperEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.BOW, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.COMMON, EnchantmentTarget.BOW, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override

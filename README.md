@@ -42,6 +42,7 @@ Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Co
 | Toxic Strike |       Sword       |        2         | Target is poisoned when hit                                                                 |   Rare    | Cannot be equipped with fire aspect, frostbite, levitation                  |
 |    Hiker     |       Boots       |        1         | Allows you to step up blocks without jumping, like a horse                                  |   Rare    |                                                                             |
 |  Dual Leap   |       Boots       |        1         | Allows you to double jump                                                                   |   Rare    | Cannot be equipped with Moon Walk                                           |
+|    Sniper    |        Bow        |        3         | Deals more damage the further away your target is from you                                  |  Common   |                                                                             |
 
 [![Curse Forge Banner](https://i.imgur.com/1gmBDfe.png?1)](https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric "Curse Forge")
 
