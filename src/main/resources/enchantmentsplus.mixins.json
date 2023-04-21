@@ -7,7 +7,6 @@
     "BlockMixin",
     "ClientPlayerEntityMixin",
     "EnchantmentsPlusMixin",
-    "InGameHudMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin"
   ],

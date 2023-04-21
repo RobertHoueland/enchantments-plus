@@ -22,13 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+    private final int cooldownTime = 400; // 20 seconds
+
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    private final int cooldownTime = 400; // 20 seconds
-
-    // Only run on client
     @Environment(EnvType.CLIENT)
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {

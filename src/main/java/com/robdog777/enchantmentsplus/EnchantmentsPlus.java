@@ -31,7 +31,7 @@ public class EnchantmentsPlus implements ModInitializer {
 
     public static Enchantment BLAZEWALKER = null, CUBICAL = null, DUALLEAP = null, ENDSLAYER = null, FLASHFORGE = null,
             FROSTBITE = null, HIKER = null, LEVITATION = null, LIFESTEAL = null, LUNARSIGHT = null, MOONWALKER = null,
-            PAYBACK = null, RAIDER = null, THUNDERLORD = null, TOXICSTRIKE = null;
+            PAYBACK = null, RAIDER = null, THUNDERLORD = null, TOXICSTRIKE = null, SNIPER = null;
 
     public static SoundEvent SwoopEvent = SoundEvent.of(SWOOP);
     public static SoundEvent BlurpEvent = SoundEvent.of(BLURP);
@@ -153,6 +153,13 @@ public class EnchantmentsPlus implements ModInitializer {
                     Registries.ENCHANTMENT,
                     new Identifier("enchantmentsplus", "toxicstrike"),
                     new ToxicStrikeEnchantment()
+            );
+        }
+        if (CONFIG_HOLDER.getConfig().enableSniper) {
+            SNIPER = Registry.register(
+                    Registries.ENCHANTMENT,
+                    new Identifier("enchantmentsplus", "sniper"),
+                    new SniperEnchantment()
             );
         }
     }

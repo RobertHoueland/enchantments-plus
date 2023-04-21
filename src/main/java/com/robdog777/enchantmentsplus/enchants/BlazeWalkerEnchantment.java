@@ -15,7 +15,7 @@ public class BlazeWalkerEnchantment extends Enchantment {
         super(Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
     }
 
-    // from frostwalker enchant
+    // skeleton code is from FrostWalker enchant
     public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
         if (entity.isOnGround()) {
             BlockState blockState = Blocks.OBSIDIAN.getDefaultState();

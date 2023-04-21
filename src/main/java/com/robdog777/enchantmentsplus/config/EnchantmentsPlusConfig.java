@@ -18,6 +18,7 @@ public class EnchantmentsPlusConfig implements ConfigData {
     public boolean enableMoonWalker = true;
     public boolean enablePayback = true;
     public boolean enableRaider = true;
+    public boolean enableSniper = true;
     public boolean enableThunderlord = true;
     public boolean enableToxicStrike = true;
 }
