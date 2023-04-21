@@ -16,6 +16,7 @@ public class EnchantmentsPlusConfig implements ConfigData {
     public boolean enableLifeSteal = true;
     public boolean enableLunarSight = true;
     public boolean enableMoonWalker = true;
+    public boolean enableMysticMind = true;
     public boolean enablePayback = true;
     public boolean enableRaider = true;
     public boolean enableSniper = true;

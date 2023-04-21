@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-    private final int cooldownTime = 400; // 20 seconds
+    private final int moonrestCooldown = 400; // 20 seconds
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -62,7 +62,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,
                             moonwalkerLevel * 100, 0, false, false, true));
                     this.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
-                            cooldownTime, 0, false, false, true));
+                            moonrestCooldown, 0, false, false, true));
                 }
             }
         }

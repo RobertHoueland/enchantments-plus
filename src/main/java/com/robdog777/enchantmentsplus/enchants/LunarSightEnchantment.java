@@ -6,7 +6,7 @@ import net.minecraft.entity.EquipmentSlot;
 
 public class LunarSightEnchantment extends Enchantment {
     public LunarSightEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
+        super(Enchantment.Rarity.COMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
     }
 
     @Override
