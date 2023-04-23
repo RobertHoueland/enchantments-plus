@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -18,17 +19,17 @@ public class SniperEnchantment extends Enchantment {
     }
 
     @Override
-    public int getMaxPower(int level) {
-        return this.getMinPower(level) + 20;
-    }
-
-    @Override
     public int getMaxLevel() {
         return 3;
     }
 
     public String registryName() {
         return "sniper";
+    }
+
+    @Override
+    protected boolean canAccept(Enchantment other) {
+        return other != EnchantmentsPlus.STORMSTRIKE;
     }
 
     @Override

@@ -39,6 +39,7 @@ public class MysticMindEnchantment extends Enchantment {
         World world = user.world;
 
         if (!world.isClient && level > 0 && user.getHealth() < 6) {
+            // skeleton code from chorus fruit item
             double d = user.getX();
             double e = user.getY();
             double f = user.getZ();

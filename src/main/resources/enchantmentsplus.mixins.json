@@ -6,7 +6,6 @@
   "mixins": [
     "BlockMixin",
     "ClientPlayerEntityMixin",
-    "EnchantmentsPlusMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin"
   ],

@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.*;
@@ -7,9 +8,9 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
-public class ThunderlordEnchantment extends Enchantment {
-    public ThunderlordEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+public class StormStrikeEnchantment extends Enchantment {
+    public StormStrikeEnchantment() {
+        super(Rarity.VERY_RARE, EnchantmentTarget.BOW, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
@@ -23,16 +24,19 @@ public class ThunderlordEnchantment extends Enchantment {
     }
 
     public String registryName() {
-        return "thunderlord";
+        return "stormstrike";
+    }
+
+    @Override
+    protected boolean canAccept(Enchantment other) {
+        return other != EnchantmentsPlus.SNIPER;
     }
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        // skeleton code is from channeling
-
         Random rand = new Random();
-        int random = rand.nextInt(10);
-        BlockPos blockPos = target.getBlockPos(); // does this need to be user?
+        int random = rand.nextInt(20);
+        BlockPos blockPos = target.getBlockPos();
         if (random < level && target.world.isSkyVisible(blockPos)) {
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(target.world);
             assert lightningEntity != null;

@@ -33,6 +33,8 @@
   "enchantment.enchantmentsplus.sniper.desc": "Deals more damage the further away you are.",
   "enchantment.enchantmentsplus.mysticmind": "Mystic Mind",
   "enchantment.enchantmentsplus.mysticmind.desc": "Teleports you a few blocks away when hit at low health.",
+  "enchantment.enchantmentsplus.stormstrike": "Storm Strike",
+  "enchantment.enchantmentsplus.stormstrike.desc": "Targets are sometimes hit with lightning.",
   "effect.enchantmentsplus.moonresteffect": "Moon Rest",
   "key.enchantmentsplus.moonwalk": "Moon Walk (press while sprinting)",
   "category.enchantmentsplus.keys": "Enchantments Plus",
@@ -54,6 +56,7 @@
   "text.autoconfig.enchantmentsplus.option.enablePayback": "Payback enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableRaider": "Raider enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableSniper": "Sniper enchantment enabled",
+  "text.autoconfig.enchantmentsplus.option.enableStormStrike": "Storm Strike enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableThunderlord": "Thunder Lord enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "Toxic Strike enchantment enabled"
 }
