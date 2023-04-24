@@ -27,16 +27,15 @@ public class BlockMixin {
             at = @At("RETURN"), cancellable = true)
     private static void getDroppedStacks(BlockState state, ServerWorld world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
         List<ItemStack> items = new ArrayList<>();
-
         List<ItemStack> returnValue = cir.getReturnValue();
+
         if (EnchantmentHelper.getLevel(EnchantmentsPlus.FLASHFORGE, stack) == 0) {
             cir.setReturnValue(returnValue);
             return;
         }
+
         for (ItemStack itemStack : returnValue) {
-            Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> {
-                return smeltingRecipe.getIngredients().get(0).test(itemStack);
-            })).findFirst();
+            Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(itemStack))).findFirst();
             if (recipe.isPresent()) {
                 ItemStack smelted = recipe.get().getOutput();
                 smelted.setCount(itemStack.getCount());

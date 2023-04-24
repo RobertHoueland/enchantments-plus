@@ -38,10 +38,8 @@ public class LifeStealEnchantment extends Enchantment {
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.world;
         if (world.isClient() && !MinecraftClient.getInstance().getServer().isDedicated()) {
-            return;
-        }
-
-        if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20))) {
+            super.onTargetDamaged(user, target, level);
+        } else if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20))) {
             if (!world.isClient) {
                 world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 0.25f, 1f);
                 user.heal(level);
