@@ -41,14 +41,13 @@ public class EnchantmentsPlus implements ModInitializer {
     public void onInitialize() {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
-
         LOGGER.info("enchantmentsplus is now loaded");
 
         Registry.register(Registries.STATUS_EFFECT, new Identifier("enchantmentsplus", "moonresteffect"), MOONREST);
         Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
         Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);
 
-        EnchantmentsPlusConfig config = AutoConfig.getConfigHolder(EnchantmentsPlusConfig.class).getConfig();
+        AutoConfig.getConfigHolder(EnchantmentsPlusConfig.class).getConfig();
         CONFIG_HOLDER.load();
 
         if (CONFIG_HOLDER.getConfig().enableBlazeWalker) {

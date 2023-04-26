@@ -9,6 +9,5 @@ public class EnchantmentsPlusClient implements ClientModInitializer {
     public void onInitializeClient() {
         KeyInputHandler.register();
         ModMessages.registerC2SPackets();
-        ModMessages.registerS2CPackets();
     }
 }

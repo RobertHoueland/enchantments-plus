@@ -1,7 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -37,13 +36,11 @@ public class LifeStealEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.world;
-        if (world.isClient() && !MinecraftClient.getInstance().getServer().isDedicated()) {
+        if (world.isClient()) {
             super.onTargetDamaged(user, target, level);
         } else if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20))) {
-            if (!world.isClient) {
-                world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 0.25f, 1f);
-                user.heal(level);
-            }
+            world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 0.25f, 1f);
+            user.heal(level);
         }
 
         super.onTargetDamaged(user, target, level);
