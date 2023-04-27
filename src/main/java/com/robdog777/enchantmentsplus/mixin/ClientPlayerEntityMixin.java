@@ -18,6 +18,7 @@ public class ClientPlayerEntityMixin {
     private int jumpCount = 0;
     private boolean jumpedLastTick = false;
 
+    // dual leap
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void tickMovement(CallbackInfo info) {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;

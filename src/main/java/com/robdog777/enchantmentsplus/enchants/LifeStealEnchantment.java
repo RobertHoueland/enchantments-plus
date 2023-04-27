@@ -39,7 +39,7 @@ public class LifeStealEnchantment extends Enchantment {
         if (world.isClient()) {
             super.onTargetDamaged(user, target, level);
         } else if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20))) {
-            world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 0.25f, 1f);
+            world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 1.0f, 1f);
             user.heal(level);
         }
 

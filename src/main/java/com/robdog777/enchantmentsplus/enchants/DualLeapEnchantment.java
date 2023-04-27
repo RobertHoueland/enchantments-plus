@@ -5,8 +5,6 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-import java.util.Random;
-
 public class DualLeapEnchantment extends Enchantment {
     public DualLeapEnchantment() {
         super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
@@ -30,6 +28,4 @@ public class DualLeapEnchantment extends Enchantment {
     public String registryName() {
         return "dualleap";
     }
-
-    private final static Random random = new Random();
 }

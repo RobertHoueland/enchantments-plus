@@ -19,6 +19,7 @@ public abstract class LivingEntityMixin extends Entity {
         super(entityType, world);
     }
 
+    // blazewalker
     @Inject(method = "applyMovementEffects", at = @At("HEAD"))
     protected void applyMovementEffects(BlockPos pos, CallbackInfo ci) {
         LivingEntity casted = (LivingEntity) (Object) this;

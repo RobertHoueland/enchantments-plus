@@ -9,7 +9,7 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric",
-    "sources": "https://github.com/therobdog7/enchantments-plus",
+    "sources": "https://github.com/RobertHoueland/enchantments-plus/",
     "issues": "https://github.com/RobertHoueland/enchantments-plus/issues"
   },
   "license": "MIT",
