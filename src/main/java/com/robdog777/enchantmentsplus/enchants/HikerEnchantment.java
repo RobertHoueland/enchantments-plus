@@ -6,7 +6,7 @@ import net.minecraft.entity.EquipmentSlot;
 
 public class HikerEnchantment extends Enchantment {
     public HikerEnchantment() {
-        super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
+        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
     }
 
     @Override
