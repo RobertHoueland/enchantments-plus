@@ -37,9 +37,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         int hikerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.HIKER, itemStackFeet);
         if (hikerLevel > 0) {
-            this.stepHeight = hikerLevel + 0.1F;
+            this.setStepHeight(hikerLevel + 0.1F);
         } else {
-            this.stepHeight = 0.6F;
+            this.setStepHeight(0.6F);
         }
 
         int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);

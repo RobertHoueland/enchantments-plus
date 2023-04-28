@@ -1,23 +1,23 @@
 # Enchantments-Plus
 
-## Updated to 1.19.3 for Fabric
+## Updated to 1.19.4 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
 Mod for minecraft that adds additional enchantments to the game. WIP project.
 
 Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
-and [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu "Mod Menu Curse Forge")
+and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 
 # **[Download Link](https://github.com/therobdog7/enchantments-plus/releases/ "Download")**
 
 ---
 
-**UPDATED TO MC VERSION: 1.19.3**
+**UPDATED TO MC VERSION: 1.19.4**
 
-**Requires: [Fabric Loader (0.14.14+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.74.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-AND [Cloth Config API Fabric (9.0.94+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
+**Requires: [Fabric Loader (0.14.17+)](https://fabricmc.net/use/ "Fabric Download")
+AND [Fabric API (0.79.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+AND [Cloth Config API Fabric (10.0.96+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
 
 Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
 
