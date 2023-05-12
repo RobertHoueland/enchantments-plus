@@ -36,7 +36,7 @@ Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Co
 |   Cubical    |       Sword       |        5         | Deals extra damage to Creepers, Slimes, and Magma Cubes                                     | Uncommon  | Cannot be equipped with other damage enchantments                           |
 | Lunar Sight  |      Helmet       |        1         | Gives night vision effect                                                                   |  Common   |                                                                             |
 | Blaze Walker |       Boots       |        2         | Walk on lava to turn it to obsidian (works like frost walker)                               |   Rare    | Treasure enchantment. Cannot be equipped with depth strider or frost walker |
-| Flash Forge  |      Pickaxe      |        1         | Blocks automatically smelt when mined, works with fortune for ores                          |   Rare    | Cannot be equipped with silk touch                                          |
+| Flash Forge  |  Pickaxe/Shovel   |        1         | Blocks automatically smelt when mined, works with fortune for ores                          |   Rare    | Cannot be equipped with silk touch                                          |
 |  Moon Walk   |       Boots       |        2         | Constant low level speed and jump boost, and a 20 second cooldown of high level jump boost. |   Rare    |                                                                             |
 |    Raider    |       Sword       |        5         | Deals extra damage to all raid/illager/pillager mobs                                        | Uncommon  | Cannot be equipped with other damage enchantments                           |
 | Toxic Strike |       Sword       |        2         | Target is poisoned when hit                                                                 |   Rare    | Cannot be equipped with fire aspect, frostbite, levitation                  |
@@ -45,6 +45,7 @@ Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Co
 |    Sniper    |        Bow        |        3         | Deals more damage the further away your target is from you                                  |  Common   | Cannot be equipped with Storm Strike                                        |
 | Mystic Mind  |      Helmet       |        1         | Teleports the user away (like chorus fruit) when they're damaged below 3 hearts             | Uncommon  |                                                                             |
 | Storm Strike |        Bow        |        3         | Chance of summoning a lightning bolt to strike target                                       | Very Rare | Cannot be equipped with Sniper                                              |
+|  Excavator   |  Pickaxe/Shovel   |        3         | Extends your reach distance to mine from further away                                       |   Rare    |                                                                             |
 
 [![Curse Forge Banner](https://i.imgur.com/1gmBDfe.png?1)](https://www.curseforge.com/minecraft/mc-mods/enchantments-plus-fabric "Curse Forge")
 
