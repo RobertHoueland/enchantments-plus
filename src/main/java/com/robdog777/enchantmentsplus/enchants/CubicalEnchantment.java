@@ -7,9 +7,9 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.world.World;
 
 public class CubicalEnchantment extends Enchantment {
     public CubicalEnchantment() {
@@ -20,7 +20,7 @@ public class CubicalEnchantment extends Enchantment {
     public int getMinPower(int level) {
         return 5 + (level - 1) * 8;
     }
-    
+
     @Override
     public int getMaxPower(int level) {
         return this.getMinPower(level) + 20;
@@ -42,8 +42,9 @@ public class CubicalEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        World world = user.getEntityWorld();
         if (target instanceof CreeperEntity || target instanceof SlimeEntity) {
-            target.damage(DamageSource.GENERIC, (float) level * 2.5F);
+            target.damage(world.getDamageSources().generic(), (float) level * 2.5F);
         }
 
         super.onTargetDamaged(user, target, level);

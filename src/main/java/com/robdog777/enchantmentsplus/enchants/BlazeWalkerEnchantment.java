@@ -19,10 +19,10 @@ public class BlazeWalkerEnchantment extends Enchantment {
     public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
         if (entity.isOnGround()) {
             BlockState blockState = Blocks.OBSIDIAN.getDefaultState();
-            float f = (float) Math.min(16, 2 + level);
+            int f = Math.min(16, 2 + level);
             BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-            for (BlockPos blockPos2 : BlockPos.iterate(blockPos.add(-f, -1.0, -f), blockPos.add(f, -1.0, f))) {
+            for (BlockPos blockPos2 : BlockPos.iterate(blockPos.add(-f, -1, -f), blockPos.add(f, -1, f))) {
                 if (blockPos2.isWithinDistance(entity.getPos(), f)) {
                     mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
                     BlockState blockState2 = world.getBlockState(mutable);

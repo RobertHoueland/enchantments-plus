@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.world.World;
 
 public class RaiderEnchantment extends Enchantment {
     public RaiderEnchantment() {
@@ -41,9 +41,10 @@ public class RaiderEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        World world = user.getEntityWorld();
         if (target instanceof LivingEntity livingEntity) {
             if (livingEntity.getGroup() == EntityGroup.ILLAGER) {
-                target.damage(DamageSource.GENERIC, (float) level * 2.5F);
+                target.damage(world.getDamageSources().generic(), (float) level * 2.5F);
             }
         }
 
