@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.mixin;
 
+import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
@@ -15,9 +16,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-    private final int moonrestCooldown = 400; // 20 seconds
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -27,6 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void tick(CallbackInfo ci) {
         ItemStack itemStackHead = this.getEquippedStack(EquipmentSlot.HEAD);
         ItemStack itemStackFeet = this.getEquippedStack(EquipmentSlot.FEET);
+        ItemStack itemStackHand = this.getEquippedStack(EquipmentSlot.MAINHAND);
 
         int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
         if (nightvisionLevel > 0) {
@@ -41,6 +44,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         } else {
             this.setStepHeight(0.6F);
         }
+
+        int excavatorLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.EXCAVATOR, itemStackHand);
+        setRange(excavatorLevel > 0, excavatorLevel);
 
         int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
         // moonwalk boost
@@ -57,9 +63,21 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                         this.getSoundCategory(), 1.0f, 1f);
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, moonwalkerLevel * 100,
                         moonwalkerLevel + 1, false, false, true));
+                // 20 seconds
+                int moonrestCooldown = 400;
                 this.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
                         moonrestCooldown, 0, false, false, true));
             }
+        }
+    }
+
+    public void setRange(boolean change_range, int level) {
+        if (change_range) {
+            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(level);
+            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(level);
+        } else {
+            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(0.0);
+            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(0.0);
         }
     }
 }

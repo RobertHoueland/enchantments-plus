@@ -9,6 +9,7 @@ public class EnchantmentsPlusConfig implements ConfigData {
     public boolean enableCubical = true;
     public boolean enableDualLeap = true;
     public boolean enableEndSlayer = true;
+    public boolean enableExcavator = true;
     public boolean enableFlashForge = true;
     public boolean enableFrostbite = true;
     public boolean enableHiker = true;
