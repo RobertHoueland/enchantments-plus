@@ -37,11 +37,11 @@ public class StormStrikeEnchantment extends Enchantment {
         Random rand = new Random();
         int random = rand.nextInt(20);
         BlockPos blockPos = target.getBlockPos();
-        if (random < level && target.world.isSkyVisible(blockPos)) {
-            LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(target.world);
+        if (random < level && target.getWorld().isSkyVisible(blockPos)) {
+            LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(target.getWorld());
             assert lightningEntity != null;
             lightningEntity.refreshPositionAfterTeleport(target.getX(), target.getY(), target.getZ());
-            target.world.spawnEntity(lightningEntity);
+            target.getWorld().spawnEntity(lightningEntity);
         }
 
         super.onTargetDamaged(user, target, level);

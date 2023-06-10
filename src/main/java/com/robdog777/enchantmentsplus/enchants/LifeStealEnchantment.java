@@ -35,7 +35,7 @@ public class LifeStealEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        World world = user.world;
+        World world = user.getWorld();
         if (world.isClient()) {
             super.onTargetDamaged(user, target, level);
         } else if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20))) {

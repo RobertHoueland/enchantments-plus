@@ -1,6 +1,6 @@
 # Enchantments-Plus
 
-## Updated to 1.19.4 for Fabric
+## Updated to 1.20 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
@@ -13,11 +13,11 @@ and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 
 ---
 
-**UPDATED TO MC VERSION: 1.19.4**
+**UPDATED TO MC VERSION: 1.20**
 
-**Requires: [Fabric Loader (0.14.17+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.79.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-AND [Cloth Config API Fabric (10.0.96+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
+**Requires: [Fabric Loader (0.14.21+)](https://fabricmc.net/use/ "Fabric Download")
+AND [Fabric API (0.83.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+AND [Cloth Config API Fabric (11.0.99+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
 
 Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
 

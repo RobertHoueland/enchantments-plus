@@ -1,6 +1,5 @@
 package com.robdog777.enchantmentsplus.mixin;
 
-import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
@@ -16,11 +15,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Objects;
-
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -59,7 +55,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
             // cooldown for stronger effect
             if (!this.hasStatusEffect(EnchantmentsPlus.MOONREST)) {
-                this.world.playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent,
+                this.getWorld().playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent,
                         this.getSoundCategory(), 1.0f, 1f);
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, moonwalkerLevel * 100,
                         moonwalkerLevel + 1, false, false, true));
@@ -72,12 +68,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     public void setRange(boolean change_range, int level) {
-        if (change_range) {
-            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(level);
-            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(level);
-        } else {
-            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(0.0);
-            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(0.0);
-        }
+        // TODO: waiting on reach entity attributes to accept PR for 1.20
+//        if (change_range) {
+//            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(level);
+//            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(level);
+//        } else {
+//            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(0.0);
+//            Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(0.0);
+//        }
     }
 }

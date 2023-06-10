@@ -36,7 +36,7 @@ public class MysticMindEnchantment extends Enchantment {
 
     @Override
     public void onUserDamaged(LivingEntity user, Entity attacker, int level) {
-        World world = user.world;
+        World world = user.getWorld();
 
         if (!world.isClient && level > 0 && user.getHealth() < 6) {
             // skeleton code from chorus fruit item

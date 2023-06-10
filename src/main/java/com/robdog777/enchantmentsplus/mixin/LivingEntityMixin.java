@@ -25,7 +25,7 @@ public abstract class LivingEntityMixin extends Entity {
         LivingEntity casted = (LivingEntity) (Object) this;
         int j = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.BLAZEWALKER, casted);
         if (j > 0) {
-            BlazeWalkerEnchantment.freezeLava(casted, this.world, pos, j);
+            BlazeWalkerEnchantment.freezeLava(casted, this.getWorld(), pos, j);
         }
     }
 }
