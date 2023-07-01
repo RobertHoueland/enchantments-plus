@@ -15,8 +15,6 @@ repositories {
             includeGroup "com.jamieswhiteshirt"
         }
     }
-    // use github repo
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -39,11 +37,9 @@ dependencies {
     }
 
     // Reach entity attributes
-//    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_version}") {
-//        exclude group: "net.fabricmc.fabric-api"
-//    }
-    // doesn't build for some reason:
-//    implementation 'com.github.anchikai:reach-entity-attributes:1.20-SNAPSHOT'
+    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_version}") {
+        exclude group: "net.fabricmc.fabric-api"
+    }
 }
 
 base {
