@@ -11,7 +11,7 @@ public class ExcavatorEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 20 * level;
+        return 10 * level;
     }
 
     @Override

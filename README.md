@@ -16,7 +16,7 @@ and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 **UPDATED TO MC VERSION: 1.20.1**
 
 **Requires: [Fabric Loader (0.14.21+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.83.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+AND [Fabric API (0.86.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 AND [Cloth Config API Fabric (11.0.99+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
 
 Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
