@@ -44,11 +44,11 @@ public class RaiderEnchantment extends Enchantment {
         World world = user.getEntityWorld();
         if (target instanceof LivingEntity livingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider) {
             if (livingEntity.getGroup() == EntityGroup.ILLAGER) {
-                target.damage(world.getDamageSources().generic(), (float) level * 2.5F);
+                target.damage(world.getDamageSources().generic(), (float) level * 5F);
             }
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override

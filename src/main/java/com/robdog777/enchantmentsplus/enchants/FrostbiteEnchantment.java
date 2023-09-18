@@ -44,9 +44,9 @@ public class FrostbiteEnchantment extends Enchantment {
         if (target instanceof LivingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFrostbite) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,
                     40 * level, level - 1));
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override

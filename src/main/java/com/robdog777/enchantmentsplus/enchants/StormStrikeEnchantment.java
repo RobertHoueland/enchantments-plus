@@ -42,9 +42,9 @@ public class StormStrikeEnchantment extends Enchantment {
             assert lightningEntity != null;
             lightningEntity.refreshPositionAfterTeleport(target.getX(), target.getY(), target.getZ());
             target.getWorld().spawnEntity(lightningEntity);
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override

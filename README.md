@@ -4,7 +4,7 @@
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
-Mod for minecraft that adds additional enchantments to the game. WIP project.
+Minecraft Mod that adds over 10 new fun enchantments to the game
 
 Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
 and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")

@@ -37,9 +37,9 @@ public class PaybackEnchantment extends Enchantment {
         World world = user.getEntityWorld();
         if (user.getHealth() < 10 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enablePayback) {
             target.damage(world.getDamageSources().generic(), (float) level * 0.5F * (20 - user.getHealth()));
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override

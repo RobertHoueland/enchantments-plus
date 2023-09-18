@@ -43,9 +43,9 @@ public class LifeStealEnchantment extends Enchantment {
                 world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 1.0f, 1f);
                 user.heal(level);
             }
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override

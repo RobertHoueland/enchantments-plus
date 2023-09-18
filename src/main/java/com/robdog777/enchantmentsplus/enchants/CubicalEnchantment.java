@@ -45,18 +45,18 @@ public class CubicalEnchantment extends Enchantment {
         World world = user.getEntityWorld();
         if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableCubical) {
             if (target instanceof CreeperEntity || target instanceof SlimeEntity) {
-                target.damage(world.getDamageSources().generic(), (float) level * 2.5F);
+                target.damage(world.getDamageSources().generic(), (float) level * 5F);
             }
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override
     public boolean isAvailableForEnchantedBookOffer() {
         return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableCubical;
     }
-    
+
     @Override
     public boolean isAvailableForRandomSelection() {
         return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableCubical;

@@ -44,9 +44,9 @@ public class ToxicStrikeEnchantment extends Enchantment {
         if (target instanceof LivingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableToxicStrike) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,
                     40 * level, level - 1));
+        } else {
+            super.onTargetDamaged(user, target, level);
         }
-
-        super.onTargetDamaged(user, target, level);
     }
 
     @Override
