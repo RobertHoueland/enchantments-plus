@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.block.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -17,7 +18,7 @@ public class BlazeWalkerEnchantment extends Enchantment {
 
     // skeleton code is from FrostWalker enchant
     public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
-        if (entity.isOnGround()) {
+        if (entity.isOnGround() && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker) {
             BlockState blockState = Blocks.OBSIDIAN.getDefaultState();
             int f = Math.min(16, 2 + level);
             BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -66,5 +67,15 @@ public class BlazeWalkerEnchantment extends Enchantment {
     @Override
     protected boolean canAccept(Enchantment other) {
         return super.canAccept(other) && other != Enchantments.DEPTH_STRIDER && other != Enchantments.FROST_WALKER;
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker;
     }
 }

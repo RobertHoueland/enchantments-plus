@@ -37,7 +37,7 @@ public class StormStrikeEnchantment extends Enchantment {
         Random rand = new Random();
         int random = rand.nextInt(20);
         BlockPos blockPos = target.getBlockPos();
-        if (random < level && target.getWorld().isSkyVisible(blockPos)) {
+        if (random < level && target.getWorld().isSkyVisible(blockPos) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableStormStrike) {
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(target.getWorld());
             assert lightningEntity != null;
             lightningEntity.refreshPositionAfterTeleport(target.getX(), target.getY(), target.getZ());
@@ -45,5 +45,15 @@ public class StormStrikeEnchantment extends Enchantment {
         }
 
         super.onTargetDamaged(user, target, level);
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableStormStrike;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableStormStrike;
     }
 }

@@ -42,12 +42,22 @@ public class RaiderEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.getEntityWorld();
-        if (target instanceof LivingEntity livingEntity) {
+        if (target instanceof LivingEntity livingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider) {
             if (livingEntity.getGroup() == EntityGroup.ILLAGER) {
                 target.damage(world.getDamageSources().generic(), (float) level * 2.5F);
             }
         }
 
         super.onTargetDamaged(user, target, level);
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider;
     }
 }

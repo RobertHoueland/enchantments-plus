@@ -28,4 +28,14 @@ public class DualLeapEnchantment extends Enchantment {
     public String registryName() {
         return "dualleap";
     }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap;
+    }
 }

@@ -1,5 +1,6 @@
 package com.robdog777.enchantmentsplus.enchants;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
@@ -26,5 +27,15 @@ public class FlashForgeEnchantment extends Enchantment {
 
     public boolean canAccept(Enchantment other) {
         return super.canAccept(other) && other != Enchantments.SILK_TOUCH;
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFlashForge;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFlashForge;
     }
 }

@@ -9,25 +9,28 @@ import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
+    @Unique
     private int jumpCount = 0;
+    @Unique
     private boolean jumpedLastTick = false;
 
-    // dual leap
+
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void tickMovement(CallbackInfo info) {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
-
+        // dual leap
         if (player.isOnGround() || player.isClimbing()) {
             jumpCount = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
         } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0) {
             // 200ms delay on double taps
-            if (player.input.jumping && canJump(player)) {
+            if (player.input.jumping && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
                 jumpCount--;
                 player.jump();
             }
@@ -36,6 +39,7 @@ public class ClientPlayerEntityMixin {
         jumpedLastTick = player.input.jumping;
     }
 
+    @Unique
     private boolean canJump(ClientPlayerEntity player) {
         ItemStack chestItemStack = player.getEquippedStack(EquipmentSlot.CHEST);
         boolean wearingUsableElytra = chestItemStack.getItem() == Items.ELYTRA && ElytraItem.isUsable(chestItemStack);

@@ -35,10 +35,20 @@ public class PaybackEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.getEntityWorld();
-        if (user.getHealth() < 10) {
+        if (user.getHealth() < 10 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enablePayback) {
             target.damage(world.getDamageSources().generic(), (float) level * 0.5F * (20 - user.getHealth()));
         }
 
         super.onTargetDamaged(user, target, level);
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enablePayback;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enablePayback;
     }
 }

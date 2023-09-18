@@ -30,13 +30,16 @@ public class BlockMixin {
         List<ItemStack> items = new ArrayList<>();
         List<ItemStack> returnValue = cir.getReturnValue();
 
-        if (EnchantmentHelper.getLevel(EnchantmentsPlus.FLASHFORGE, stack) == 0) {
+        // Flash Forge
+        if (EnchantmentHelper.getLevel(EnchantmentsPlus.FLASHFORGE, stack) == 0
+                || !EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFlashForge) {
             cir.setReturnValue(returnValue);
             return;
         }
-
         for (ItemStack itemStack : returnValue) {
-            Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(itemStack))).findFirst();
+            Optional<SmeltingRecipe> recipe = world.getRecipeManager()
+                    .listAllOfType(RecipeType.SMELTING).stream()
+                    .filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(itemStack))).findFirst();
             if (recipe.isPresent()) {
                 DynamicRegistryManager registryManager = world.getRegistryManager();
                 ItemStack smelted = recipe.get().getOutput(registryManager);
@@ -46,6 +49,7 @@ public class BlockMixin {
                 items.add(itemStack);
             }
         }
+
         cir.setReturnValue(items);
     }
 }

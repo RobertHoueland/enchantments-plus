@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,26 +31,30 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         ItemStack itemStackFeet = this.getEquippedStack(EquipmentSlot.FEET);
         ItemStack itemStackHand = this.getEquippedStack(EquipmentSlot.MAINHAND);
 
-        int nightvisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
-        if (nightvisionLevel > 0) {
+        // Lunar Sight
+        int nightVisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
+        if (nightVisionLevel > 0 && !this.hasStatusEffect(StatusEffects.NIGHT_VISION) &&
+                EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLunarSight) {
             // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
                     220, 0, false, false, true));
         }
 
+        // Hiker
         int hikerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.HIKER, itemStackFeet);
-        if (hikerLevel > 0) {
+        if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker) {
             this.setStepHeight(hikerLevel + 0.1F);
         } else {
             this.setStepHeight(0.6F);
         }
 
+        // Excavator
         int excavatorLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.EXCAVATOR, itemStackHand);
         setRange(excavatorLevel > 0, excavatorLevel);
 
-        int moonwalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
-        // moonwalk boost
-        if (moonwalkerLevel > 0) {
+        // Moonwalker
+        int moonWalkerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.MOONWALKER, itemStackFeet);
+        if (moonWalkerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableMoonWalker) {
             // constant effects
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20,
                     0, false, false, true));
@@ -60,18 +65,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             if (!this.hasStatusEffect(EnchantmentsPlus.MOONREST)) {
                 this.getWorld().playSound(null, this.getBlockPos(), EnchantmentsPlus.SwoopEvent,
                         this.getSoundCategory(), 1.0f, 1f);
-                this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, moonwalkerLevel * 100,
-                        moonwalkerLevel + 1, false, false, true));
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, moonWalkerLevel * 100,
+                        moonWalkerLevel + 1, false, false, true));
                 // 20 seconds
-                int moonrestCooldown = 400;
+                int moonRestCooldown = 400;
                 this.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
-                        moonrestCooldown, 0, false, false, true));
+                        moonRestCooldown, 0, false, false, true));
             }
         }
     }
 
+    @Unique
     public void setRange(boolean change_range, int level) {
-        if (change_range) {
+        if (change_range && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableExcavator) {
             Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(level);
             Objects.requireNonNull(this.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(level);
         } else {

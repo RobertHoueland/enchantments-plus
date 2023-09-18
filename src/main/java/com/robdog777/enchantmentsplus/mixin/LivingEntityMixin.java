@@ -19,13 +19,13 @@ public abstract class LivingEntityMixin extends Entity {
         super(entityType, world);
     }
 
-    // blazewalker
     @Inject(method = "applyMovementEffects", at = @At("HEAD"))
     protected void applyMovementEffects(BlockPos pos, CallbackInfo ci) {
+        // blazewalker
         LivingEntity casted = (LivingEntity) (Object) this;
-        int j = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.BLAZEWALKER, casted);
-        if (j > 0) {
-            BlazeWalkerEnchantment.freezeLava(casted, this.getWorld(), pos, j);
+        int blazeWalkerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.BLAZEWALKER, casted);
+        if (blazeWalkerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker) {
+            BlazeWalkerEnchantment.freezeLava(casted, this.getWorld(), pos, blazeWalkerLevel);
         }
     }
 }

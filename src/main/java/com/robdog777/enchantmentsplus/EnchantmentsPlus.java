@@ -25,7 +25,8 @@ public class EnchantmentsPlus implements ModInitializer {
     public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
     public static final Identifier BLURP = new Identifier("enchantmentsplus:blurp");
 
-    private static final ConfigHolder<EnchantmentsPlusConfig> CONFIG_HOLDER = AutoConfig.register(EnchantmentsPlusConfig.class, JanksonConfigSerializer::new);
+    public static final ConfigHolder<EnchantmentsPlusConfig> CONFIG_HOLDER = AutoConfig.register(
+            EnchantmentsPlusConfig.class, JanksonConfigSerializer::new);
 
     public static StatusEffect MOONREST = new MoonRestEffect();
 
@@ -50,138 +51,123 @@ public class EnchantmentsPlus implements ModInitializer {
         AutoConfig.getConfigHolder(EnchantmentsPlusConfig.class).getConfig();
         CONFIG_HOLDER.load();
 
-        if (CONFIG_HOLDER.getConfig().enableBlazeWalker) {
-            BLAZEWALKER = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "blazewalker"),
-                    new BlazeWalkerEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableCubical) {
-            CUBICAL = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "cubical"),
-                    new CubicalEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableDualLeap) {
-            DUALLEAP = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "dualleap"),
-                    new DualLeapEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableEndSlayer) {
-            ENDSLAYER = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "endslayer"),
-                    new EndSlayerEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableFlashForge) {
-            FLASHFORGE = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "flashforge"),
-                    new FlashForgeEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableFrostbite) {
-            FROSTBITE = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "frostbite"),
-                    new FrostbiteEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableHiker) {
-            HIKER = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "hiker"),
-                    new HikerEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableLevitation) {
-            LEVITATION = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "levitation"),
-                    new LevitationEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableLifeSteal) {
-            LIFESTEAL = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "lifesteal"),
-                    new LifeStealEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableLunarSight) {
-            LUNARSIGHT = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "lunarsight"),
-                    new LunarSightEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableMoonWalker) {
-            MOONWALKER = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "moonwalker"),
-                    new MoonWalkerEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enablePayback) {
-            PAYBACK = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "payback"),
-                    new PaybackEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableRaider) {
-            RAIDER = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "raider"),
-                    new RaiderEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableThunderlord) {
-            THUNDERLORD = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "thunderlord"),
-                    new ThunderlordEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableToxicStrike) {
-            TOXICSTRIKE = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "toxicstrike"),
-                    new ToxicStrikeEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableSniper) {
-            SNIPER = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "sniper"),
-                    new SniperEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableMysticMind) {
-            MYSTICMIND = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "mysticmind"),
-                    new MysticMindEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableStormStrike) {
-            STORMSTRIKE = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "stormstrike"),
-                    new StormStrikeEnchantment()
-            );
-        }
-        if (CONFIG_HOLDER.getConfig().enableExcavator) {
-            EXCAVATOR = Registry.register(
-                    Registries.ENCHANTMENT,
-                    new Identifier("enchantmentsplus", "excavator"),
-                    new ExcavatorEnchantment()
-            );
-        }
+        BLAZEWALKER = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "blazewalker"),
+                new BlazeWalkerEnchantment()
+        );
+
+        CUBICAL = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "cubical"),
+                new CubicalEnchantment()
+        );
+
+        DUALLEAP = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "dualleap"),
+                new DualLeapEnchantment()
+        );
+
+        ENDSLAYER = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "endslayer"),
+                new EndSlayerEnchantment()
+        );
+
+        EXCAVATOR = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "excavator"),
+                new ExcavatorEnchantment()
+        );
+
+        FLASHFORGE = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "flashforge"),
+                new FlashForgeEnchantment()
+        );
+
+        FROSTBITE = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "frostbite"),
+                new FrostbiteEnchantment()
+        );
+
+
+        HIKER = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "hiker"),
+                new HikerEnchantment()
+        );
+
+
+        LEVITATION = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "levitation"),
+                new LevitationEnchantment()
+        );
+
+        LIFESTEAL = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "lifesteal"),
+                new LifeStealEnchantment()
+        );
+
+
+        LUNARSIGHT = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "lunarsight"),
+                new LunarSightEnchantment()
+        );
+
+
+        MOONWALKER = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "moonwalker"),
+                new MoonWalkerEnchantment()
+        );
+
+        MYSTICMIND = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "mysticmind"),
+                new MysticMindEnchantment()
+        );
+
+
+        PAYBACK = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "payback"),
+                new PaybackEnchantment()
+        );
+
+        RAIDER = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "raider"),
+                new RaiderEnchantment()
+        );
+
+        SNIPER = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "sniper"),
+                new SniperEnchantment()
+        );
+
+        STORMSTRIKE = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "stormstrike"),
+                new StormStrikeEnchantment()
+        );
+
+        THUNDERLORD = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "thunderlord"),
+                new ThunderlordEnchantment()
+        );
+
+        TOXICSTRIKE = Registry.register(
+                Registries.ENCHANTMENT,
+                new Identifier("enchantmentsplus", "toxicstrike"),
+                new ToxicStrikeEnchantment()
+        );
     }
 }

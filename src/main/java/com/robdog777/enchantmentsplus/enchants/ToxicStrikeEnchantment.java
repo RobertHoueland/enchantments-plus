@@ -41,11 +41,21 @@ public class ToxicStrikeEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if (target instanceof LivingEntity) {
+        if (target instanceof LivingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableToxicStrike) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,
                     40 * level, level - 1));
         }
 
         super.onTargetDamaged(user, target, level);
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableToxicStrike;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableToxicStrike;
     }
 }

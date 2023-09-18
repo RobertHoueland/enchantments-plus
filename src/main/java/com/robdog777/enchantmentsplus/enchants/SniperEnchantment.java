@@ -36,10 +36,20 @@ public class SniperEnchantment extends Enchantment {
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.getEntityWorld();
         float distance = user.distanceTo(target);
-        if (distance > 10) {
+        if (distance > 10 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableSniper) {
             target.damage(world.getDamageSources().generic(), (float) level * (distance / 2.5F));
         }
 
         super.onTargetDamaged(user, target, level);
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableSniper;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableSniper;
     }
 }

@@ -28,4 +28,14 @@ public class MoonWalkerEnchantment extends Enchantment {
     public String registryName() {
         return "moonwalker";
     }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableMoonWalker;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableMoonWalker;
+    }
 }

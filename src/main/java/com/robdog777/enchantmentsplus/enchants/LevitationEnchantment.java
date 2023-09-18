@@ -36,11 +36,21 @@ public class LevitationEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        if (target instanceof LivingEntity) {
+        if (target instanceof LivingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLevitation) {
             ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION,
                     20 * level, level - 1));
         }
 
         super.onTargetDamaged(user, target, level);
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLevitation;
+    }
+
+    @Override
+    public boolean isAvailableForRandomSelection() {
+        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLevitation;
     }
 }
