@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
-import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +22,6 @@ import java.util.Optional;
 
 @Mixin(Block.class)
 public class BlockMixin {
-    // smelt with FlashForge
     @Inject(method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
             at = @At("RETURN"), cancellable = true)
     private static void getDroppedStacks(BlockState state, ServerWorld world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
@@ -41,8 +39,7 @@ public class BlockMixin {
                     .listAllOfType(RecipeType.SMELTING).stream()
                     .filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(itemStack))).findFirst();
             if (recipe.isPresent()) {
-                DynamicRegistryManager registryManager = world.getRegistryManager();
-                ItemStack smelted = recipe.get().getOutput(registryManager);
+                ItemStack smelted = recipe.get().getOutput();
                 smelted.setCount(itemStack.getCount());
                 items.add(smelted);
             } else {

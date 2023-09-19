@@ -32,7 +32,7 @@ public class BlazeWalkerEnchantment extends Enchantment {
                         Block block = blockState3.getBlock();
                         if (blockState3.isOf(Blocks.LAVA) && block instanceof FluidBlock && blockState3.get(FluidBlock.LEVEL) == 0 && blockState.canPlaceAt(world, blockPos2) && world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
                             world.setBlockState(blockPos2, blockState);
-                            world.scheduleBlockTick(blockPos2, Blocks.OBSIDIAN, MathHelper.nextInt(entity.getRandom(), 60, 120));
+                            world.createAndScheduleBlockTick(blockPos2, Blocks.OBSIDIAN, MathHelper.nextInt(entity.getRandom(), 60, 120));
                         }
                     }
                 }

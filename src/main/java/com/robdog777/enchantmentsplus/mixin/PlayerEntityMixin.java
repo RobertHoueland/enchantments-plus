@@ -33,8 +33,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         // Lunar Sight
         int nightVisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
-        if (nightVisionLevel > 0 && !this.hasStatusEffect(StatusEffects.NIGHT_VISION) &&
-                EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLunarSight) {
+        if (nightVisionLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLunarSight) {
             // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
                     220, 0, false, false, true));
@@ -43,9 +42,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         // Hiker
         int hikerLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.HIKER, itemStackFeet);
         if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker) {
-            this.setStepHeight(hikerLevel + 0.1F);
+            this.stepHeight = hikerLevel + 0.1F;
         } else {
-            this.setStepHeight(0.6F);
+            this.stepHeight = 0.6F;
         }
 
         // Excavator

@@ -6,7 +6,7 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
+import net.minecraft.entity.damage.DamageSource;
 
 public class PaybackEnchantment extends Enchantment {
     public PaybackEnchantment() {
@@ -34,9 +34,8 @@ public class PaybackEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        World world = user.getEntityWorld();
         if (user.getHealth() < 10 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enablePayback) {
-            target.damage(world.getDamageSources().generic(), (float) level * 0.5F * (20 - user.getHealth()));
+            target.damage(DamageSource.GENERIC, (float) level * 0.5F * (20 - user.getHealth()));
         } else {
             super.onTargetDamaged(user, target, level);
         }

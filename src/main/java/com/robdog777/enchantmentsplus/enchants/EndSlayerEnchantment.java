@@ -8,10 +8,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.mob.ShulkerEntity;
-import net.minecraft.world.World;
 
 public class EndSlayerEnchantment extends Enchantment {
     public EndSlayerEnchantment() {
@@ -44,14 +44,13 @@ public class EndSlayerEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        World world = user.getEntityWorld();
         if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableEndSlayer) {
             if (target instanceof EndermanEntity || target instanceof EndermiteEntity || target instanceof ShulkerEntity) {
-                target.damage(world.getDamageSources().generic(), (float) level * 5F);
+                target.damage(DamageSource.GENERIC, (float) level * 5F);
             }
 
             if (target instanceof EnderDragonEntity) {
-                target.damage(world.getDamageSources().generic(), (float) level * 10F);
+                target.damage(DamageSource.GENERIC, (float) level * 10F);
             }
         } else {
             super.onTargetDamaged(user, target, level);
