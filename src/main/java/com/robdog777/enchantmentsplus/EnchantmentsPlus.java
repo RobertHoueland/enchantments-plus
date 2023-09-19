@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EnchantmentsPlus implements ModInitializer {
-    // This logger is used to write text to the console and the log file
     public static final Logger LOGGER = LoggerFactory.getLogger("enchantmentsplus");
 
     // moon png file from https://www.pngitem.com

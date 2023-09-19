@@ -33,8 +33,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         // Lunar Sight
         int nightVisionLevel = EnchantmentHelper.getLevel(EnchantmentsPlus.LUNARSIGHT, itemStackHead);
-        if (nightVisionLevel > 0 && !this.hasStatusEffect(StatusEffects.NIGHT_VISION) &&
-                EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLunarSight) {
+        if (nightVisionLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLunarSight) {
             // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
                     220, 0, false, false, true));
