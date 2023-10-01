@@ -7,6 +7,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.registry.DynamicRegistryManager;
@@ -37,12 +38,12 @@ public class BlockMixin {
             return;
         }
         for (ItemStack itemStack : returnValue) {
-            Optional<SmeltingRecipe> recipe = world.getRecipeManager()
+            Optional<RecipeEntry<SmeltingRecipe>> recipe = world.getRecipeManager()
                     .listAllOfType(RecipeType.SMELTING).stream()
-                    .filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(itemStack))).findFirst();
+                    .filter((smeltingRecipe -> smeltingRecipe.value().getIngredients().get(0).test(itemStack))).findFirst();
             if (recipe.isPresent()) {
                 DynamicRegistryManager registryManager = world.getRegistryManager();
-                ItemStack smelted = recipe.get().getOutput(registryManager);
+                ItemStack smelted = recipe.get().value().getResult(registryManager);
                 smelted.setCount(itemStack.getCount());
                 items.add(smelted);
             } else {
