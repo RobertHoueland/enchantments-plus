@@ -36,16 +36,16 @@ public class LifeStealEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.getWorld();
-        if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLifeSteal) {
-            if (world.isClient()) {
-                super.onTargetDamaged(user, target, level);
-            } else if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20))) {
-                world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 1.0f, 1f);
-                user.heal(level);
+        if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLifeSteal && !world.isClient()) {
+            if (user.getHealth() < 20 && (Math.random() < 0.10 + (level * 0.20)) && target instanceof LivingEntity) {
+                float targetHealth = ((LivingEntity) target).getHealth();
+                if (targetHealth > 0) {
+                    world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 1.0f, 1f);
+                    user.heal(targetHealth * 0.5f);
+                }
             }
-        } else {
-            super.onTargetDamaged(user, target, level);
         }
+        super.onTargetDamaged(user, target, level);
     }
 
     @Override
