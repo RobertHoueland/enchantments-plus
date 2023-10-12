@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.world.World;
 
 public class SniperEnchantment extends Enchantment {
     public SniperEnchantment() {
@@ -34,12 +35,17 @@ public class SniperEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
+        World world = user.getEntityWorld();
         float distance = user.distanceTo(target);
         if (distance > 10 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableSniper) {
-            target.damage(DamageSource.GENERIC, (float) level * (distance / 2.5F));
-        } else {
-            super.onTargetDamaged(user, target, level);
+            float damage = (float) level * (distance / 2.5F);
+            if (damage > 40) {
+                target.damage(DamageSource.GENERIC, 40);
+            } else {
+                target.damage(DamageSource.GENERIC, damage);
+            }
         }
+        super.onTargetDamaged(user, target, level);
     }
 
     @Override
