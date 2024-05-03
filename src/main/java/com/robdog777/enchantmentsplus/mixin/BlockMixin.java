@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
@@ -46,6 +47,10 @@ public class BlockMixin {
                 ItemStack smelted = recipe.get().value().getResult(registryManager);
                 smelted.setCount(itemStack.getCount());
                 items.add(smelted);
+
+                // Spawn XP orbs
+                int xpAmount = (int) recipe.get().value().getExperience();
+                world.spawnEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY(), pos.getZ(), xpAmount));
             } else {
                 items.add(itemStack);
             }
