@@ -8,6 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.RavagerEntity;
+import net.minecraft.entity.mob.VexEntity;
+import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.world.World;
 
 public class RaiderEnchantment extends Enchantment {
@@ -43,7 +46,8 @@ public class RaiderEnchantment extends Enchantment {
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.getEntityWorld();
         if (target instanceof LivingEntity livingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider) {
-            if (livingEntity.getGroup() == EntityGroup.ILLAGER) {
+            if (livingEntity.getGroup() == EntityGroup.ILLAGER || target instanceof WitchEntity ||
+                    target instanceof VexEntity || target instanceof RavagerEntity) {
                 target.damage(world.getDamageSources().generic(), (float) level * 5F);
             }
         } else {
