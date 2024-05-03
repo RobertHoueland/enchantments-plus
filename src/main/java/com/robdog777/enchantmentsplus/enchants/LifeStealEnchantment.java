@@ -41,7 +41,7 @@ public class LifeStealEnchantment extends Enchantment {
                 float targetHealth = ((LivingEntity) target).getHealth();
                 if (targetHealth > 0) {
                     world.playSound(null, user.getBlockPos(), EnchantmentsPlus.BlurpEvent, SoundCategory.PLAYERS, 1.0f, 1f);
-                    user.heal(Math.min((targetHealth * level * 0.05f), (level * 3.0f)));
+                    user.heal(targetHealth * 0.5f);
                 }
             }
         }
