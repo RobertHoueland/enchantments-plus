@@ -23,6 +23,8 @@ public class EnchantmentsPlus implements ModInitializer {
     // Audio files copyright free from https://freesound.org/
     public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
     public static final Identifier BLURP = new Identifier("enchantmentsplus:blurp");
+    public static final Identifier WHOOSH = new Identifier("enchantmentsplus:whoosh");
+    public static final Identifier DENY = new Identifier("enchantmentsplus:deny");
 
     public static final ConfigHolder<EnchantmentsPlusConfig> CONFIG_HOLDER = AutoConfig.register(
             EnchantmentsPlusConfig.class, JanksonConfigSerializer::new);
@@ -36,6 +38,8 @@ public class EnchantmentsPlus implements ModInitializer {
 
     public static SoundEvent SwoopEvent = SoundEvent.of(SWOOP);
     public static SoundEvent BlurpEvent = SoundEvent.of(BLURP);
+    public static SoundEvent WhooshEvent = SoundEvent.of(WHOOSH);
+    public static SoundEvent DenyEvent = SoundEvent.of(DENY);
 
     @Override
     public void onInitialize() {
@@ -46,6 +50,8 @@ public class EnchantmentsPlus implements ModInitializer {
         Registry.register(Registries.STATUS_EFFECT, new Identifier("enchantmentsplus", "moonresteffect"), MOONREST);
         Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
         Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);
+        Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.WHOOSH, WhooshEvent);
+        Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.DENY, DenyEvent);
 
         AutoConfig.getConfigHolder(EnchantmentsPlusConfig.class).getConfig();
         CONFIG_HOLDER.load();

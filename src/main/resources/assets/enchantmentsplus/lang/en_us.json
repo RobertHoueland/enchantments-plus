@@ -40,6 +40,8 @@
   "effect.enchantmentsplus.moonresteffect": "Moon Rest",
   "subtitles.enchantmentsplus.swoop": "Moon walk whoosh",
   "subtitles.enchantmentsplus.blurp": "Health regenerates",
+  "subtitles.enchantmentsplus.whoosh": "Player leaps",
+  "subtitles.enchantmentsplus.deny": "Dual leap fails",
   "text.autoconfig.enchantmentsplus.title": "Enchantments Plus options",
   "text.autoconfig.enchantmentsplus.option.enableBlazeWalker": "Blaze Walker enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableCubical": "Cubical enchantment enabled",

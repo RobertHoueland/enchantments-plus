@@ -10,5 +10,17 @@
     "sounds": [
       "enchantmentsplus:blurp"
     ]
+  },
+  "whoosh": {
+    "subtitle": "subtitles.enchantmentsplus.whoosh",
+    "sounds": [
+      "enchantmentsplus:whoosh"
+    ]
+  },
+  "deny": {
+    "subtitle": "subtitles.enchantmentsplus.deny",
+    "sounds": [
+      "enchantmentsplus:deny"
+    ]
   }
 }

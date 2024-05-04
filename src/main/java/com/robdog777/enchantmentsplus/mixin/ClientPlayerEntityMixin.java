@@ -1,6 +1,7 @@
 package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
+import com.robdog777.enchantmentsplus.SharedStates;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
@@ -32,6 +33,11 @@ public class ClientPlayerEntityMixin {
             if (player.fallDistance < 4.0f && player.input.jumping && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
                 jumpCount--;
                 player.jump();
+
+                SharedStates.dualLeapSuccessful = true;
+            } else if (player.fallDistance >= 4.0f) {
+                // player had fallen too many blocks, this prevents negating fall damage
+                SharedStates.dualLeapFailed = true;
             }
         }
 
@@ -48,3 +54,4 @@ public class ClientPlayerEntityMixin {
                 && !player.getAbilities().creativeMode && !player.getAbilities().flying;
     }
 }
+

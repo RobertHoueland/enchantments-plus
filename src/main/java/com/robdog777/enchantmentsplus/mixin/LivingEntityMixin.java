@@ -2,6 +2,7 @@ package com.robdog777.enchantmentsplus.mixin;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
+import com.robdog777.enchantmentsplus.SharedStates;
 import com.robdog777.enchantmentsplus.enchants.BlazeWalkerEnchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -10,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -80,6 +82,19 @@ public abstract class LivingEntityMixin extends Entity {
                 int moonRestCooldown = 400;
                 currentEntity.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
                         moonRestCooldown, 0, false, false, true));
+            }
+        }
+
+        // Dual Leap sound effects
+        if (currentEntity instanceof PlayerEntity player) {
+            if (SharedStates.dualLeapSuccessful) {
+                player.getWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.WhooshEvent,
+                        SoundCategory.PLAYERS, 0.7f, 1f);
+                SharedStates.dualLeapSuccessful = false;
+            } else if (SharedStates.dualLeapFailed) {
+                player.getWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.DenyEvent,
+                        SoundCategory.PLAYERS, 0.7f, 1f);
+                SharedStates.dualLeapFailed = false;
             }
         }
     }
