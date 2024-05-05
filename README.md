@@ -1,10 +1,10 @@
 # Enchantments-Plus
 
-## Updated to 1.20.2 for Fabric
+## Updated to 1.20.4 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
-Minecraft Mod that adds over 10 new fun enchantments to the game
+Minecraft Mod that adds over 10 new fun enchantments to the game!
 
 Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
 and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
@@ -13,9 +13,9 @@ and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 
 ---
 
-**Requires: [Fabric Loader (0.14.22+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.89.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-AND [Cloth Config API Fabric (12.0.109+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
+**Requires: [Fabric Loader](https://fabricmc.net/use/ "Fabric Download")
+AND [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+AND [Cloth Config API Fabric](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
 
 Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
 
@@ -39,7 +39,7 @@ Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Co
 |    Raider    |       Sword       |        5         | Deals extra damage to all raid/illager/pillager mobs                                        | Uncommon  | Cannot be equipped with other damage enchantments                           |
 | Toxic Strike |       Sword       |        2         | Target is poisoned when hit                                                                 |   Rare    | Cannot be equipped with fire aspect, frostbite, levitation                  |
 |    Hiker     |       Boots       |        1         | Allows you to step up one high blocks without jumping, like a horse                         | Uncommon  |                                                                             |
-|  Dual Leap   |       Boots       |        1         | Allows you to double jump                                                                   |   Rare    | Cannot be equipped with Moon Walk                                           |
+|  Dual Leap   |       Boots       |        1         | Allows you to double jump (does not work if you have fallen a certain number of blocks)     |   Rare    | Cannot be equipped with Moon Walk                                           |
 |    Sniper    |        Bow        |        3         | Deals more damage the further away your target is from you                                  |  Common   | Cannot be equipped with Storm Strike                                        |
 | Mystic Mind  |      Helmet       |        1         | Teleports the user away (like chorus fruit) when they're damaged below 3 hearts             | Uncommon  |                                                                             |
 | Storm Strike |        Bow        |        3         | Chance of summoning a lightning bolt to strike target                                       | Very Rare | Cannot be equipped with Sniper                                              |
