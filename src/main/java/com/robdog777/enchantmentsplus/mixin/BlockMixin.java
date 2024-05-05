@@ -26,7 +26,9 @@ import java.util.Optional;
 @Mixin(Block.class)
 public class BlockMixin {
     // smelt with FlashForge
-    @Inject(method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
+    @Inject(method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;" +
+            "Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;" +
+            "Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
             at = @At("RETURN"))
     private static void getDroppedStacks(BlockState state, ServerWorld world, BlockPos pos, BlockEntity blockEntity,
                                          Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
