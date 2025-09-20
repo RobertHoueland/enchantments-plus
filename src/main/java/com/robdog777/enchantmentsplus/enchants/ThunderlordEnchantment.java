@@ -2,25 +2,27 @@ package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.*;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class ThunderlordEnchantment extends Enchantment {
     public ThunderlordEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 5 + (8 * level);
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 3;
+//        Rarity.VERY_RARE
+        super(new Properties(
+                ItemTags.WEAPON_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.SWORD_ENCHANTABLE),
+                8,
+                3,
+                Enchantment.leveledCost(12, 20),
+                Enchantment.leveledCost(65, 20),
+                8,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     }
 
     public String registryName() {
@@ -29,8 +31,7 @@ public class ThunderlordEnchantment extends Enchantment {
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
-        // skeleton code is from channeling
-
+        // code is from channeling
         Random rand = new Random();
         int random = rand.nextInt(10);
         BlockPos blockPos = target.getBlockPos(); // does this need to be user?

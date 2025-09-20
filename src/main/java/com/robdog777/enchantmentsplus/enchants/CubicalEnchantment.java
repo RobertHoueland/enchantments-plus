@@ -3,32 +3,30 @@ package com.robdog777.enchantmentsplus.enchants;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.SlimeEntity;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class CubicalEnchantment extends Enchantment {
     public CubicalEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 5 + (level - 1) * 8;
-    }
-
-    @Override
-    public int getMaxPower(int level) {
-        return this.getMinPower(level) + 20;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 5;
+//        Rarity.UNCOMMON
+        super(new Properties(
+                ItemTags.WEAPON_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.SWORD_ENCHANTABLE),
+                5,
+                5,
+                Enchantment.leveledCost(5, 8),
+                Enchantment.leveledCost(25, 8),
+                2,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     }
 
     public String registryName() {

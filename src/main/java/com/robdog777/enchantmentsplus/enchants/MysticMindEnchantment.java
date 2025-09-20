@@ -2,11 +2,12 @@ package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -16,19 +17,21 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
+import java.util.Optional;
+
 public class MysticMindEnchantment extends Enchantment {
     public MysticMindEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 5 * level;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 1;
+//        Rarity.UNCOMMON
+        super(new Properties(
+                ItemTags.HEAD_ARMOR_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.HEAD_ARMOR_ENCHANTABLE),
+                1,
+                1,
+                Enchantment.constantCost(5),
+                Enchantment.constantCost(41),
+                4,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.HEAD}));
     }
 
     public String registryName() {
@@ -40,7 +43,7 @@ public class MysticMindEnchantment extends Enchantment {
         World world = user.getWorld();
 
         if (!world.isClient && level > 0 && user.getHealth() < 6 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableMysticMind) {
-            // skeleton code from chorus fruit item
+            // code is from chorus fruit
             double d = user.getX();
             double e = user.getY();
             double f = user.getZ();

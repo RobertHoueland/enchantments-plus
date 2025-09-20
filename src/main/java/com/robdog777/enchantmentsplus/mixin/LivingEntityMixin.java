@@ -1,6 +1,5 @@
 package com.robdog777.enchantmentsplus.mixin;
 
-import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import com.robdog777.enchantmentsplus.SharedStates;
 import com.robdog777.enchantmentsplus.enchants.BlazeWalkerEnchantment;
@@ -8,19 +7,20 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -39,6 +39,22 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
+    @Override
+    public float getStepHeight() {
+        LivingEntity currentEntity = (LivingEntity) (Object) this;
+
+        // Hiker
+        int hikerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
+        if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker && currentEntity instanceof PlayerEntity) {
+            float height = hikerLevel + 0.1F;
+            float defaultHeight = (float) currentEntity.getAttributeValue(EntityAttributes.GENERIC_STEP_HEIGHT);
+
+            return Math.max(defaultHeight, height);
+        }
+
+        return super.getStepHeight();
+    }
+
     @Inject(method = "tick", at = @At("HEAD"))
     protected void tick(CallbackInfo ci) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
@@ -51,18 +67,6 @@ public abstract class LivingEntityMixin extends Entity {
                     220, 0, false, false, true));
         }
 
-        // Hiker
-        int hikerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
-        if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker) {
-            currentEntity.setStepHeight(hikerLevel + 0.1F);
-        } else if (currentEntity instanceof PlayerEntity) {
-            currentEntity.setStepHeight(0.6F);
-        }
-
-        // Excavator
-        int excavatorLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.EXCAVATOR, currentEntity);
-        setRange(excavatorLevel > 0, excavatorLevel, currentEntity);
-
         // Moon Walker
         int moonWalkerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.MOONWALKER, currentEntity);
         if (moonWalkerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableMoonWalker) {
@@ -73,14 +77,16 @@ public abstract class LivingEntityMixin extends Entity {
                     0, false, false, true));
 
             // cool down for stronger effect
-            if (!currentEntity.hasStatusEffect(EnchantmentsPlus.MOONREST)) {
+            RegistryEntry<StatusEffect> moonrestEntry = Registries.STATUS_EFFECT.getEntry(EnchantmentsPlus.MOONREST);
+            if (!currentEntity.hasStatusEffect(moonrestEntry)) {
+                // TODO: add keybind
                 currentEntity.getWorld().playSound(null, currentEntity.getBlockPos(), EnchantmentsPlus.SwoopEvent,
                         currentEntity.getSoundCategory(), 1.0f, 1f);
                 currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, moonWalkerLevel * 100,
                         moonWalkerLevel + 1, false, false, true));
-                // 20 seconds
-                int moonRestCooldown = 400;
-                currentEntity.addStatusEffect(new StatusEffectInstance(EnchantmentsPlus.MOONREST,
+
+                int moonRestCooldown = 400; // 20 seconds
+                currentEntity.addStatusEffect(new StatusEffectInstance(moonrestEntry,
                         moonRestCooldown, 0, false, false, true));
             }
         }
@@ -96,17 +102,6 @@ public abstract class LivingEntityMixin extends Entity {
                         SoundCategory.PLAYERS, 0.7f, 1f);
                 SharedStates.dualLeapFailed = false;
             }
-        }
-    }
-
-    @Unique
-    public void setRange(boolean change_range, int level, LivingEntity currentEntity) {
-        if (change_range && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableExcavator) {
-            Objects.requireNonNull(currentEntity.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(level);
-            Objects.requireNonNull(currentEntity.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(level);
-        } else {
-            Objects.requireNonNull(currentEntity.getAttributeInstance(ReachEntityAttributes.REACH)).setBaseValue(0.0);
-            Objects.requireNonNull(currentEntity.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE)).setBaseValue(0.0);
         }
     }
 }

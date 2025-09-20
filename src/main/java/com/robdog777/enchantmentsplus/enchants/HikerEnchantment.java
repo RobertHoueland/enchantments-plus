@@ -2,22 +2,25 @@ package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
+
+import java.util.Optional;
 
 public class HikerEnchantment extends Enchantment {
     public HikerEnchantment() {
-        super(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 15 * level;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 1;
+//        Rarity.UNCOMMON
+        super(new Properties(
+                ItemTags.FOOT_ARMOR_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.FOOT_ARMOR_ENCHANTABLE),
+                1,
+                1,
+                Enchantment.constantCost(5),
+                Enchantment.constantCost(41),
+                8,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.FEET}));
     }
 
     public String registryName() {

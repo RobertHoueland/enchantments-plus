@@ -3,34 +3,32 @@ package com.robdog777.enchantmentsplus.enchants;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.RavagerEntity;
 import net.minecraft.entity.mob.VexEntity;
 import net.minecraft.entity.mob.WitchEntity;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class RaiderEnchantment extends Enchantment {
     public RaiderEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 5 + (level - 1) * 8;
-    }
-
-    @Override
-    public int getMaxPower(int level) {
-        return this.getMinPower(level) + 20;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 5;
+//        Rarity.UNCOMMON
+        super(new Properties(
+                ItemTags.WEAPON_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.SWORD_ENCHANTABLE),
+                5,
+                5,
+                Enchantment.leveledCost(5, 8),
+                Enchantment.leveledCost(25, 8),
+                2,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     }
 
     public String registryName() {
@@ -45,8 +43,8 @@ public class RaiderEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         World world = user.getEntityWorld();
-        if (target instanceof LivingEntity livingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider) {
-            if (livingEntity.getGroup() == EntityGroup.ILLAGER || target instanceof WitchEntity ||
+        if (target instanceof LivingEntity && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider) {
+            if (target instanceof IllagerEntity || target instanceof WitchEntity ||
                     target instanceof VexEntity || target instanceof RavagerEntity) {
                 target.damage(world.getDamageSources().generic(), (float) level * 5F);
             }

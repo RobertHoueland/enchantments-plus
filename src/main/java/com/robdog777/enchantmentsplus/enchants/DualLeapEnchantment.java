@@ -2,22 +2,25 @@ package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
+
+import java.util.Optional;
 
 public class DualLeapEnchantment extends Enchantment {
     public DualLeapEnchantment() {
-        super(Enchantment.Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return (20 * level);
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 1;
+//        Rarity.RARE
+        super(new Properties(
+                ItemTags.FOOT_ARMOR_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.FOOT_ARMOR_ENCHANTABLE),
+                1,
+                1,
+                Enchantment.leveledCost(10, 10),
+                Enchantment.leveledCost(25, 10),
+                8,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.FEET}));
     }
 
     @Override

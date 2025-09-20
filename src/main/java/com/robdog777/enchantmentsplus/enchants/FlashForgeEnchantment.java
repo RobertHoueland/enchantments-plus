@@ -2,23 +2,26 @@ package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
+
+import java.util.Optional;
 
 public class FlashForgeEnchantment extends Enchantment {
     public FlashForgeEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 20 * level;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 1;
+//        Rarity.RARE
+        super(new Properties(
+                ItemTags.MINING_LOOT_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.MINING_LOOT_ENCHANTABLE),
+                1,
+                1,
+                Enchantment.leveledCost(10, 10),
+                Enchantment.leveledCost(25, 10),
+                8,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     }
 
     public String registryName() {
