@@ -1,0 +1,19 @@
+{
+  "anvil_cost": 4,
+  "description": {"translate": "enchantment.enchantmentsplus.sniper"},
+  "effects": {
+    "minecraft:post_attack": [{
+      "affected": "victim",
+      "effect": {"type": "enchantmentsplus:custom", "action": "sniper"},
+      "enchanted": "attacker"
+    }]
+  },
+  "exclusive_set": "#enchantmentsplus:exclusive_set/bow_stormstrike",
+  "max_cost": {"base": 37, "per_level_above_first": 20},
+  "max_level": 3,
+  "min_cost": {"base": 12, "per_level_above_first": 20},
+  "primary_items": "#minecraft:enchantable/bow",
+  "slots": ["mainhand"],
+  "supported_items": "#minecraft:enchantable/bow",
+  "weight": 3
+}

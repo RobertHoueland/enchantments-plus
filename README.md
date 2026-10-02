@@ -1,6 +1,6 @@
 # Enchantments-Plus
 
-## Updated to 1.20.4 for Fabric
+## Updated to 1.21 for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 

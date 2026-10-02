@@ -1,7 +1,7 @@
 package com.robdog777.enchantmentsplus.mixin;
 
+import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +19,7 @@ public class PlayerEntityMixin {
 
         if (currentEntity instanceof PlayerEntity) {
             double currentValue = currentEntity.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE);
-            int excavatorLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.EXCAVATOR, currentEntity);
+            int excavatorLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.EXCAVATOR, currentEntity);
 
             if (excavatorLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableExcavator) {
                 cir.setReturnValue(currentValue + excavatorLevel);

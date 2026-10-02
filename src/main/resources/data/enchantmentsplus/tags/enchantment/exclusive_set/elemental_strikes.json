@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:fire_aspect",
+    "enchantmentsplus:frostbite",
+    "enchantmentsplus:levitation",
+    "enchantmentsplus:toxicstrike"
+  ]
+}

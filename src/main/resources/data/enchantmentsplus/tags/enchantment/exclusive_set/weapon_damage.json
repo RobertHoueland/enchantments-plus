@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sharpness",
+    "minecraft:smite",
+    "minecraft:bane_of_arthropods",
+    "enchantmentsplus:cubical",
+    "enchantmentsplus:endslayer",
+    "enchantmentsplus:raider"
+  ]
+}

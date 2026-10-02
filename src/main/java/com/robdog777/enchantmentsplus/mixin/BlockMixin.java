@@ -1,11 +1,11 @@
 package com.robdog777.enchantmentsplus.mixin;
 
+import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.item.ItemStack;
@@ -35,7 +35,7 @@ public class BlockMixin {
         List<ItemStack> returnValue = cir.getReturnValue();
 
         // Flash Forge
-        if (EnchantmentHelper.getLevel(EnchantmentsPlus.FLASHFORGE, stack) == 0
+        if (EnchantmentLookup.getLevel(EnchantmentsPlus.FLASHFORGE, stack, world) == 0
                 || !EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFlashForge) {
             return;
         }

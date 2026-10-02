@@ -1,9 +1,9 @@
 package com.robdog777.enchantmentsplus.mixin;
 
+import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import com.robdog777.enchantmentsplus.SharedStates;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ElytraItem;
@@ -28,7 +28,7 @@ public class ClientPlayerEntityMixin {
 
         // Dual Leap
         if (player.isOnGround() || player.isClimbing()) {
-            jumpCount = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
+            jumpCount = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
         } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0) {
             if (player.fallDistance < 4.0f && player.input.jumping && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
                 jumpCount--;
