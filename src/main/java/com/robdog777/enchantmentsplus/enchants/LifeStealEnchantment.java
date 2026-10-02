@@ -2,26 +2,29 @@ package com.robdog777.enchantmentsplus.enchants;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 
+import java.util.Optional;
+
 public class LifeStealEnchantment extends Enchantment {
     public LifeStealEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return 5 + (7 * level);
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 3;
+//        Rarity.RARE
+        super(new Properties(
+                ItemTags.WEAPON_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.SWORD_ENCHANTABLE),
+                2,
+                3,
+                Enchantment.leveledCost(10, 20),
+                Enchantment.leveledCost(60, 20),
+                4,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     }
 
     public String registryName() {

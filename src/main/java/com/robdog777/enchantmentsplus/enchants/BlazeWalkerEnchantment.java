@@ -3,21 +3,34 @@ package com.robdog777.enchantmentsplus.enchants;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import net.minecraft.block.*;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.Optional;
+
 public class BlazeWalkerEnchantment extends Enchantment {
     public BlazeWalkerEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
+//        Rarity.RARE
+        super(new Properties(
+                ItemTags.FOOT_ARMOR_ENCHANTABLE,
+                Optional.ofNullable(ItemTags.FOOT_ARMOR_ENCHANTABLE),
+                2,
+                2,
+                Enchantment.leveledCost(10, 10),
+                Enchantment.leveledCost(25, 10),
+                4,
+                FeatureSet.empty(),
+                new EquipmentSlot[]{EquipmentSlot.FEET}));
     }
 
-    // skeleton code is from FrostWalker enchant
     public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
+        // original code is from Frost Walker
         if (entity.isOnGround() && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker) {
             BlockState blockState = Blocks.OBSIDIAN.getDefaultState();
             int f = Math.min(16, 2 + level);
@@ -38,21 +51,6 @@ public class BlazeWalkerEnchantment extends Enchantment {
                 }
             }
         }
-    }
-
-    @Override
-    public int getMinPower(int level) {
-        return level * 10;
-    }
-
-    @Override
-    public int getMaxPower(int level) {
-        return this.getMinPower(level) + 15;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 2;
     }
 
     @Override
