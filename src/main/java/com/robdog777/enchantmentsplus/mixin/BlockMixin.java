@@ -48,7 +48,7 @@ public class BlockMixin {
 
             if (recipe.isPresent()) {
                 DynamicRegistryManager registryManager = world.getRegistryManager();
-                ItemStack smelted = recipe.get().value().getResult(registryManager);
+                ItemStack smelted = recipe.get().value().getResult(registryManager).copy(); // copy to prevent duplicated drops
                 smelted.setCount(itemStack.getCount());
                 returnValue.set(i, smelted);
 
