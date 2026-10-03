@@ -44,11 +44,12 @@ public abstract class LivingEntityMixin extends Entity {
     public float getStepHeight() {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
         int hikerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
-        if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker
-                && currentEntity instanceof PlayerEntity) {
-            float height = hikerLevel + 0.1F;
-            float defaultHeight = (float) currentEntity.getAttributeValue(EntityAttributes.STEP_HEIGHT);
-            return Math.max(defaultHeight, height);
+        if (currentEntity instanceof PlayerEntity) {
+            float stepHeight = (float) currentEntity.getAttributeValue(EntityAttributes.STEP_HEIGHT);
+            if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker) {
+                return Math.max(stepHeight, hikerLevel + 0.1F);
+            }
+            return stepHeight;
         }
         return super.getStepHeight();
     }
