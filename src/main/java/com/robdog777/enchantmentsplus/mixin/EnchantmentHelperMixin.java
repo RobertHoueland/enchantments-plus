@@ -16,11 +16,11 @@ import java.util.stream.Stream;
 
 @Mixin(EnchantmentHelper.class)
 public abstract class EnchantmentHelperMixin {
-    @Inject(method = "getPossibleEntries", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getPossibleEntries", at = @At("RETURN"))
     private static void removeDisabledEnchantments(int power, ItemStack stack,
                                                    Stream<RegistryEntry<Enchantment>> possibleEntries,
                                                    CallbackInfoReturnable<List<EnchantmentLevelEntry>> cir) {
         // Vanilla removes conflicting candidates when selecting additional enchantments
-        cir.getReturnValue().removeIf(entry -> !EnchantmentsPlus.isEnchantmentEnabled(entry.enchantment));
+        cir.getReturnValue().removeIf(entry -> !EnchantmentsPlus.isEnchantmentEnabled(entry.enchantment()));
     }
 }

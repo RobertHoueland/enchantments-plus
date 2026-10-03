@@ -1,10 +1,8 @@
-# Enchantments-Plus
-
-## Updated to 1.21 for Fabric
+# Enchantments-Plus for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
-Minecraft Mod that adds over 10 new fun enchantments to the game!
+Minecraft mod that adds over 15 new enchantments to the game!
 
 Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
 and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
