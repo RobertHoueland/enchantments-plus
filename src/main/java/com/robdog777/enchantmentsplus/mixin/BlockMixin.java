@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
-import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,13 +42,12 @@ public class BlockMixin {
 
         for (int i = 0; i < returnValue.size(); i++) {
             ItemStack itemStack = returnValue.get(i);
+            SingleStackRecipeInput input = new SingleStackRecipeInput(itemStack);
             Optional<RecipeEntry<SmeltingRecipe>> recipe = world.getRecipeManager()
-                    .listAllOfType(RecipeType.SMELTING).stream()
-                    .filter(r -> r.value().getIngredients().get(0).test(itemStack)).findFirst();
+                    .getFirstMatch(RecipeType.SMELTING, input, world);
 
             if (recipe.isPresent()) {
-                DynamicRegistryManager registryManager = world.getRegistryManager();
-                ItemStack smelted = recipe.get().value().getResult(registryManager).copy(); // copy to prevent duplicated drops
+                ItemStack smelted = recipe.get().value().craft(input, world.getRegistryManager()).copy(); // copy to prevent duplicated drops
                 smelted.setCount(itemStack.getCount());
                 returnValue.set(i, smelted);
 

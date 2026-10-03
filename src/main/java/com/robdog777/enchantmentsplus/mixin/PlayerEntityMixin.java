@@ -18,7 +18,7 @@ public class PlayerEntityMixin {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
 
         if (currentEntity instanceof PlayerEntity) {
-            double currentValue = currentEntity.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE);
+            double currentValue = currentEntity.getAttributeValue(EntityAttributes.BLOCK_INTERACTION_RANGE);
             int excavatorLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.EXCAVATOR, currentEntity);
 
             if (excavatorLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableExcavator) {

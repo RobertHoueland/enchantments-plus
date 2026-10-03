@@ -5,10 +5,9 @@ import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import com.robdog777.enchantmentsplus.SharedStates;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +29,7 @@ public class ClientPlayerEntityMixin {
         if (player.isOnGround() || player.isClimbing()) {
             jumpCount = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
         } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0) {
-            if (player.fallDistance < 4.0f && player.input.jumping && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
+            if (player.fallDistance < 4.0f && player.input.playerInput.jump() && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
                 jumpCount--;
                 player.jump();
 
@@ -41,15 +40,15 @@ public class ClientPlayerEntityMixin {
             }
         }
 
-        jumpedLastTick = player.input.jumping;
+        jumpedLastTick = player.input.playerInput.jump();
     }
 
     @Unique
     private boolean canJump(ClientPlayerEntity player) {
         ItemStack chestItemStack = player.getEquippedStack(EquipmentSlot.CHEST);
-        boolean wearingUsableElytra = chestItemStack.getItem() == Items.ELYTRA && ElytraItem.isUsable(chestItemStack);
+        boolean wearingUsableElytra = LivingEntity.canGlideWith(chestItemStack, EquipmentSlot.CHEST);
 
-        return !wearingUsableElytra && !player.isFallFlying() && !player.hasVehicle()
+        return !wearingUsableElytra && !player.isGliding() && !player.hasVehicle()
                 && !player.isTouchingWater() && !player.hasStatusEffect(StatusEffects.LEVITATION)
                 && !player.getAbilities().creativeMode && !player.getAbilities().flying;
     }

@@ -22,7 +22,7 @@ public abstract class EnchantBookFactoryMixin {
     private Optional<RegistryEntry<Enchantment>> selectEnabledEnchantment(Registry<Enchantment> registry,
                                                                          TagKey<Enchantment> tag, Random random) {
         // Filter before selecting so disabled entries do not replace valid book offers
-        return registry.getEntryList(tag).flatMap(entries -> Util.getRandomOrEmpty(entries.stream()
+        return registry.getOptional(tag).flatMap(entries -> Util.getRandomOrEmpty(entries.stream()
                 .filter(EnchantmentsPlus::isEnchantmentEnabled)
                 .toList(), random));
     }
