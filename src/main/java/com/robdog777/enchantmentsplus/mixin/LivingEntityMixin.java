@@ -44,11 +44,12 @@ public abstract class LivingEntityMixin extends Entity {
     public float getStepHeight() {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
         int hikerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
-        if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker
-                && currentEntity instanceof PlayerEntity) {
-            float height = hikerLevel + 0.1F;
-            float defaultHeight = (float) currentEntity.getAttributeValue(EntityAttributes.STEP_HEIGHT);
-            return Math.max(defaultHeight, height);
+        if (currentEntity instanceof PlayerEntity) {
+            float stepHeight = (float) currentEntity.getAttributeValue(EntityAttributes.STEP_HEIGHT);
+            if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker) {
+                return Math.max(stepHeight, hikerLevel + 0.1F);
+            }
+            return stepHeight;
         }
         return super.getStepHeight();
     }
@@ -61,11 +62,11 @@ public abstract class LivingEntityMixin extends Entity {
         // TODO: play on servers
         if (currentEntity instanceof PlayerEntity player) {
             if (SharedStates.dualLeapSuccessful) {
-                player.getWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.WhooshEvent,
+                player.getEntityWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.WhooshEvent,
                         SoundCategory.PLAYERS, 0.7f, 1f);
                 SharedStates.dualLeapSuccessful = false;
             } else if (SharedStates.dualLeapFailed) {
-                player.getWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.DenyEvent,
+                player.getEntityWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.DenyEvent,
                         SoundCategory.PLAYERS, 0.7f, 1f);
                 SharedStates.dualLeapFailed = false;
             }
@@ -90,7 +91,7 @@ public abstract class LivingEntityMixin extends Entity {
                     currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
                             20, 0, false, false, true));
                     if (!currentEntity.hasStatusEffect(moonRestEntry)) {
-                        currentEntity.getWorld().playSound(null, currentEntity.getBlockPos(),
+                        currentEntity.getEntityWorld().playSound(null, currentEntity.getBlockPos(),
                                 EnchantmentsPlus.SwoopEvent, currentEntity.getSoundCategory(), 1.0f, 1f);
                         currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
                                 moonWalkerLevel * 100, moonWalkerLevel + 1, false, false, true));

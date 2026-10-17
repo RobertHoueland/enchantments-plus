@@ -18,7 +18,7 @@ public final class EnchantmentLookup {
     }
 
     public static int getEquipmentLevel(RegistryKey<Enchantment> key, LivingEntity entity) {
-        RegistryEntry<Enchantment> entry = getEntry(entity.getWorld(), key);
+        RegistryEntry<Enchantment> entry = getEntry(entity.getEntityWorld(), key);
         return entry == null ? 0 : EnchantmentHelper.getEquipmentLevel(entry, entity);
     }
 

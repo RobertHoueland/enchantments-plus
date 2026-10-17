@@ -23,7 +23,7 @@ public final class BlazeWalkerEnchantment {
         int radius = Math.min(16, 2 + level);
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         for (BlockPos pos : BlockPos.iterate(blockPos.add(-radius, -1, -radius), blockPos.add(radius, -1, radius))) {
-            if (!pos.isWithinDistance(entity.getPos(), radius)) {
+            if (!pos.isWithinDistance(entity.getEntityPos(), radius)) {
                 continue;
             }
 

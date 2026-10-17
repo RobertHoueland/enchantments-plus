@@ -51,7 +51,7 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
                 user.stopRiding();
             }
 
-            Vec3d oldPosition = user.getPos();
+            Vec3d oldPosition = user.getEntityPos();
             if (user.teleport(x, y, z, true)) {
                 world.emitGameEvent(GameEvent.TELEPORT, oldPosition, GameEvent.Emitter.of(user));
                 SoundEvent sound = user instanceof FoxEntity
