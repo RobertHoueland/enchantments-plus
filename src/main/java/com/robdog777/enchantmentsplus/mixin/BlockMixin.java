@@ -36,7 +36,7 @@ public class BlockMixin {
 
         // Flash Forge
         if (EnchantmentLookup.getLevel(EnchantmentsPlus.FLASHFORGE, stack, world) == 0
-                || !EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFlashForge) {
+                || !EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.FLASHFORGE, world)) {
             return;
         }
 

@@ -21,7 +21,8 @@ public class PlayerEntityMixin {
             double currentValue = currentEntity.getAttributeValue(EntityAttributes.BLOCK_INTERACTION_RANGE);
             int excavatorLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.EXCAVATOR, currentEntity);
 
-            if (excavatorLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableExcavator) {
+            if (excavatorLevel > 0 && EnchantmentsPlus.isEnchantmentEnabled(
+                    EnchantmentsPlus.EXCAVATOR, currentEntity.getEntityWorld())) {
                 cir.setReturnValue(currentValue + excavatorLevel);
             }
         }

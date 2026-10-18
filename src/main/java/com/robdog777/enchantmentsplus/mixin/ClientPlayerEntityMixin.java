@@ -29,7 +29,8 @@ public class ClientPlayerEntityMixin {
         if (player.isOnGround() || player.isClimbing()) {
             jumpCount = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
         } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0) {
-            if (player.fallDistance < 4.0f && player.input.playerInput.jump() && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
+            if (player.fallDistance < 4.0f && player.input.playerInput.jump() && canJump(player)
+                    && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.DUALLEAP, player.getEntityWorld())) {
                 jumpCount--;
                 player.jump();
 

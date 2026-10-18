@@ -3,13 +3,10 @@ package com.robdog777.enchantmentsplus.mixin;
 import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import com.robdog777.enchantmentsplus.SharedStates;
-import com.robdog777.enchantmentsplus.config.EnchantmentsPlusConfig;
 import com.robdog777.enchantmentsplus.enchants.BlazeWalkerEnchantment;
-import me.shedaniel.autoconfig.ConfigHolder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -24,6 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -35,23 +33,21 @@ public abstract class LivingEntityMixin extends Entity {
     protected void applyMovementEffects(ServerWorld world, BlockPos pos, CallbackInfo ci) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
         int blazeWalkerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.BLAZEWALKER, currentEntity);
-        if (blazeWalkerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker) {
+        if (blazeWalkerLevel > 0 && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.BLAZEWALKER, world)) {
             BlazeWalkerEnchantment.freezeLava(currentEntity, world, pos, blazeWalkerLevel);
         }
     }
 
-    @Override
-    public float getStepHeight() {
+    @Inject(method = "getStepHeight", at = @At("RETURN"), cancellable = true)
+    private void applyHikerStepHeight(CallbackInfoReturnable<Float> cir) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
-        int hikerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
-        if (currentEntity instanceof PlayerEntity) {
-            float stepHeight = (float) currentEntity.getAttributeValue(EntityAttributes.STEP_HEIGHT);
-            if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker) {
-                return Math.max(stepHeight, hikerLevel + 0.1F);
+        if (currentEntity instanceof PlayerEntity
+                && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.HIKER, currentEntity.getEntityWorld())) {
+            int hikerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
+            if (hikerLevel > 0) {
+                cir.setReturnValue(Math.max(cir.getReturnValue(), hikerLevel + 0.1F));
             }
-            return stepHeight;
         }
-        return super.getStepHeight();
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -74,15 +70,13 @@ public abstract class LivingEntityMixin extends Entity {
 
         // Only process periodic enchantment effects every five ticks.
         if (currentEntity.age % 5 == 0) {
-            ConfigHolder<EnchantmentsPlusConfig> config = EnchantmentsPlus.CONFIG_HOLDER;
-
-            if (config.getConfig().enableLunarSight
+            if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.LUNARSIGHT, currentEntity.getEntityWorld())
                     && EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.LUNARSIGHT, currentEntity) > 0) {
                 currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
                         220, 0, false, false, true));
             }
 
-            if (config.getConfig().enableMoonWalker) {
+            if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.MOONWALKER, currentEntity.getEntityWorld())) {
                 RegistryEntry<StatusEffect> moonRestEntry = Registries.STATUS_EFFECT.getEntry(EnchantmentsPlus.MOONREST);
                 int moonWalkerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.MOONWALKER, currentEntity);
                 if (moonWalkerLevel > 0) {

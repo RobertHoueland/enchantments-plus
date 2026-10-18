@@ -59,5 +59,6 @@
   "text.autoconfig.enchantmentsplus.option.enableSniper": "是否启用 狙击",
   "text.autoconfig.enchantmentsplus.option.enableStormStrike": "是否启用 雷霆箭",
   "text.autoconfig.enchantmentsplus.option.enableThunderlord": "是否启用 唤雷",
-  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "是否启用 毒性附加"
+  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "是否启用 毒性附加",
+  "text.autoconfig.enchantmentsplus.client_only_notice": "注意：这些选项仅会更改本客户端在单人模式下的本地配置，不会影响多人服务器的配置。\n若需在服务器上进行更改，请联系管理员修改配置文件。"
 }

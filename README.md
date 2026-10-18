@@ -12,10 +12,14 @@ and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 ---
 
 **Requires: [Fabric Loader](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-AND [Cloth Config API Fabric](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
+AND [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
-Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
+Installation: Drop the mod .jar and Fabric API into your mods folder.
+
+Optional: Install [Cloth Config API Fabric](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
+for configuration file support, and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth") for the in-game
+settings screen.<br>Without Cloth Config,
+all enchantments are enabled by default; multiplayer clients follow the server's enchantment settings.
 
 ---
 

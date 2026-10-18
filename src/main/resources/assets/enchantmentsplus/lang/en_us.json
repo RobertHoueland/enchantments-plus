@@ -61,5 +61,6 @@
   "text.autoconfig.enchantmentsplus.option.enableSniper": "Sniper enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableStormStrike": "Storm Strike enchantment enabled",
   "text.autoconfig.enchantmentsplus.option.enableThunderlord": "Thunder Lord enchantment enabled",
-  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "Toxic Strike enchantment enabled"
+  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "Toxic Strike enchantment enabled",
+  "text.autoconfig.enchantmentsplus.client_only_notice": "NOTE: These toggles only change this client's local config for Singleplayer, not a multiplayer server's.\nAsk the admin to edit the config to make changes on servers."
 }

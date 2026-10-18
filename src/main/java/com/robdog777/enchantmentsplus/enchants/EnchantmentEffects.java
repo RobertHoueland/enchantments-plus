@@ -34,7 +34,7 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
     }
 
     private static void mysticMind(ServerWorld world, LivingEntity user, int level) {
-        if (level <= 0 || user.getHealth() >= 6.0F || !EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableMysticMind) {
+        if (level <= 0 || user.getHealth() >= 6.0F || !EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.MYSTICMIND, world)) {
             return;
         }
 
@@ -69,13 +69,13 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
 
         switch (action) {
             case "cubical" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableCubical
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.CUBICAL, world)
                         && (target instanceof CreeperEntity || target instanceof SlimeEntity)) {
                     target.damage(world, world.getDamageSources().generic(), level * 5.0F);
                 }
             }
             case "endslayer" -> {
-                if (!EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableEndSlayer) {
+                if (!EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.ENDSLAYER, world)) {
                     return;
                 }
                 if (target instanceof EnderDragonEntity) {
@@ -85,17 +85,17 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
                 }
             }
             case "frostbite" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFrostbite && target instanceof LivingEntity livingTarget) {
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.FROSTBITE, world) && target instanceof LivingEntity livingTarget) {
                     livingTarget.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40 * level, level - 1));
                 }
             }
             case "levitation" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLevitation && target instanceof LivingEntity livingTarget) {
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.LEVITATION, world) && target instanceof LivingEntity livingTarget) {
                     livingTarget.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 20 * level, level - 1));
                 }
             }
             case "lifesteal" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableLifeSteal && user != null && user.getHealth() < 20.0F
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.LIFESTEAL, world) && user != null && user.getHealth() < 20.0F
                         && target instanceof LivingEntity livingTarget
                         && user.getRandom().nextFloat() < 0.10F + level * 0.20F
                         && livingTarget.getHealth() > 0.0F) {
@@ -106,19 +106,19 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
             }
             case "mysticmind" -> mysticMind(world, user, level);
             case "payback" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enablePayback && user != null && user.getHealth() < 10.0F) {
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.PAYBACK, world) && user != null && user.getHealth() < 10.0F) {
                     target.damage(world, world.getDamageSources().generic(), level * 0.5F * (20.0F - user.getHealth()));
                 }
             }
             case "raider" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableRaider && target instanceof LivingEntity
-                        && (target instanceof IllagerEntity || target instanceof WitchEntity
-                        || target instanceof VexEntity || target instanceof RavagerEntity)) {
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.RAIDER, world) &&
+                        (target instanceof IllagerEntity || target instanceof WitchEntity ||
+                                target instanceof VexEntity || target instanceof RavagerEntity)) {
                     target.damage(world, world.getDamageSources().generic(), level * 5.0F);
                 }
             }
             case "sniper" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableSniper) {
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.SNIPER, world)) {
                     if (user != null) {
                         float distance = user.distanceTo(target);
                         if (distance > 10.0F) {
@@ -128,11 +128,11 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
                 }
             }
             case "stormstrike" -> strikeLightning(world, target, level, 20,
-                    EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableStormStrike);
+                    EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.STORMSTRIKE, world));
             case "thunderlord" -> strikeLightning(world, target, level, 10,
-                    EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableThunderlord);
+                    EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.THUNDERLORD, world));
             case "toxicstrike" -> {
-                if (EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableToxicStrike && target instanceof LivingEntity livingTarget) {
+                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.TOXICSTRIKE, world) && target instanceof LivingEntity livingTarget) {
                     livingTarget.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 40 * level, level - 1));
                 }
             }
