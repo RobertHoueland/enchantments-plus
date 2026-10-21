@@ -12,7 +12,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.fox.Fox;
@@ -22,7 +22,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.monster.Shulker;
-import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.monster.cubemob.Slime;
 import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.monster.illager.AbstractIllager;
@@ -37,7 +37,7 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
 
     private static void strikeLightning(ServerLevel world, Entity target, int level, int chance, boolean enabled) {
         if (enabled && target.getRandom().nextInt(chance) < level && world.canSeeSky(target.blockPosition())) {
-            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world, EntitySpawnReason.TRIGGERED);
+            LightningBolt lightning = EntityTypes.LIGHTNING_BOLT.create(world, EntitySpawnReason.TRIGGERED);
             if (lightning != null) {
                 lightning.snapTo(target.getX(), target.getY(), target.getZ());
                 world.addFreshEntity(lightning);
