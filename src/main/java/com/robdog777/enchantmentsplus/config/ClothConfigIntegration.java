@@ -17,28 +17,16 @@ public final class ClothConfigIntegration {
     }
 
     public static boolean isEnchantmentEnabled(int index) {
-        EnchantmentsPlusConfig config = CONFIG_HOLDER.getConfig();
-        return switch (index) {
-            case 0 -> config.enableBlazeWalker;
-            case 1 -> config.enableCubical;
-            case 2 -> config.enableDualLeap;
-            case 3 -> config.enableEndSlayer;
-            case 4 -> config.enableExcavator;
-            case 5 -> config.enableFlashForge;
-            case 6 -> config.enableFrostbite;
-            case 7 -> config.enableHiker;
-            case 8 -> config.enableLevitation;
-            case 9 -> config.enableLifeSteal;
-            case 10 -> config.enableLunarSight;
-            case 11 -> config.enableMoonWalker;
-            case 12 -> config.enableMysticMind;
-            case 13 -> config.enablePayback;
-            case 14 -> config.enableRaider;
-            case 15 -> config.enableSniper;
-            case 16 -> config.enableStormStrike;
-            case 17 -> config.enableThunderlord;
-            case 18 -> config.enableToxicStrike;
-            default -> true;
-        };
+        EnchantmentOption option = EnchantmentOption.byIndex(index);
+        return option == null || option.isEnabled(CONFIG_HOLDER.getConfig());
+    }
+
+    public static int getMaxLevel(String id) {
+        EnchantmentOption option = EnchantmentOption.byId(id);
+        return option == null ? -1 : option.getMaxLevel(CONFIG_HOLDER.getConfig());
+    }
+
+    public static ConfigHolder<EnchantmentsPlusConfig> getConfigHolder() {
+        return CONFIG_HOLDER;
     }
 }

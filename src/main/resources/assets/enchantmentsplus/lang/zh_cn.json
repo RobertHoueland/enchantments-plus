@@ -40,7 +40,20 @@
   "effect.enchantmentsplus.moonresteffect": "月面歇息",
   "subtitles.enchantmentsplus.swoop": "月步：呼啸",
   "subtitles.enchantmentsplus.blurp": "生命值回复",
+  "subtitles.enchantmentsplus.whoosh": "玩家跃起",
+  "subtitles.enchantmentsplus.deny": "双重跨越失败",
   "text.autoconfig.enchantmentsplus.title": "Enchantments Plus 设置",
+  "text.autoconfig.enchantmentsplus.category.combat": "战斗",
+  "text.autoconfig.enchantmentsplus.category.movement": "移动",
+  "text.autoconfig.enchantmentsplus.category.utility": "公用事业与国防",
+  "text.autoconfig.enchantmentsplus.option.enabled": "已启用",
+  "text.autoconfig.enchantmentsplus.option.maximumLevel": "最高等级",
+  "text.autoconfig.enchantmentsplus.settings_notice": "仅适用于本地设置。多人游戏使用服务器的设置。",
+  "text.autoconfig.enchantmentsplus.restart_notice": "重新打开世界或重启服务器，以应用最高级别的更改。",
+  "text.autoconfig.enchantmentsplus.enabled_tooltip": "同时控制可用性与效果。默认：已启用。多人游戏时采用服务器的设置。",
+  "text.autoconfig.enchantmentsplus.maximum_level_tooltip": "默认值：%s。重新打开世界或重启服务器即可生效。现有物品将保留其已有的等级。由于附魔消耗保持不变，提升至更高等级可能需要使用铁砧。",
+  "text.autoconfig.enchantmentsplus.scaling_notice": "Higher levels improve this enchantment's effect, up to any effect-specific caps.",
+  "text.autoconfig.enchantmentsplus.non_scaling_notice": "目前，更高的等级并不会增强此附魔的效果。",
   "text.autoconfig.enchantmentsplus.option.enableBlazeWalker": "是否启用 岩浆行者",
   "text.autoconfig.enchantmentsplus.option.enableCubical": "是否启用 方块杀手",
   "text.autoconfig.enchantmentsplus.option.enableDualLeap": "是否启用 二段跳",
@@ -59,6 +72,5 @@
   "text.autoconfig.enchantmentsplus.option.enableSniper": "是否启用 狙击",
   "text.autoconfig.enchantmentsplus.option.enableStormStrike": "是否启用 雷霆箭",
   "text.autoconfig.enchantmentsplus.option.enableThunderlord": "是否启用 唤雷",
-  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "是否启用 毒性附加",
-  "text.autoconfig.enchantmentsplus.client_only_notice": "注意：这些选项仅会更改本客户端在单人模式下的本地配置，不会影响多人服务器的配置。\n若需在服务器上进行更改，请联系管理员修改配置文件。"
+  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "是否启用 毒性附加"
 }

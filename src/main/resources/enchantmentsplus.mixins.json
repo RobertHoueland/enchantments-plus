@@ -9,7 +9,8 @@
     "EnchantRandomlyLootFunctionMixin",
     "EnchantmentHelperMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "RegistryLoaderMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin"

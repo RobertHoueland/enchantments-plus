@@ -122,6 +122,14 @@ public class EnchantmentsPlus implements ModInitializer {
         return !CLOTH_CONFIG_LOADED || ClothConfigIntegration.isEnchantmentEnabled(index);
     }
 
+    public static int getConfiguredMaxLevel(RegistryKey<?> key) {
+        if (!CLOTH_CONFIG_LOADED || !key.isOf(RegistryKeys.ENCHANTMENT)
+                || !key.getValue().getNamespace().equals(MOD_ID)) {
+            return -1;
+        }
+        return ClothConfigIntegration.getMaxLevel(key.getValue().getPath());
+    }
+
     private static RegistryKey<Enchantment> enchantmentKey(String id) {
         return RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(MOD_ID, id));
     }

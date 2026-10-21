@@ -40,7 +40,20 @@
   "effect.enchantmentsplus.moonresteffect": "Лунный покой",
   "subtitles.enchantmentsplus.swoop": "Лунная прогулка",
   "subtitles.enchantmentsplus.blurp": "Здоровье восстанавливается",
+  "subtitles.enchantmentsplus.whoosh": "Игрок совершает прыжок",
+  "subtitles.enchantmentsplus.deny": "Двойной прыжок не удался",
   "text.autoconfig.enchantmentsplus.title": "Опции Enchantments Plus",
+  "text.autoconfig.enchantmentsplus.category.combat": "Бой",
+  "text.autoconfig.enchantmentsplus.category.movement": "Движение",
+  "text.autoconfig.enchantmentsplus.category.utility": "Коммунальные услуги и оборона",
+  "text.autoconfig.enchantmentsplus.option.enabled": "Включено",
+  "text.autoconfig.enchantmentsplus.option.maximumLevel": "Максимальный уровень",
+  "text.autoconfig.enchantmentsplus.settings_notice": "Только для локальных настроек. В многопользовательском режиме используются настройки сервера.",
+  "text.autoconfig.enchantmentsplus.restart_notice": "Переоткройте мир или перезапустите сервер, чтобы применить изменения максимального уровня.",
+  "text.autoconfig.enchantmentsplus.enabled_tooltip": "Управляет как доступностью, так и эффектами. По умолчанию: включено. В многопользовательском режиме используются настройки сервера.",
+  "text.autoconfig.enchantmentsplus.maximum_level_tooltip": "По умолчанию: %s. Чтобы изменения вступили в силу, переоткройте мир или перезапустите сервер. Уровни, уже имеющиеся у предметов, сохраняются. Для получения более высоких уровней могут потребоваться наковальни, поскольку стоимость наложения чар осталась прежней.",
+  "text.autoconfig.enchantmentsplus.scaling_notice": "Higher levels improve this enchantment's effect, up to any effect-specific caps.",
+  "text.autoconfig.enchantmentsplus.non_scaling_notice": "Более высокие уровни в данный момент не усиливают эффект этого зачарования.",
   "text.autoconfig.enchantmentsplus.option.enableBlazeWalker": "Включить зачарование Лавоход",
   "text.autoconfig.enchantmentsplus.option.enableCubical": "Включить зачарование Кубический",
   "text.autoconfig.enchantmentsplus.option.enableDualLeap": "Включить зачарование Двойной прыжок",
@@ -59,6 +72,5 @@
   "text.autoconfig.enchantmentsplus.option.enableSniper": "Включить зачарование Снайпер",
   "text.autoconfig.enchantmentsplus.option.enableStormStrike": "Включить зачарование Штормовой удар",
   "text.autoconfig.enchantmentsplus.option.enableThunderlord": "Включить зачарование Повелителя грома",
-  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "Включить зачарование Токсичный удар",
-  "text.autoconfig.enchantmentsplus.client_only_notice": "ПРИМЕЧАНИЕ: Эти переключатели изменяют только локальную конфигурацию клиента для одиночной игры, а не настройки многопользовательского сервера.\nЧтобы внести изменения на сервере, попросите администратора отредактировать конфигурационный файл."
+  "text.autoconfig.enchantmentsplus.option.enableToxicStrike": "Включить зачарование Токсичный удар"
 }
