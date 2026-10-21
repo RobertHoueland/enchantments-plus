@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,7 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.fox.Fox;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Enderman;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.monster.Shulker;
@@ -64,7 +65,7 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
             }
 
             Vec3 oldPosition = user.position();
-            if (user.randomTeleport(x, y, z, true)) {
+            if (user.randomTeleport(x, y, z, true, BlockTags.CONSUMABLE_DOES_NOT_TELEPORT_TO)) {
                 world.gameEvent(GameEvent.TELEPORT, oldPosition, GameEvent.Context.of(user));
                 SoundEvent sound = user instanceof Fox
                         ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
@@ -92,7 +93,7 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
                 }
                 if (target instanceof EnderDragon) {
                     target.hurtServer(world, world.damageSources().generic(), level * 10.0F);
-                } else if (target instanceof EnderMan || target instanceof Endermite || target instanceof Shulker) {
+                } else if (target instanceof Enderman || target instanceof Endermite || target instanceof Shulker) {
                     target.hurtServer(world, world.damageSources().generic(), level * 5.0F);
                 }
             }
