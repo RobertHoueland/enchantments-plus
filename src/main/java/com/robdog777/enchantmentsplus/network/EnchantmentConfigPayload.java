@@ -1,19 +1,19 @@
 package com.robdog777.enchantmentsplus.network;
 
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
 
-public record EnchantmentConfigPayload(long enabledMask) implements CustomPayload {
-    public static final Id<EnchantmentConfigPayload> ID =
-            new Id<>(Identifier.of("enchantmentsplus", "enchantment_config"));
-    public static final PacketCodec<RegistryByteBuf, EnchantmentConfigPayload> CODEC = PacketCodec.of(
+public record EnchantmentConfigPayload(long enabledMask) implements CustomPacketPayload {
+    public static final Type<EnchantmentConfigPayload> ID =
+            new Type<>(Identifier.fromNamespaceAndPath("enchantmentsplus", "enchantment_config"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, EnchantmentConfigPayload> CODEC = StreamCodec.ofMember(
             (payload, buf) -> buf.writeLong(payload.enabledMask),
             buf -> new EnchantmentConfigPayload(buf.readLong()));
 
     @Override
-    public Id<? extends CustomPayload> getId() {
+    public Type<? extends CustomPacketPayload> type() {
         return ID;
     }
 }

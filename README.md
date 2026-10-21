@@ -43,6 +43,7 @@ rules.
 Enchanting costs and effect formulas are unchanged, so high levels may require anvil combinations and can be very
 powerful.
 All 19 enchantments allow maximum-level changes; this does not necessarily make their effects stronger:
+
 - **Level-dependent effects (16):** Blaze Walker, Cubical, Dual Leap, End Slayer, Excavator, Frostbite, Hiker,
   Levitation, Life Steal, Moon Walker, Payback, Raider, Sniper, Storm Strike, Thunder Lord, and Toxic Strike.
   Dual Leap gains more midair jumps, and Hiker gains greater step height, despite both defaulting to level I.

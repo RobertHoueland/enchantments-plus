@@ -13,7 +13,7 @@ public final class EnchantmentConfigNetworking {
     }
 
     public static void initialize() {
-        PayloadTypeRegistry.playS2C().register(EnchantmentConfigPayload.ID, EnchantmentConfigPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(EnchantmentConfigPayload.ID, EnchantmentConfigPayload.CODEC);
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             if (ServerPlayNetworking.canSend(handler, EnchantmentConfigPayload.ID)) {
@@ -28,7 +28,7 @@ public final class EnchantmentConfigNetworking {
             }
             lastBroadcastMask = currentMask;
             
-            server.getPlayerManager().getPlayerList().forEach(player -> {
+            server.getPlayerList().getPlayers().forEach(player -> {
                 if (ServerPlayNetworking.canSend(player, EnchantmentConfigPayload.ID)) {
                     ServerPlayNetworking.send(player, new EnchantmentConfigPayload(currentMask));
                 }

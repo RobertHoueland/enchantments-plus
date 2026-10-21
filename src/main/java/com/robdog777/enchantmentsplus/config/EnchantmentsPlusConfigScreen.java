@@ -7,9 +7,9 @@ import me.shedaniel.clothconfig2.api.Requirement;
 import me.shedaniel.clothconfig2.gui.ClothConfigScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 @Environment(EnvType.CLIENT)
 public final class EnchantmentsPlusConfigScreen {
@@ -24,7 +24,7 @@ public final class EnchantmentsPlusConfigScreen {
         EnchantmentsPlusConfig defaults = new EnchantmentsPlusConfig();
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Text.translatable(PREFIX + "title"))
+                .setTitle(Component.translatable(PREFIX + "title"))
                 .setAlwaysShowTabs(true)
                 .setSavingRunnable(holder::save)
                 .setAfterInitConsumer(EnchantmentsPlusConfigScreen::hideUnusedTabScrollButtons);
@@ -32,9 +32,9 @@ public final class EnchantmentsPlusConfigScreen {
 
         // create category screens
         for (String categoryId : new String[]{"combat", "movement", "utility"}) {
-            ConfigCategory category = builder.getOrCreateCategory(Text.translatable(PREFIX + "category." + categoryId));
-            category.addEntry(entries.startTextDescription(Text.translatable(PREFIX + "settings_notice")
-                    .append("\n").append(Text.translatable(PREFIX + "restart_notice"))).build());
+            ConfigCategory category = builder.getOrCreateCategory(Component.translatable(PREFIX + "category." + categoryId));
+            category.addEntry(entries.startTextDescription(Component.translatable(PREFIX + "settings_notice")
+                    .append("\n").append(Component.translatable(PREFIX + "restart_notice"))).build());
 
             for (EnchantmentOption option : EnchantmentOption.values()) {
                 if (option.category().equals(categoryId)) {
@@ -53,7 +53,7 @@ public final class EnchantmentsPlusConfigScreen {
 
         // Cloth Config shows disabled scroll arrows, hide them
         for (var child : configScreen.children()) {
-            if (child instanceof ClickableWidget widget && widget.getY() == 44 && widget.getWidth() == 12) {
+            if (child instanceof AbstractWidget widget && widget.getY() == 44 && widget.getWidth() == 12) {
                 widget.visible = false;
             }
         }
@@ -63,26 +63,26 @@ public final class EnchantmentsPlusConfigScreen {
                                        EnchantmentsPlusConfig config, EnchantmentsPlusConfig defaults,
                                        EnchantmentOption option) {
         String enchantmentKey = "enchantment.enchantmentsplus." + option.id();
-        var section = entries.startSubCategory(Text.translatable(enchantmentKey)).setExpanded(false);
-        section.add(entries.startTextDescription(Text.translatable(enchantmentKey + ".desc")).build());
+        var section = entries.startSubCategory(Component.translatable(enchantmentKey)).setExpanded(false);
+        section.add(entries.startTextDescription(Component.translatable(enchantmentKey + ".desc")).build());
 
-        var enabled = entries.startBooleanToggle(Text.translatable(PREFIX + "option.enabled"), option.isEnabled(config))
+        var enabled = entries.startBooleanToggle(Component.translatable(PREFIX + "option.enabled"), option.isEnabled(config))
                 .setDefaultValue(option.isEnabled(defaults))
-                .setTooltip(Text.translatable(PREFIX + "enabled_tooltip"))
+                .setTooltip(Component.translatable(PREFIX + "enabled_tooltip"))
                 .setSaveConsumer(value -> option.setEnabled(config, value))
                 .build();
         section.add(enabled);
-        section.add(entries.startIntField(Text.translatable(PREFIX + "option.maximumLevel"), option.getMaxLevel(config))
+        section.add(entries.startIntField(Component.translatable(PREFIX + "option.maximumLevel"), option.getMaxLevel(config))
                 .setDefaultValue(option.getMaxLevel(defaults))
                 .setMin(EnchantmentOption.MIN_LEVEL)
                 .setMax(EnchantmentOption.MAX_LEVEL)
-                .setTooltip(Text.translatable(PREFIX + "maximum_level_tooltip", option.getMaxLevel(defaults)))
+                .setTooltip(Component.translatable(PREFIX + "maximum_level_tooltip", option.getMaxLevel(defaults)))
                 .setRequirement(Requirement.isTrue(enabled))
                 .setSaveConsumer(value -> option.setMaxLevel(config, value))
                 .build());
 
         String scalingNotice = option.scalesWithLevel() ? "scaling_notice" : "non_scaling_notice";
-        section.add(entries.startTextDescription(Text.translatable(PREFIX + scalingNotice)).build());
+        section.add(entries.startTextDescription(Component.translatable(PREFIX + scalingNotice)).build());
         category.addEntry(section.build());
     }
 }

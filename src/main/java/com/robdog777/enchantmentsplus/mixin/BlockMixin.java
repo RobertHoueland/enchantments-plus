@@ -2,19 +2,6 @@ package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ExperienceOrbEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.SmeltingRecipe;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,16 +9,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.item.ItemInstance;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(Block.class)
 public class BlockMixin {
     // smelt with FlashForge
-    @Inject(method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;" +
-            "Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;" +
-            "Lnet/minecraft/item/ItemStack;)Ljava/util/List;",
+    @Inject(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemInstance;)Ljava/util/List;",
             at = @At("RETURN"))
-    private static void getDroppedStacks(BlockState state, ServerWorld world, BlockPos pos, BlockEntity blockEntity,
-                                         Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
+    private static void getDroppedStacks(BlockState state, ServerLevel world, BlockPos pos, BlockEntity blockEntity,
+                                         Entity entity, ItemInstance stack, CallbackInfoReturnable<List<ItemStack>> cir) {
         List<ItemStack> returnValue = cir.getReturnValue();
 
         // Flash Forge
@@ -42,24 +41,24 @@ public class BlockMixin {
 
         for (int i = 0; i < returnValue.size(); i++) {
             ItemStack itemStack = returnValue.get(i);
-            SingleStackRecipeInput input = new SingleStackRecipeInput(itemStack);
-            Optional<RecipeEntry<SmeltingRecipe>> recipe = world.getRecipeManager()
-                    .getFirstMatch(RecipeType.SMELTING, input, world);
+            SingleRecipeInput input = new SingleRecipeInput(itemStack);
+            Optional<RecipeHolder<SmeltingRecipe>> recipe = world.recipeAccess()
+                    .getRecipeFor(RecipeType.SMELTING, input, world);
 
             if (recipe.isPresent()) {
-                ItemStack smelted = recipe.get().value().craft(input, world.getRegistryManager()).copy(); // copy to prevent duplicated drops
+                ItemStack smelted = recipe.get().value().assemble(input).copy(); // copy to prevent duplicated drops
                 smelted.setCount(itemStack.getCount());
                 returnValue.set(i, smelted);
 
                 // Spawn XP orbs
-                int xpAmount = (int) recipe.get().value().getExperience();
-                world.spawnEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY(), pos.getZ(), xpAmount));
+                int xpAmount = (int) recipe.get().value().experience();
+                world.addFreshEntity(new ExperienceOrb(world, pos.getX(), pos.getY(), pos.getZ(), xpAmount));
 
                 if (state.getBlock() == Blocks.IRON_ORE || state.getBlock() == Blocks.DEEPSLATE_IRON_ORE ||
                         state.getBlock() == Blocks.COPPER_ORE || state.getBlock() == Blocks.DEEPSLATE_COPPER_ORE) {
                     // these ores are hardcoded to drop XP since they work differently
                     // technically smelting ore gives 0.7 XP but we're rounding for an int
-                    world.spawnEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY(), pos.getZ(), 1));
+                    world.addFreshEntity(new ExperienceOrb(world, pos.getX(), pos.getY(), pos.getZ(), 1));
                 }
             }
         }

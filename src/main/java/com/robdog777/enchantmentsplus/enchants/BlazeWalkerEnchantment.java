@@ -1,29 +1,29 @@
 package com.robdog777.enchantmentsplus.enchants;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FluidBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
 
 public final class BlazeWalkerEnchantment {
     private BlazeWalkerEnchantment() {
     }
 
-    public static void freezeLava(LivingEntity entity, ServerWorld world, BlockPos blockPos, int level) {
-        if (!entity.isOnGround()) {
+    public static void freezeLava(LivingEntity entity, ServerLevel world, BlockPos blockPos, int level) {
+        if (!entity.onGround()) {
             return;
         }
 
-        BlockState obsidian = Blocks.OBSIDIAN.getDefaultState();
+        BlockState obsidian = Blocks.OBSIDIAN.defaultBlockState();
         int radius = Math.min(16, 2 + level);
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
-        for (BlockPos pos : BlockPos.iterate(blockPos.add(-radius, -1, -radius), blockPos.add(radius, -1, radius))) {
-            if (!pos.isWithinDistance(entity.getEntityPos(), radius)) {
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+        for (BlockPos pos : BlockPos.betweenClosed(blockPos.offset(-radius, -1, -radius), blockPos.offset(radius, -1, radius))) {
+            if (!pos.closerToCenterThan(entity.position(), radius)) {
                 continue;
             }
 
@@ -34,12 +34,12 @@ public final class BlazeWalkerEnchantment {
 
             BlockState lava = world.getBlockState(pos);
             Block block = lava.getBlock();
-            if (lava.isOf(Blocks.LAVA) && block instanceof FluidBlock
-                    && lava.get(FluidBlock.LEVEL) == 0
-                    && obsidian.canPlaceAt(world, pos)
-                    && world.canPlace(obsidian, pos, ShapeContext.absent())) {
-                world.setBlockState(pos, obsidian);
-                world.scheduleBlockTick(pos, Blocks.OBSIDIAN, MathHelper.nextInt(entity.getRandom(), 60, 120));
+            if (lava.is(Blocks.LAVA) && block instanceof LiquidBlock
+                    && lava.getValue(LiquidBlock.LEVEL) == 0
+                    && obsidian.canSurvive(world, pos)
+                    && world.isUnobstructed(obsidian, pos, CollisionContext.empty())) {
+                world.setBlockAndUpdate(pos, obsidian);
+                world.scheduleTick(pos, Blocks.OBSIDIAN, Mth.nextInt(entity.getRandom(), 60, 120));
             }
         }
     }

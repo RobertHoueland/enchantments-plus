@@ -3,36 +3,36 @@ package com.robdog777.enchantmentsplus.mixin;
 import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import com.robdog777.enchantmentsplus.SharedStates;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(LocalPlayer.class)
 public class ClientPlayerEntityMixin {
     @Unique
     private int jumpCount = 0;
     @Unique
     private boolean jumpedLastTick = false;
 
-    @Inject(method = "tickMovement", at = @At("HEAD"))
+    @Inject(method = "aiStep", at = @At("HEAD"))
     private void tickMovement(CallbackInfo info) {
-        ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
+        LocalPlayer player = (LocalPlayer) (Object) this;
 
         // Dual Leap
-        if (player.isOnGround() || player.isClimbing()) {
+        if (player.onGround() || player.onClimbable()) {
             jumpCount = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
-        } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0) {
-            if (player.fallDistance < 4.0f && player.input.playerInput.jump() && canJump(player)
-                    && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.DUALLEAP, player.getEntityWorld())) {
+        } else if (!jumpedLastTick && jumpCount > 0 && player.getDeltaMovement().y < 0) {
+            if (player.fallDistance < 4.0f && player.input.keyPresses.jump() && canJump(player)
+                    && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.DUALLEAP, player.level())) {
                 jumpCount--;
-                player.jump();
+                player.jumpFromGround();
 
                 SharedStates.dualLeapSuccessful = true;
             } else if (player.fallDistance >= 4.0f) {
@@ -41,17 +41,17 @@ public class ClientPlayerEntityMixin {
             }
         }
 
-        jumpedLastTick = player.input.playerInput.jump();
+        jumpedLastTick = player.input.keyPresses.jump();
     }
 
     @Unique
-    private boolean canJump(ClientPlayerEntity player) {
-        ItemStack chestItemStack = player.getEquippedStack(EquipmentSlot.CHEST);
-        boolean wearingUsableElytra = LivingEntity.canGlideWith(chestItemStack, EquipmentSlot.CHEST);
+    private boolean canJump(LocalPlayer player) {
+        ItemStack chestItemStack = player.getItemBySlot(EquipmentSlot.CHEST);
+        boolean wearingUsableElytra = LivingEntity.canGlideUsing(chestItemStack, EquipmentSlot.CHEST);
 
-        return !wearingUsableElytra && !player.isGliding() && !player.hasVehicle()
-                && !player.isTouchingWater() && !player.hasStatusEffect(StatusEffects.LEVITATION)
-                && !player.getAbilities().creativeMode && !player.getAbilities().flying;
+        return !wearingUsableElytra && !player.isFallFlying() && !player.isPassenger()
+                && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION)
+                && !player.getAbilities().instabuild && !player.getAbilities().flying;
     }
 }
 
