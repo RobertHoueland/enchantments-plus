@@ -75,25 +75,51 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
         }
     }
 
+    public boolean isDamageBonus() {
+        return switch (action) {
+            case "cubical", "endslayer", "payback", "raider", "sniper" -> true;
+            default -> false;
+        };
+    }
+
+    public float damageBonus(ServerLevel world, int level, LivingEntity user, Entity target) {
+        var key = switch (action) {
+            case "cubical" -> EnchantmentsPlus.CUBICAL;
+            case "endslayer" -> EnchantmentsPlus.ENDSLAYER;
+            case "payback" -> EnchantmentsPlus.PAYBACK;
+            case "raider" -> EnchantmentsPlus.RAIDER;
+            case "sniper" -> EnchantmentsPlus.SNIPER;
+            default -> null;
+        };
+
+        if (key == null || !EnchantmentsPlus.isEnchantmentEnabled(key, world)) {
+            return 0.0F;
+        }
+
+        // apply damage bonus enchantments
+        return switch (action) {
+            case "cubical" -> target instanceof Creeper || target instanceof Slime ? level * 5.0F : 0.0F;
+            case "endslayer" -> target instanceof EnderDragon ? level * 10.0F
+                    : target instanceof EnderMan || target instanceof Endermite || target instanceof Shulker ? level * 5.0F : 0.0F;
+            case "payback" ->
+                    user != null && user.getHealth() < 10.0F ? level * 0.5F * (20.0F - user.getHealth()) : 0.0F;
+            case "raider" -> target instanceof AbstractIllager || target instanceof Witch
+                    || target instanceof Vex || target instanceof Ravager ? level * 5.0F : 0.0F;
+            case "sniper" -> user != null && user.distanceTo(target) > 10.0F
+                    ? Math.min(40.0F, level * (user.distanceTo(target) / 2.5F)) : 0.0F;
+            default -> 0.0F;
+        };
+    }
+
     @Override
     public void apply(ServerLevel world, int level, EnchantedItemInUse context, Entity target, Vec3 pos) {
         LivingEntity user = context.owner();
 
         switch (action) {
-            case "cubical" -> {
-                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.CUBICAL, world)
-                        && (target instanceof Creeper || target instanceof Slime)) {
-                    target.hurtServer(world, world.damageSources().generic(), level * 5.0F);
-                }
-            }
-            case "endslayer" -> {
-                if (!EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.ENDSLAYER, world)) {
-                    return;
-                }
-                if (target instanceof EnderDragon) {
-                    target.hurtServer(world, world.damageSources().generic(), level * 10.0F);
-                } else if (target instanceof EnderMan || target instanceof Endermite || target instanceof Shulker) {
-                    target.hurtServer(world, world.damageSources().generic(), level * 5.0F);
+            case "cubical", "endslayer", "payback", "raider", "sniper" -> {
+                float bonus = damageBonus(world, level, user, target);
+                if (bonus > 0.0F) {
+                    target.hurtServer(world, world.damageSources().generic(), bonus);
                 }
             }
             case "frostbite" -> {
@@ -117,28 +143,6 @@ public record EnchantmentEffects(String action) implements EnchantmentEntityEffe
                 }
             }
             case "mysticmind" -> mysticMind(world, user, level);
-            case "payback" -> {
-                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.PAYBACK, world) && user != null && user.getHealth() < 10.0F) {
-                    target.hurtServer(world, world.damageSources().generic(), level * 0.5F * (20.0F - user.getHealth()));
-                }
-            }
-            case "raider" -> {
-                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.RAIDER, world) &&
-                        (target instanceof AbstractIllager || target instanceof Witch ||
-                                target instanceof Vex || target instanceof Ravager)) {
-                    target.hurtServer(world, world.damageSources().generic(), level * 5.0F);
-                }
-            }
-            case "sniper" -> {
-                if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.SNIPER, world)) {
-                    if (user != null) {
-                        float distance = user.distanceTo(target);
-                        if (distance > 10.0F) {
-                            target.hurtServer(world, world.damageSources().generic(), Math.min(40.0F, level * (distance / 2.5F)));
-                        }
-                    }
-                }
-            }
             case "stormstrike" -> strikeLightning(world, target, level, 20,
                     EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.STORMSTRIKE, world));
             case "thunderlord" -> strikeLightning(world, target, level, 10,
