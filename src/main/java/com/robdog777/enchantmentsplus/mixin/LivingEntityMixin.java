@@ -2,13 +2,11 @@ package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import com.robdog777.enchantmentsplus.SharedStates;
 import com.robdog777.enchantmentsplus.enchants.BlazeWalkerEnchantment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -53,20 +51,6 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tick", at = @At("HEAD"))
     protected void tick(CallbackInfo ci) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
-
-        // Dual Leap sound effects
-        // TODO: play on servers
-        if (currentEntity instanceof Player player) {
-            if (SharedStates.dualLeapSuccessful) {
-                player.level().playSound(null, player.blockPosition(), EnchantmentsPlus.WhooshEvent,
-                        SoundSource.PLAYERS, 0.7f, 1f);
-                SharedStates.dualLeapSuccessful = false;
-            } else if (SharedStates.dualLeapFailed) {
-                player.level().playSound(null, player.blockPosition(), EnchantmentsPlus.DenyEvent,
-                        SoundSource.PLAYERS, 0.7f, 1f);
-                SharedStates.dualLeapFailed = false;
-            }
-        }
 
         // Only process periodic enchantment effects every five ticks.
         if (currentEntity.tickCount % 5 == 0) {

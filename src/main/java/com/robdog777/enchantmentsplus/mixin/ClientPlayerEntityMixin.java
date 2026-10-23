@@ -2,7 +2,6 @@ package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import com.robdog777.enchantmentsplus.SharedStates;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,19 +24,23 @@ public class ClientPlayerEntityMixin {
     private void tickMovement(CallbackInfo info) {
         LocalPlayer player = (LocalPlayer) (Object) this;
 
-        // Dual Leap
+        // Dual leap
+        int level = EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.DUALLEAP, player.level())
+                ? EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player) : 0;
+        jumpCount = Math.min(jumpCount, level);
         if (player.onGround() || player.onClimbable()) {
-            jumpCount = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
-        } else if (!jumpedLastTick && jumpCount > 0 && player.getDeltaMovement().y < 0) {
-            if (player.fallDistance < 4.0f && player.input.keyPresses.jump() && canJump(player)
-                    && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.DUALLEAP, player.level())) {
+            jumpCount = level;
+        } else if (!jumpedLastTick && player.input.keyPresses.jump() && jumpCount > 0
+                && player.getDeltaMovement().y < 0 && canJump(player)) {
+            // don't let the player use the leap after a huge fall or else they can effectively avoid fall damage
+            if (player.fallDistance < 4.0f) {
                 jumpCount--;
                 player.jumpFromGround();
 
-                SharedStates.dualLeapSuccessful = true;
+                player.playSound(EnchantmentsPlus.WhooshEvent, 0.7f, 1f);
             } else if (player.fallDistance >= 4.0f) {
                 // player had fallen too many blocks, this prevents negating fall damage
-                SharedStates.dualLeapFailed = true;
+                player.playSound(EnchantmentsPlus.DenyEvent, 0.7f, 1f);
             }
         }
 
