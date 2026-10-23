@@ -6,6 +6,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
@@ -41,6 +42,8 @@ public class EnchantmentDamageMixin {
         for (var effect : enchantment.getEffects(EnchantmentEffectComponents.POST_ATTACK)) {
             if (effect.enchanted() == EnchantmentTarget.ATTACKER && effect.affected() == EnchantmentTarget.VICTIM
                     && effect.effect() instanceof EnchantmentEffects custom && custom.isDamageBonus()
+                    // Arrow Sniper damage is added after velocity and critical scaling.
+                    && !(custom.action().equals("sniper") && source.getDirectEntity() instanceof AbstractArrow)
                     && effect.matches(Enchantment.damageContext(world, level, victim, source))) {
                 LivingEntity attacker = source.getEntity() instanceof LivingEntity living ? living : null;
                 amount.add(custom.damageBonus(world, level, attacker, victim));
