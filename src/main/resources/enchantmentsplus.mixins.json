@@ -6,6 +6,7 @@
   "mixins": [
     "BlockMixin",
     "EnchantRandomlyLootFunctionMixin",
+    "EnchantmentDamageMixin",
     "EnchantmentHelperMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
