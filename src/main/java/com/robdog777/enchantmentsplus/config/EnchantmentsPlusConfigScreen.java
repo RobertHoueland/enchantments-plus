@@ -5,11 +5,15 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.api.Requirement;
 import me.shedaniel.clothconfig2.gui.ClothConfigScreen;
+import me.shedaniel.clothconfig2.gui.entries.SubCategoryListEntry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+
+import java.util.ArrayList;
 
 @Environment(EnvType.CLIENT)
 public final class EnchantmentsPlusConfigScreen {
@@ -83,6 +87,17 @@ public final class EnchantmentsPlusConfigScreen {
 
         String scalingNotice = option.scalesWithLevel() ? "scaling_notice" : "non_scaling_notice";
         section.add(entries.startTextDescription(Component.translatable(PREFIX + scalingNotice)).build());
-        category.addEntry(section.build());
+        // Cloth Config's builder cannot customize focus handling; its only entry constructor is deprecated.
+        @SuppressWarnings("deprecation")
+        var focusSafeSection = new SubCategoryListEntry(Component.translatable(enchantmentKey), new ArrayList<>(section), false) {
+            @Override
+            public void setFocused(GuiEventListener listener) {
+                // Cloth Config unfocuses even an unchanged child, which clears a nested text field's focus on repeated clicks. Match vanilla's identity guard.
+                if (getFocused() != listener) {
+                    super.setFocused(listener);
+                }
+            }
+        };
+        category.addEntry(focusSafeSection);
     }
 }
