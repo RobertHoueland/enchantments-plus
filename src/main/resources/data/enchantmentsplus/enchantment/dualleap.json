@@ -1,0 +1,12 @@
+{
+  "anvil_cost": 8,
+  "description": {"translate": "enchantment.enchantmentsplus.dualleap"},
+  "exclusive_set": "#enchantmentsplus:exclusive_set/boots_movement",
+  "max_cost": {"base": 25, "per_level_above_first": 10},
+  "max_level": 1,
+  "min_cost": {"base": 10, "per_level_above_first": 10},
+  "primary_items": "#minecraft:enchantable/foot_armor",
+  "slots": ["feet"],
+  "supported_items": "#minecraft:enchantable/foot_armor",
+  "weight": 1
+}

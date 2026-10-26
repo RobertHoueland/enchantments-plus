@@ -1,10 +1,8 @@
-# Enchantments-Plus
-
-## Updated to 1.20.4 for Fabric
+# Enchantments-Plus for Fabric
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
-Minecraft Mod that adds over 10 new fun enchantments to the game!
+Minecraft mod that adds over 15 new enchantments to the game!
 
 Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
 and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
@@ -14,10 +12,48 @@ and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 ---
 
 **Requires: [Fabric Loader](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-AND [Cloth Config API Fabric](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
+AND [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
-Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
+Installation: Drop the mod .jar and Fabric API into your mods folder.
+
+Optional: Install [Cloth Config API Fabric](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
+for configuration file support, and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth") for the in-game
+settings screen.<br>Without Cloth Config,
+all enchantments are enabled by default; multiplayer clients follow the server's enchantment settings.
+
+### Configuration
+
+With Cloth Config and Mod Menu installed, open **Mods → Enchantments Plus → Configure**.
+The **Combat**, **Movement**, and **Utility & Defense** tabs contain collapsible sections for each enchantment.
+Each section has an enable toggle, a maximum-level input (1–99), individual reset controls,
+and a label indicating whether the effect scales with level.
+Disabled enchantments retain their maximum-level setting. Cancel discards unsaved edits.
+
+Maximum levels default to the values in the table below. Reopen the world or restart the server after changing them.
+Server administrators can edit `config/enchantmentsplus.json5`; existing enable settings remain compatible,
+and new fields such as `maxLevelFrostbite` control maximum levels. Out-of-range file values are clamped to 1–99.
+Multiplayer uses the server's registry definitions, regardless of a client's local settings or whether it has Cloth
+Config.
+Without Cloth Config, the mod leaves datapack maximum levels unchanged. With Cloth Config, configured levels take
+precedence over datapack maximum levels for these 19 enchantments.
+
+These limits apply to enchanting, new enchanted-book trades and loot, anvil combinations, and `/enchant`.
+Existing items and already-generated trades/loot are not rewritten; combining existing items follows vanilla anvil
+rules.
+Enchanting costs and effect formulas are unchanged, so high levels may require anvil combinations and can be very
+powerful.
+All 19 enchantments allow maximum-level changes; this does not necessarily make their effects stronger:
+
+- **Level-dependent effects (16):** Blaze Walker, Cubical, Dual Leap, End Slayer, Excavator, Frostbite, Hiker,
+  Levitation, Life Steal, Moon Walker, Payback, Raider, Sniper, Storm Strike, Thunder Lord, and Toxic Strike.
+  Dual Leap gains more midair jumps, and Hiker gains greater step height, despite both defaulting to level I.
+  Some effects have caps: Blaze Walker's radius caps at 16 blocks (level XIV), Life Steal's activation chance
+  reaches 100% at level V, Sniper's extra damage caps at 40, and lightning chances reach 100% at level XX
+  for Storm Strike and level X for Thunder Lord (when the sky is visible).
+- **Effects unchanged at higher levels (3):** Flash Forge, Lunar Sight, and Mystic Mind.
+  Their maximum levels can still be configured, but higher levels do not improve their effects.
+
+New UI text uses English placeholders in the Russian and Chinese locales until translations are provided.
 
 ---
 

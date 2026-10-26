@@ -2,11 +2,16 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.robdog777.enchantmentsplus.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "ArrowDamageMixin",
     "BlockMixin",
+    "EnchantRandomlyLootFunctionMixin",
+    "EnchantmentDamageMixin",
+    "EnchantmentHelperMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "RegistryLoaderMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin"

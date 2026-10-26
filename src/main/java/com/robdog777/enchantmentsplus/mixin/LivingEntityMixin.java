@@ -1,120 +1,79 @@
 package com.robdog777.enchantmentsplus.mixin;
 
+import com.robdog777.enchantmentsplus.EnchantmentLookup;
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import com.robdog777.enchantmentsplus.SharedStates;
-import com.robdog777.enchantmentsplus.config.EnchantmentsPlusConfig;
 import com.robdog777.enchantmentsplus.enchants.BlazeWalkerEnchantment;
-import me.shedaniel.autoconfig.ConfigHolder;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    protected LivingEntityMixin(EntityType entityType, World world) {
+    protected LivingEntityMixin(EntityType<?> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(method = "applyMovementEffects", at = @At("HEAD"))
-    protected void applyMovementEffects(BlockPos pos, CallbackInfo ci) {
+    @Inject(method = "onChangedBlock", at = @At("HEAD"))
+    protected void applyMovementEffects(ServerLevel world, BlockPos pos, CallbackInfo ci) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
-
-        // Blaze Walker
-        int blazeWalkerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.BLAZEWALKER, currentEntity);
-        if (blazeWalkerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker) {
-            BlazeWalkerEnchantment.freezeLava(currentEntity, this.getWorld(), pos, blazeWalkerLevel);
+        int blazeWalkerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.BLAZEWALKER, currentEntity);
+        if (blazeWalkerLevel > 0 && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.BLAZEWALKER, world)) {
+            BlazeWalkerEnchantment.freezeLava(currentEntity, world, pos, blazeWalkerLevel);
         }
     }
 
-    @Override
-    public float getStepHeight() {
+    @Inject(method = "maxUpStep", at = @At("RETURN"), cancellable = true)
+    private void applyHikerStepHeight(CallbackInfoReturnable<Float> cir) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
-
-        // Hiker
-        int hikerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
-        if (hikerLevel > 0 && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableHiker && currentEntity instanceof PlayerEntity) {
-            float height = hikerLevel + 0.1F;
-            float defaultHeight = (float) currentEntity.getAttributeValue(EntityAttributes.GENERIC_STEP_HEIGHT);
-
-            return Math.max(defaultHeight, height);
+        if (currentEntity instanceof Player
+                && EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.HIKER, currentEntity.level())) {
+            int hikerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.HIKER, currentEntity);
+            if (hikerLevel > 0) {
+                cir.setReturnValue(Math.max(cir.getReturnValue(), hikerLevel + 0.1F));
+            }
         }
-
-        return super.getStepHeight();
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
     protected void tick(CallbackInfo ci) {
         LivingEntity currentEntity = (LivingEntity) (Object) this;
 
-        // Dual Leap sound effects
-        // TODO: play on servers
-        if (currentEntity instanceof PlayerEntity player) {
-            if (SharedStates.dualLeapSuccessful) {
-                player.getWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.WhooshEvent,
-                        SoundCategory.PLAYERS, 0.7f, 1f);
-
-                SharedStates.dualLeapSuccessful = false;
-            } else if (SharedStates.dualLeapFailed) {
-                player.getWorld().playSound(null, player.getBlockPos(), EnchantmentsPlus.DenyEvent,
-                        SoundCategory.PLAYERS, 0.7f, 1f);
-
-                SharedStates.dualLeapFailed = false;
-            }
-        }
-
-        // Only process every 5 ticks (4 times per second) instead of every tick
-        if (currentEntity.age % 5 == 0) {
-            ConfigHolder<EnchantmentsPlusConfig> config = EnchantmentsPlus.CONFIG_HOLDER;
-
-            // Lunar Sight
-            if (config.getConfig().enableLunarSight) {
-                int nightVisionLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.LUNARSIGHT, currentEntity);
-
-                if (nightVisionLevel > 0) {
-                    // Stays for 11 seconds, otherwise sky flashes at <=10 seconds
-                    currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION,
-                            220, 0, false, false, true));
-                }
+        // Only process periodic enchantment effects every five ticks.
+        if (currentEntity.tickCount % 5 == 0) {
+            if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.LUNARSIGHT, currentEntity.level())
+                    && EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.LUNARSIGHT, currentEntity) > 0) {
+                currentEntity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION,
+                        220, 0, false, false, true));
             }
 
-            // Moon Walker
-            if (config.getConfig().enableMoonWalker) {
-                RegistryEntry<StatusEffect> MOONREST_ENTRY = Registries.STATUS_EFFECT.getEntry(EnchantmentsPlus.MOONREST);
-                int moonWalkerLevel = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.MOONWALKER, currentEntity);
-
+            if (EnchantmentsPlus.isEnchantmentEnabled(EnchantmentsPlus.MOONWALKER, currentEntity.level())) {
+                Holder<MobEffect> moonRestEntry = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(EnchantmentsPlus.MOONREST);
+                int moonWalkerLevel = EnchantmentLookup.getEquipmentLevel(EnchantmentsPlus.MOONWALKER, currentEntity);
                 if (moonWalkerLevel > 0) {
-                    // constant effects
-                    currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20,
-                            0, false, false, true));
-
-                    currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20,
-                            0, false, false, true));
-
-                    // cool down for stronger effect
-                    if (!currentEntity.hasStatusEffect(MOONREST_ENTRY)) {
-                        // TODO: add keybind
-                        currentEntity.getWorld().playSound(null, currentEntity.getBlockPos(),
-                                EnchantmentsPlus.SwoopEvent, currentEntity.getSoundCategory(), 1.0f, 1f);
-
-                        currentEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST,
+                    currentEntity.addEffect(new MobEffectInstance(MobEffects.SPEED,
+                            20, 0, false, false, true));
+                    currentEntity.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST,
+                            20, 0, false, false, true));
+                    if (!currentEntity.hasEffect(moonRestEntry)) {
+                        currentEntity.level().playSound(null, currentEntity.blockPosition(),
+                                EnchantmentsPlus.SwoopEvent, currentEntity.getSoundSource(), 1.0f, 1f);
+                        currentEntity.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST,
                                 moonWalkerLevel * 100, moonWalkerLevel + 1, false, false, true));
-
-                        currentEntity.addStatusEffect(new StatusEffectInstance(MOONREST_ENTRY,
+                        currentEntity.addEffect(new MobEffectInstance(moonRestEntry,
                                 400, 0, false, false, true));
                     }
                 }

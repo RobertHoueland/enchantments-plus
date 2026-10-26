@@ -1,79 +1,46 @@
 package com.robdog777.enchantmentsplus.enchants;
 
-import com.robdog777.enchantmentsplus.EnchantmentsPlus;
-import net.minecraft.block.*;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
 
-import java.util.Optional;
-
-public class BlazeWalkerEnchantment extends Enchantment {
-    public BlazeWalkerEnchantment() {
-//        Rarity.RARE
-        super(new Properties(
-                ItemTags.FOOT_ARMOR_ENCHANTABLE,
-                Optional.ofNullable(ItemTags.FOOT_ARMOR_ENCHANTABLE),
-                2,
-                2,
-                Enchantment.leveledCost(10, 10),
-                Enchantment.leveledCost(25, 10),
-                4,
-                FeatureSet.empty(),
-                new EquipmentSlot[]{EquipmentSlot.FEET}));
+public final class BlazeWalkerEnchantment {
+    private BlazeWalkerEnchantment() {
     }
 
-    public static void freezeLava(LivingEntity entity, World world, BlockPos blockPos, int level) {
-        // original code is from Frost Walker
-        if (entity.isOnGround() && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker) {
-            BlockState blockState = Blocks.OBSIDIAN.getDefaultState();
-            int f = Math.min(16, 2 + level);
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
+    public static void freezeLava(LivingEntity entity, ServerLevel world, BlockPos blockPos, int level) {
+        if (!entity.onGround()) {
+            return;
+        }
 
-            for (BlockPos blockPos2 : BlockPos.iterate(blockPos.add(-f, -1, -f), blockPos.add(f, -1, f))) {
-                if (blockPos2.isWithinDistance(entity.getPos(), f)) {
-                    mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
-                    BlockState blockState2 = world.getBlockState(mutable);
-                    if (blockState2.isAir()) {
-                        BlockState blockState3 = world.getBlockState(blockPos2);
-                        Block block = blockState3.getBlock();
-                        if (blockState3.isOf(Blocks.LAVA) && block instanceof FluidBlock && blockState3.get(FluidBlock.LEVEL) == 0 && blockState.canPlaceAt(world, blockPos2) && world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
-                            world.setBlockState(blockPos2, blockState);
-                            world.scheduleBlockTick(blockPos2, Blocks.OBSIDIAN, MathHelper.nextInt(entity.getRandom(), 60, 120));
-                        }
-                    }
-                }
+        BlockState obsidian = Blocks.OBSIDIAN.defaultBlockState();
+        int radius = Math.min(16, 2 + level);
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+        for (BlockPos pos : BlockPos.betweenClosed(blockPos.offset(-radius, -1, -radius), blockPos.offset(radius, -1, radius))) {
+            if (!pos.closerToCenterThan(entity.position(), radius)) {
+                continue;
+            }
+
+            mutable.set(pos.getX(), pos.getY() + 1, pos.getZ());
+            if (!world.getBlockState(mutable).isAir()) {
+                continue;
+            }
+
+            BlockState lava = world.getBlockState(pos);
+            Block block = lava.getBlock();
+            if (lava.is(Blocks.LAVA) && block instanceof LiquidBlock
+                    && lava.getValue(LiquidBlock.LEVEL) == 0
+                    && obsidian.canSurvive(world, pos)
+                    && world.isUnobstructed(obsidian, pos, CollisionContext.empty())) {
+                world.setBlockAndUpdate(pos, obsidian);
+                world.scheduleTick(pos, Blocks.OBSIDIAN, Mth.nextInt(entity.getRandom(), 60, 120));
             }
         }
-    }
-
-    @Override
-    public boolean isTreasure() {
-        return true;
-    }
-
-    public String registryName() {
-        return "blazewalker";
-    }
-
-    @Override
-    protected boolean canAccept(Enchantment other) {
-        return super.canAccept(other) && other != Enchantments.DEPTH_STRIDER && other != Enchantments.FROST_WALKER;
-    }
-
-    @Override
-    public boolean isAvailableForEnchantedBookOffer() {
-        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker;
-    }
-
-    @Override
-    public boolean isAvailableForRandomSelection() {
-        return EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableBlazeWalker;
     }
 }

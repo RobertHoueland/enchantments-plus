@@ -30,14 +30,14 @@
     "enchantmentsplus.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.15.10",
-    "fabric": "*",
-    "minecraft": "~1.20.6",
-    "java": ">=21",
-    "cloth-config": ">=14.0.126"
+    "fabricloader": ">=0.19.5",
+    "fabric-api": "*",
+    "minecraft": "26.3",
+    "java": ">=25"
   },
   "suggests": {
     "fabric-api": "*",
+    "cloth-config": ">=26.3.159",
     "modmenu": "*"
   }
 }
