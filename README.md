@@ -53,8 +53,6 @@ All 19 enchantments allow maximum-level changes; this does not necessarily make 
 - **Effects unchanged at higher levels (3):** Flash Forge, Lunar Sight, and Mystic Mind.
   Their maximum levels can still be configured, but higher levels do not improve their effects.
 
-New UI text uses English placeholders in the Russian and Chinese locales until translations are provided.
-
 ---
 
 ### Current Enchantments List:
