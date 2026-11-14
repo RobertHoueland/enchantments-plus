@@ -1,6 +1,7 @@
 package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
+import com.robdog777.enchantmentsplus.config.EnchantmentSettings;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
@@ -24,14 +25,20 @@ public class ClientPlayerEntityMixin {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void tickMovement(CallbackInfo info) {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
-        
-        // Dual Leap
+
+        int level = EnchantmentSettings.enabled(EnchantmentsPlus.DUALLEAP)
+                ? EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player) : 0;
+        jumpCount = Math.min(jumpCount, level);
         if (player.isOnGround() || player.isClimbing()) {
-            jumpCount = EnchantmentHelper.getEquipmentLevel(EnchantmentsPlus.DUALLEAP, player);
-        } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0) {
-            if (player.input.jumping && canJump(player) && EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableDualLeap) {
+            jumpCount = level;
+        } else if (!jumpedLastTick && jumpCount > 0 && player.getVelocity().y < 0
+                && player.input.jumping && canJump(player)) {
+            if (player.fallDistance < 4.0F) {
                 jumpCount--;
                 player.jump();
+                player.playSound(EnchantmentsPlus.WhooshEvent, 0.7F, 1.0F);
+            } else {
+                player.playSound(EnchantmentsPlus.DenyEvent, 0.7F, 1.0F);
             }
         }
 

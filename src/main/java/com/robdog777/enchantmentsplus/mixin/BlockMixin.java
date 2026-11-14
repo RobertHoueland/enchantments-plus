@@ -1,6 +1,7 @@
 package com.robdog777.enchantmentsplus.mixin;
 
 import com.robdog777.enchantmentsplus.EnchantmentsPlus;
+import com.robdog777.enchantmentsplus.config.EnchantmentSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,7 +12,7 @@ import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
-import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,19 +36,17 @@ public class BlockMixin {
 
         // Flash Forge
         if (EnchantmentHelper.getLevel(EnchantmentsPlus.FLASHFORGE, stack) == 0
-                || !EnchantmentsPlus.CONFIG_HOLDER.getConfig().enableFlashForge) {
+                || !EnchantmentSettings.enabled(EnchantmentsPlus.FLASHFORGE)) {
             return;
         }
 
         for (int i = 0; i < returnValue.size(); i++) {
             ItemStack itemStack = returnValue.get(i);
-            Optional<SmeltingRecipe> recipe = world.getRecipeManager()
-                    .listAllOfType(RecipeType.SMELTING).stream()
-                    .filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(itemStack))).findFirst();
+            SimpleInventory input = new SimpleInventory(itemStack);
+            Optional<SmeltingRecipe> recipe = world.getRecipeManager().getFirstMatch(RecipeType.SMELTING, input, world);
 
             if (recipe.isPresent()) {
-                DynamicRegistryManager registryManager = world.getRegistryManager();
-                ItemStack smelted = recipe.get().getOutput(registryManager);
+                ItemStack smelted = recipe.get().craft(input, world.getRegistryManager()).copy();
                 smelted.setCount(itemStack.getCount());
                 returnValue.set(i, smelted);
 

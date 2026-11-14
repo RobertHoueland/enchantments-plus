@@ -1,12 +1,11 @@
 package com.robdog777.enchantmentsplus;
 
-import com.robdog777.enchantmentsplus.config.EnchantmentsPlusConfig;
-import com.robdog777.enchantmentsplus.enchants.*;
+import com.robdog777.enchantmentsplus.config.ClothConfigIntegration;
+import com.robdog777.enchantmentsplus.enchants.ConfigurableEnchantment;
+import com.robdog777.enchantmentsplus.network.EnchantmentConfigNetworking;
 import com.robdog777.enchantmentsplus.statuseffects.MoonRestEffect;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.ConfigHolder;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
@@ -17,156 +16,59 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EnchantmentsPlus implements ModInitializer {
-    public static final Logger LOGGER = LoggerFactory.getLogger("enchantmentsplus");
+    public static final String MOD_ID = "enchantmentsplus";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final boolean CLOTH_CONFIG_LOADED = FabricLoader.getInstance().isModLoaded("cloth-config");
 
-    // moon png file from https://www.pngitem.com
-    // Audio files copyright free from https://freesound.org/
-    public static final Identifier SWOOP = new Identifier("enchantmentsplus:swoop");
-    public static final Identifier BLURP = new Identifier("enchantmentsplus:blurp");
+    // moon png file from https://www.pngitem.com; copyright-free audio from https://freesound.org/
+    public static final Identifier SWOOP = new Identifier(MOD_ID, "swoop");
+    public static final Identifier BLURP = new Identifier(MOD_ID, "blurp");
+    public static final Identifier WHOOSH = new Identifier(MOD_ID, "whoosh");
+    public static final Identifier DENY = new Identifier(MOD_ID, "deny");
+    public static final SoundEvent SwoopEvent = SoundEvent.of(SWOOP);
+    public static final SoundEvent BlurpEvent = SoundEvent.of(BLURP);
+    public static final SoundEvent WhooshEvent = SoundEvent.of(WHOOSH);
+    public static final SoundEvent DenyEvent = SoundEvent.of(DENY);
+    public static final StatusEffect MOONREST = new MoonRestEffect();
 
-    public static final ConfigHolder<EnchantmentsPlusConfig> CONFIG_HOLDER = AutoConfig.register(
-            EnchantmentsPlusConfig.class, JanksonConfigSerializer::new);
+    public static final Enchantment BLAZEWALKER = new ConfigurableEnchantment("blazewalker", 2, 2, 4, 10, 10, 25, 10, "feet", "blaze");
+    public static final Enchantment CUBICAL = new ConfigurableEnchantment("cubical", 5, 5, 2, 5, 8, 25, 8, "weapon", "damage");
+    public static final Enchantment DUALLEAP = new ConfigurableEnchantment("dualleap", 1, 1, 8, 10, 10, 25, 10, "feet", "movement");
+    public static final Enchantment ENDSLAYER = new ConfigurableEnchantment("endslayer", 5, 5, 2, 5, 8, 25, 8, "weapon", "damage");
+    public static final Enchantment EXCAVATOR = new ConfigurableEnchantment("excavator", 3, 1, 8, 10, 10, 25, 10, "tool", "");
+    public static final Enchantment FLASHFORGE = new ConfigurableEnchantment("flashforge", 1, 1, 8, 10, 10, 25, 10, "tool", "smelting");
+    public static final Enchantment FROSTBITE = new ConfigurableEnchantment("frostbite", 2, 2, 4, 10, 20, 60, 20, "weapon", "elemental");
+    public static final Enchantment HIKER = new ConfigurableEnchantment("hiker", 1, 1, 8, 5, 0, 41, 0, "feet", "");
+    public static final Enchantment LEVITATION = new ConfigurableEnchantment("levitation", 2, 2, 4, 10, 20, 60, 20, "weapon", "elemental");
+    public static final Enchantment LIFESTEAL = new ConfigurableEnchantment("lifesteal", 3, 2, 4, 10, 20, 60, 20, "weapon", "health");
+    public static final Enchantment LUNARSIGHT = new ConfigurableEnchantment("lunarsight", 1, 1, 4, 1, 0, 41, 0, "head", "");
+    public static final Enchantment MOONWALKER = new ConfigurableEnchantment("moonwalker", 2, 1, 8, 10, 10, 45, 10, "feet", "movement");
+    public static final Enchantment MYSTICMIND = new ConfigurableEnchantment("mysticmind", 1, 1, 4, 5, 0, 41, 0, "head", "");
+    public static final Enchantment PAYBACK = new ConfigurableEnchantment("payback", 3, 3, 5, 5, 8, 45, 8, "weapon", "health");
+    public static final Enchantment RAIDER = new ConfigurableEnchantment("raider", 5, 5, 2, 5, 8, 25, 8, "weapon", "damage");
+    public static final Enchantment SNIPER = new ConfigurableEnchantment("sniper", 3, 3, 4, 12, 20, 37, 20, "bow", "bow");
+    public static final Enchantment STORMSTRIKE = new ConfigurableEnchantment("stormstrike", 3, 8, 8, 12, 20, 65, 20, "bow", "bow");
+    public static final Enchantment THUNDERLORD = new ConfigurableEnchantment("thunderlord", 3, 8, 8, 12, 20, 65, 20, "weapon", "");
+    public static final Enchantment TOXICSTRIKE = new ConfigurableEnchantment("toxicstrike", 2, 2, 4, 10, 20, 60, 20, "weapon", "elemental");
 
-    public static StatusEffect MOONREST = new MoonRestEffect();
-
-    public static Enchantment BLAZEWALKER = null, CUBICAL = null, DUALLEAP = null, ENDSLAYER = null, EXCAVATOR = null,
-            FLASHFORGE = null, FROSTBITE = null, HIKER = null, LEVITATION = null, LIFESTEAL = null, LUNARSIGHT = null,
-            MOONWALKER = null, PAYBACK = null, RAIDER = null, THUNDERLORD = null, TOXICSTRIKE = null, SNIPER = null,
-            MYSTICMIND = null, STORMSTRIKE = null;
-
-    public static SoundEvent SwoopEvent = SoundEvent.of(SWOOP);
-    public static SoundEvent BlurpEvent = SoundEvent.of(BLURP);
+    public static final Enchantment[] ENCHANTMENTS = {BLAZEWALKER, CUBICAL, DUALLEAP, ENDSLAYER, EXCAVATOR,
+            FLASHFORGE, FROSTBITE, HIKER, LEVITATION, LIFESTEAL, LUNARSIGHT, MOONWALKER, MYSTICMIND,
+            PAYBACK, RAIDER, SNIPER, STORMSTRIKE, THUNDERLORD, TOXICSTRIKE};
 
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
+        if (CLOTH_CONFIG_LOADED) {
+            ClothConfigIntegration.load();
+        }
+        Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "moonresteffect"), MOONREST);
+        Registry.register(Registries.SOUND_EVENT, SWOOP, SwoopEvent);
+        Registry.register(Registries.SOUND_EVENT, BLURP, BlurpEvent);
+        Registry.register(Registries.SOUND_EVENT, WHOOSH, WhooshEvent);
+        Registry.register(Registries.SOUND_EVENT, DENY, DenyEvent);
+        for (Enchantment enchantment : ENCHANTMENTS) {
+            Registry.register(Registries.ENCHANTMENT, new Identifier(MOD_ID, ((ConfigurableEnchantment) enchantment).id()), enchantment);
+        }
+        EnchantmentConfigNetworking.register();
         LOGGER.info("enchantmentsplus is now loaded");
-
-        Registry.register(Registries.STATUS_EFFECT, new Identifier("enchantmentsplus", "moonresteffect"), MOONREST);
-        Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.SWOOP, SwoopEvent);
-        Registry.register(Registries.SOUND_EVENT, EnchantmentsPlus.BLURP, BlurpEvent);
-
-        AutoConfig.getConfigHolder(EnchantmentsPlusConfig.class).getConfig();
-        CONFIG_HOLDER.load();
-
-        BLAZEWALKER = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "blazewalker"),
-                new BlazeWalkerEnchantment()
-        );
-
-        CUBICAL = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "cubical"),
-                new CubicalEnchantment()
-        );
-
-        DUALLEAP = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "dualleap"),
-                new DualLeapEnchantment()
-        );
-
-        ENDSLAYER = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "endslayer"),
-                new EndSlayerEnchantment()
-        );
-
-        EXCAVATOR = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "excavator"),
-                new ExcavatorEnchantment()
-        );
-
-        FLASHFORGE = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "flashforge"),
-                new FlashForgeEnchantment()
-        );
-
-        FROSTBITE = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "frostbite"),
-                new FrostbiteEnchantment()
-        );
-
-
-        HIKER = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "hiker"),
-                new HikerEnchantment()
-        );
-
-
-        LEVITATION = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "levitation"),
-                new LevitationEnchantment()
-        );
-
-        LIFESTEAL = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "lifesteal"),
-                new LifeStealEnchantment()
-        );
-
-
-        LUNARSIGHT = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "lunarsight"),
-                new LunarSightEnchantment()
-        );
-
-
-        MOONWALKER = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "moonwalker"),
-                new MoonWalkerEnchantment()
-        );
-
-        MYSTICMIND = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "mysticmind"),
-                new MysticMindEnchantment()
-        );
-
-
-        PAYBACK = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "payback"),
-                new PaybackEnchantment()
-        );
-
-        RAIDER = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "raider"),
-                new RaiderEnchantment()
-        );
-
-        SNIPER = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "sniper"),
-                new SniperEnchantment()
-        );
-
-        STORMSTRIKE = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "stormstrike"),
-                new StormStrikeEnchantment()
-        );
-
-        THUNDERLORD = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "thunderlord"),
-                new ThunderlordEnchantment()
-        );
-
-        TOXICSTRIKE = Registry.register(
-                Registries.ENCHANTMENT,
-                new Identifier("enchantmentsplus", "toxicstrike"),
-                new ToxicStrikeEnchantment()
-        );
     }
 }

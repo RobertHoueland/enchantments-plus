@@ -5,6 +5,14 @@
       "enchantmentsplus:swoop"
     ]
   },
+  "whoosh": {
+    "subtitle": "subtitles.enchantmentsplus.whoosh",
+    "sounds": ["enchantmentsplus:whoosh"]
+  },
+  "deny": {
+    "subtitle": "subtitles.enchantmentsplus.deny",
+    "sounds": ["enchantmentsplus:deny"]
+  },
   "blurp": {
     "subtitle": "subtitles.enchantmentsplus.blurp",
     "sounds": [

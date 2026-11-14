@@ -1,8 +1,8 @@
 package com.robdog777.enchantmentsplus.config;
 
+import com.robdog777.enchantmentsplus.EnchantmentsPlus;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -10,6 +10,6 @@ import net.fabricmc.api.Environment;
 public class ModMenuIntegration implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> AutoConfig.getConfigScreen(EnchantmentsPlusConfig.class, parent).get();
+        return parent -> EnchantmentsPlus.CLOTH_CONFIG_LOADED ? EnchantmentsPlusConfigScreen.create(parent) : null;
     }
 }

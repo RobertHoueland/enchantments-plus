@@ -4,7 +4,9 @@
 
 <img src="https://i.imgur.com/HFDSgKD.png" alt="Icon" width="250"/>
 
-Minecraft Mod that adds over 10 new fun enchantments to the game
+Minecraft mod that adds 19 custom enchantments to the game.
+
+This branch backports the features and fixes from the 26.3 release to Minecraft 1.20.1 (Java 17).
 
 Supports [Enchantment Descriptions](https://github.com/Darkhax-Minecraft/Enchantment-Descriptions "Enchantment Descriptions Github")
 and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
@@ -16,10 +18,27 @@ and [Mod Menu](https://modrinth.com/mod/modmenu "Mod Menu Modrinth")
 **UPDATED TO MC VERSION: 1.20.1**
 
 **Requires: [Fabric Loader (0.14.21+)](https://fabricmc.net/use/ "Fabric Download")
-AND [Fabric API (0.86.0+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-AND [Cloth Config API Fabric (11.0.99+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)**
+AND [Fabric API (0.86.1+)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)**
 
-Installation: Drop .jar file into mods folder (same with Fabric API and Cloth Config API)
+Optional: [Cloth Config API Fabric (11.0.99+)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
+for configuration and [Mod Menu](https://modrinth.com/mod/modmenu) for the settings screen.
+Without Cloth Config, all enchantments use their enabled defaults.
+
+Installation: Place the mod JAR and Fabric API in the `mods` folder on both the client and server.
+
+### Configuration and backported fixes
+
+- Three settings tabs (combat, movement, utility), per-enchantment enable toggles, and maximum levels from **1 to 99**.
+- Server settings are authoritative and synchronize to joining clients and when changed. Local client settings do not override a multiplayer server.
+- Disabled enchantments are excluded from random enchanting, enchanted-book trades, and random loot, and their effects are disabled. Existing items are not rewritten.
+- Cubical, End Slayer, Payback, Raider, and Sniper add damage to the original hit rather than causing a second, unattributed hit.
+- Sniper uses the bow that fired the arrow, even after switching weapons, and adds at most **40 bonus damage** after arrow speed/critical scaling and before armor mitigation.
+- Dual Leap has success/failure sounds, prevents leaps after falling four blocks, and clears unused leaps when boots are removed or the enchantment is disabled.
+- Hiker preserves other step-height adjustments. Excavator adds block reach without modifying attack reach or overwriting other attribute modifiers.
+- Flash Forge preserves Fortune drop counts without modifying shared smelting recipe outputs.
+
+The table below lists default levels. Raising a maximum level does not add scaling to effects that are intrinsically on/off.
+Minecraft 1.20.1 uses Java-registered enchantments rather than the newer data-driven enchantment registry.
 
 ---
 
